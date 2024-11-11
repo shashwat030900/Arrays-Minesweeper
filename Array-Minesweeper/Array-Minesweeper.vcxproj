@@ -133,42 +133,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="source\UI\Instructions\InstructionsScreenUIController.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="source\Event\EventService.cpp" />
-    <ClCompile Include="source\Main\GameService.cpp" />
-    <ClCompile Include="source\Gobal\Config.cpp" />
-    <ClCompile Include="source\Graphics\GraphicService.cpp" />
-    <ClCompile Include="source\UI\Credits\CreditsScreenUIController.cpp" />
-    <ClCompile Include="source\UI\MainMenu\MainMenuUIController.cpp" />
-    <ClCompile Include="source\Gobal\ServiceLocator.cpp" />
-    <ClCompile Include="source\Sound\SoundService.cpp" />
-    <ClCompile Include="source\UI\SplashScreen\SplashScreenUIController.cpp" />
-    <ClCompile Include="source\UI\UIElement\AnimatedImageView.cpp" />
-    <ClCompile Include="source\UI\UIElement\ButtonView.cpp" />
-    <ClCompile Include="source\UI\UIElement\ImageView.cpp" />
-    <ClCompile Include="source\UI\UIElement\TextView.cpp" />
-    <ClCompile Include="source\UI\UIElement\UIView.cpp" />
-    <ClCompile Include="source\UI\UIService.cpp" />
+    <ClCompile Include="source\Event\EventPollingManager.cpp" />
+    <ClCompile Include="source\GameWindow\GameWindowManager.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="header\Event\EventService.h" />
-    <ClInclude Include="header\Main\GameService.h" />
-    <ClInclude Include="header\Global\Config.h" />
-    <ClInclude Include="header\Graphics\GraphicService.h" />
-    <ClInclude Include="header\UI\Credits\CreditsScreenUIController.h" />
-    <ClInclude Include="header\UI\Interface\IUIController.h" />
-    <ClInclude Include="header\UI\MainMenu\MainMenuUIController.h" />
-    <ClInclude Include="header\Global\ServiceLocator.h" />
-    <ClInclude Include="header\Sound\SoundService.h" />
-    <ClInclude Include="header\UI\SplashScreen\SplashScreenUIController.h" />
-    <ClInclude Include="header\UI\UIElement\AnimatedImageView.h" />
-    <ClInclude Include="header\UI\UIElement\ButtonView.h" />
-    <ClInclude Include="header\UI\UIElement\ImageView.h" />
-    <ClInclude Include="header\UI\UIElement\TextView.h" />
-    <ClInclude Include="header\UI\UIElement\UIView.h" />
-    <ClInclude Include="header\UI\UIService.h" />
-    <ClInclude Include="header\UI\Instructions\InstructionsScreenUIController.h" />
+    <ClInclude Include="header\Event\EventPollingManager.h" />
+    <ClInclude Include="header\GameWindow\GameWindowManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
