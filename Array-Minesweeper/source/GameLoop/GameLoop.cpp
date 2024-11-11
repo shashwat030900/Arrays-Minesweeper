@@ -5,7 +5,7 @@ GameLoop::GameLoop() {
     windowManager->initialize();
     eventManager = new Event::EventPollingManager(windowManager->getGameWindow());
     splashScreenManager = new SplashScreenManager(windowManager->getGameWindow());
-    mainMenuManager = new MainMenuManager();
+    mainMenuManager = new MainMenuManager(windowManager->getGameWindow());
     gameplayManager = new GameplayManager();
     currentState = GameState::SPLASH_SCREEN;
 }
@@ -25,11 +25,9 @@ void GameLoop::handleState() {
         currentState = GameState::MAIN_MENU;
         break;
 
-    //case GameState::MAIN_MENU:
-    //    mainMenuManager->display(windowManager->getGameWindow());
-    //    // Transition logic to gameplay or exit
-    //    currentState = GameState::GAMEPLAY; // Example transition
-    //    break;
+    case GameState::MAIN_MENU:
+        mainMenuManager->show();
+        break;
 
     //case GameState::GAMEPLAY:
     //    gameplayManager->startGame(windowManager->getGameWindow());
@@ -46,8 +44,8 @@ void GameLoop::handleState() {
 void GameLoop::run() {
     while (windowManager->isGameWindowOpen()) {
         eventManager->processEvents();
-        handleState();
         windowManager->getGameWindow()->clear();
+        handleState();
         windowManager->getGameWindow()->display();
     }
 }
