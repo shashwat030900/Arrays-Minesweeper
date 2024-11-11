@@ -31,8 +31,13 @@ sf::Vector2f SplashScreenManager::getLogoPosition() {
 }
 
 void SplashScreenManager::show() {
-    // Logic for displaying the splash screen (e.g., fade in/out animations)
+
     initialize();
-    render();
-    game_window->display();
+
+    sf::Clock clock;
+    while (clock.getElapsedTime().asSeconds() < logo_animation_duration) {
+        game_window->clear();
+        render();
+        game_window->display();
+    }
 }
