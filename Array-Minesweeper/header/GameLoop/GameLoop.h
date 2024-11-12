@@ -8,6 +8,9 @@
 #include "../../header/GameLoop/Gameplay/GameplayManager.h"
 #include <iostream>
 
+using namespace GameWindow;
+using namespace Event;
+
 enum class GameState {
     SPLASH_SCREEN,
     MAIN_MENU,
@@ -17,8 +20,8 @@ enum class GameState {
 
 class GameLoop {
 private:
-    GameWindow::GameWindowManager* windowManager;
-    Event::EventPollingManager* eventManager;
+    GameWindowManager* windowManager;
+    EventPollingManager* eventManager;
     SplashScreenManager* splashScreenManager;
     MainMenuManager* mainMenuManager;
     GameplayManager* gameplayManager;

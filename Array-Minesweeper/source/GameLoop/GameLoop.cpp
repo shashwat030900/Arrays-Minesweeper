@@ -27,15 +27,15 @@ void GameLoop::handleState() {
         break;
 
     case GameState::MAIN_MENU:
-        mainMenuManager->update(*eventManager);
+        mainMenuManager->Update(*eventManager);
         eventManager->update();
 
-        if (mainMenuManager->isPlayButtonPressed()) {
-            mainMenuManager->resetButtonStates();
+        if (mainMenuManager->IsPlayButtonPressed()) {
+            mainMenuManager->ResetButtonStates();
             currentState = GameState::GAMEPLAY;
         }
-        else if (mainMenuManager->isQuitButtonPressed()) {
-            mainMenuManager->resetButtonStates();
+        else if (mainMenuManager->IsQuitButtonPressed()) {
+            mainMenuManager->ResetButtonStates();
             currentState = GameState::EXIT;
         }
         break;

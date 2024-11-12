@@ -133,6 +133,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="source\UI\UI Elements\Image\Image.cpp" />
     <ClCompile Include="source\UI\UI Elements\Button\Buttons.cpp" />
     <ClCompile Include="source\Sound\SoundManager.cpp" />
     <ClCompile Include="source\GameLoop\Gameplay\Cell.cpp" />
@@ -160,6 +161,7 @@
     <ClInclude Include="header\UI\MainMenu\MainMenuManager.h" />
     <ClInclude Include="header\Time\TimeManager.h" />
     <ClInclude Include="header\Sound\SoundManager.h" />
+    <ClInclude Include="header\UI\UI Elements\Image\Image.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

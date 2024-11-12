@@ -15,16 +15,28 @@
       "RelativeMoniker": "D:0:0:{F57EE1AA-F779-49C9-A20F-718830F922F9}|Array-Minesweeper.vcxproj|solutionrelative:header\\UI\\MainMenu\\MainMenuManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F57EE1AA-F779-49C9-A20F-718830F922F9}|Array-Minesweeper.vcxproj|C:\\Users\\aryan\\Desktop\\Current Project\\Arrays\\Array-Minesweeper\\source\\Event\\EventPollingManager.cpp||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{F57EE1AA-F779-49C9-A20F-718830F922F9}|Array-Minesweeper.vcxproj|solutionrelative:source\\Event\\EventPollingManager.cpp||{8B382828-6202-11D1-8870-0000F87579D2}"
+      "AbsoluteMoniker": "D:0:0:{F57EE1AA-F779-49C9-A20F-718830F922F9}|Array-Minesweeper.vcxproj|C:\\Users\\aryan\\Desktop\\Current Project\\Arrays\\Array-Minesweeper\\header\\UI\\UI Elements\\Button\\Buttons.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{F57EE1AA-F779-49C9-A20F-718830F922F9}|Array-Minesweeper.vcxproj|solutionrelative:header\\UI\\UI Elements\\Button\\Buttons.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F57EE1AA-F779-49C9-A20F-718830F922F9}|Array-Minesweeper.vcxproj|C:\\Users\\aryan\\Desktop\\Current Project\\Arrays\\Array-Minesweeper\\source\\UI\\UI Elements\\Button\\Buttons.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{F57EE1AA-F779-49C9-A20F-718830F922F9}|Array-Minesweeper.vcxproj|solutionrelative:source\\UI\\UI Elements\\Button\\Buttons.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F57EE1AA-F779-49C9-A20F-718830F922F9}|Array-Minesweeper.vcxproj|C:\\Users\\aryan\\Desktop\\Current Project\\Arrays\\Array-Minesweeper\\header\\UI\\UI Elements\\Button\\Buttons.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{F57EE1AA-F779-49C9-A20F-718830F922F9}|Array-Minesweeper.vcxproj|solutionrelative:header\\UI\\UI Elements\\Button\\Buttons.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{F57EE1AA-F779-49C9-A20F-718830F922F9}|Array-Minesweeper.vcxproj|C:\\Users\\aryan\\Desktop\\Current Project\\Arrays\\Array-Minesweeper\\header\\UI\\UI Elements\\Image\\Image.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{F57EE1AA-F779-49C9-A20F-718830F922F9}|Array-Minesweeper.vcxproj|solutionrelative:header\\UI\\UI Elements\\Image\\Image.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F57EE1AA-F779-49C9-A20F-718830F922F9}|Array-Minesweeper.vcxproj|C:\\Users\\aryan\\Desktop\\Current Project\\Arrays\\Array-Minesweeper\\source\\UI\\UI Elements\\Image\\Image.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{F57EE1AA-F779-49C9-A20F-718830F922F9}|Array-Minesweeper.vcxproj|solutionrelative:source\\UI\\UI Elements\\Image\\Image.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F57EE1AA-F779-49C9-A20F-718830F922F9}|Array-Minesweeper.vcxproj|C:\\Users\\aryan\\Desktop\\Current Project\\Arrays\\Array-Minesweeper\\header\\GameLoop\\GameLoop.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{F57EE1AA-F779-49C9-A20F-718830F922F9}|Array-Minesweeper.vcxproj|solutionrelative:header\\GameLoop\\GameLoop.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F57EE1AA-F779-49C9-A20F-718830F922F9}|Array-Minesweeper.vcxproj|C:\\Users\\aryan\\Desktop\\Current Project\\Arrays\\Array-Minesweeper\\source\\Event\\EventPollingManager.cpp||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{F57EE1AA-F779-49C9-A20F-718830F922F9}|Array-Minesweeper.vcxproj|solutionrelative:source\\Event\\EventPollingManager.cpp||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F57EE1AA-F779-49C9-A20F-718830F922F9}|Array-Minesweeper.vcxproj|C:\\Users\\aryan\\Desktop\\Current Project\\Arrays\\Array-Minesweeper\\header\\GameWindow\\GameWindowManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -37,10 +49,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{F57EE1AA-F779-49C9-A20F-718830F922F9}|Array-Minesweeper.vcxproj|C:\\Users\\aryan\\Desktop\\Current Project\\Arrays\\Array-Minesweeper\\header\\Time\\TimeManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{F57EE1AA-F779-49C9-A20F-718830F922F9}|Array-Minesweeper.vcxproj|solutionrelative:header\\Time\\TimeManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F57EE1AA-F779-49C9-A20F-718830F922F9}|Array-Minesweeper.vcxproj|C:\\Users\\aryan\\Desktop\\Current Project\\Arrays\\Array-Minesweeper\\header\\GameLoop\\GameLoop.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{F57EE1AA-F779-49C9-A20F-718830F922F9}|Array-Minesweeper.vcxproj|solutionrelative:header\\GameLoop\\GameLoop.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F57EE1AA-F779-49C9-A20F-718830F922F9}|Array-Minesweeper.vcxproj|C:\\Users\\aryan\\Desktop\\Current Project\\Arrays\\Array-Minesweeper\\source\\UI\\SplashScreen\\SplashScreenManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -114,13 +122,78 @@
           "Children": [
             {
               "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Image.cpp",
+              "DocumentMoniker": "C:\\Users\\aryan\\Desktop\\Current Project\\Arrays\\Array-Minesweeper\\source\\UI\\UI Elements\\Image\\Image.cpp",
+              "RelativeDocumentMoniker": "source\\UI\\UI Elements\\Image\\Image.cpp",
+              "ToolTip": "C:\\Users\\aryan\\Desktop\\Current Project\\Arrays\\Array-Minesweeper\\source\\UI\\UI Elements\\Image\\Image.cpp",
+              "RelativeToolTip": "source\\UI\\UI Elements\\Image\\Image.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-11-12T10:23:50.171Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Image.h",
+              "DocumentMoniker": "C:\\Users\\aryan\\Desktop\\Current Project\\Arrays\\Array-Minesweeper\\header\\UI\\UI Elements\\Image\\Image.h",
+              "RelativeDocumentMoniker": "header\\UI\\UI Elements\\Image\\Image.h",
+              "ToolTip": "C:\\Users\\aryan\\Desktop\\Current Project\\Arrays\\Array-Minesweeper\\header\\UI\\UI Elements\\Image\\Image.h",
+              "RelativeToolTip": "header\\UI\\UI Elements\\Image\\Image.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-11-12T10:16:32.161Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "GameLoop.cpp",
+              "DocumentMoniker": "C:\\Users\\aryan\\Desktop\\Current Project\\Arrays\\Array-Minesweeper\\source\\GameLoop\\GameLoop.cpp",
+              "RelativeDocumentMoniker": "source\\GameLoop\\GameLoop.cpp",
+              "ToolTip": "C:\\Users\\aryan\\Desktop\\Current Project\\Arrays\\Array-Minesweeper\\source\\GameLoop\\GameLoop.cpp",
+              "RelativeToolTip": "source\\GameLoop\\GameLoop.cpp",
+              "ViewState": "AgIAABIAAAAAAAAAAAAQwCUAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-11-11T12:44:15.066Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Buttons.h",
+              "DocumentMoniker": "C:\\Users\\aryan\\Desktop\\Current Project\\Arrays\\Array-Minesweeper\\header\\UI\\UI Elements\\Button\\Buttons.h",
+              "RelativeDocumentMoniker": "header\\UI\\UI Elements\\Button\\Buttons.h",
+              "ToolTip": "C:\\Users\\aryan\\Desktop\\Current Project\\Arrays\\Array-Minesweeper\\header\\UI\\UI Elements\\Button\\Buttons.h",
+              "RelativeToolTip": "header\\UI\\UI Elements\\Button\\Buttons.h",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAgAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-11-12T07:14:04.989Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "GameLoop.h",
+              "DocumentMoniker": "C:\\Users\\aryan\\Desktop\\Current Project\\Arrays\\Array-Minesweeper\\header\\GameLoop\\GameLoop.h",
+              "RelativeDocumentMoniker": "header\\GameLoop\\GameLoop.h",
+              "ToolTip": "C:\\Users\\aryan\\Desktop\\Current Project\\Arrays\\Array-Minesweeper\\header\\GameLoop\\GameLoop.h",
+              "RelativeToolTip": "header\\GameLoop\\GameLoop.h",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAABsAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-11-11T12:41:23.976Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 4,
               "Title": "Buttons.cpp",
               "DocumentMoniker": "C:\\Users\\aryan\\Desktop\\Current Project\\Arrays\\Array-Minesweeper\\source\\UI\\UI Elements\\Button\\Buttons.cpp",
               "RelativeDocumentMoniker": "source\\UI\\UI Elements\\Button\\Buttons.cpp",
               "ToolTip": "C:\\Users\\aryan\\Desktop\\Current Project\\Arrays\\Array-Minesweeper\\source\\UI\\UI Elements\\Button\\Buttons.cpp",
               "RelativeToolTip": "source\\UI\\UI Elements\\Button\\Buttons.cpp",
-              "ViewState": "AgIAAAoAAAAAAAAAAAAQwBAAAAAZAAAAAAAAAA==",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAAAAAA3AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-11-12T07:15:06.925Z",
               "EditorCaption": ""
@@ -133,48 +206,9 @@
               "RelativeDocumentMoniker": "source\\UI\\MainMenu\\MainMenuManager.cpp",
               "ToolTip": "C:\\Users\\aryan\\Desktop\\Current Project\\Arrays\\Array-Minesweeper\\source\\UI\\MainMenu\\MainMenuManager.cpp",
               "RelativeToolTip": "source\\UI\\MainMenu\\MainMenuManager.cpp",
-              "ViewState": "AgIAAB4AAAAAAAAAAAAUwCkAAAAXAAAAAAAAAA==",
+              "ViewState": "AgIAAC0AAAAAAAAAAAAqwEgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-11-11T13:25:14.722Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "GameLoop.cpp",
-              "DocumentMoniker": "C:\\Users\\aryan\\Desktop\\Current Project\\Arrays\\Array-Minesweeper\\source\\GameLoop\\GameLoop.cpp",
-              "RelativeDocumentMoniker": "source\\GameLoop\\GameLoop.cpp",
-              "ToolTip": "C:\\Users\\aryan\\Desktop\\Current Project\\Arrays\\Array-Minesweeper\\source\\GameLoop\\GameLoop.cpp",
-              "RelativeToolTip": "source\\GameLoop\\GameLoop.cpp",
-              "ViewState": "AgIAABUAAAAAAAAAAAAQwCsAAAAnAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-11-11T12:44:15.066Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "EventPollingManager.cpp",
-              "DocumentMoniker": "C:\\Users\\aryan\\Desktop\\Current Project\\Arrays\\Array-Minesweeper\\source\\Event\\EventPollingManager.cpp",
-              "RelativeDocumentMoniker": "source\\Event\\EventPollingManager.cpp",
-              "ToolTip": "C:\\Users\\aryan\\Desktop\\Current Project\\Arrays\\Array-Minesweeper\\source\\Event\\EventPollingManager.cpp",
-              "RelativeToolTip": "source\\Event\\EventPollingManager.cpp",
-              "ViewState": "AgIAAAUAAAAAAAAAAAAlwDwAAAAeAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-11-11T08:01:20.954Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Buttons.h",
-              "DocumentMoniker": "C:\\Users\\aryan\\Desktop\\Current Project\\Arrays\\Array-Minesweeper\\header\\UI\\UI Elements\\Button\\Buttons.h",
-              "RelativeDocumentMoniker": "header\\UI\\UI Elements\\Button\\Buttons.h",
-              "ToolTip": "C:\\Users\\aryan\\Desktop\\Current Project\\Arrays\\Array-Minesweeper\\header\\UI\\UI Elements\\Button\\Buttons.h",
-              "RelativeToolTip": "header\\UI\\UI Elements\\Button\\Buttons.h",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAABgAAAAVAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-11-12T07:14:04.989Z",
               "EditorCaption": ""
             },
             {
@@ -185,14 +219,14 @@
               "RelativeDocumentMoniker": "header\\UI\\MainMenu\\MainMenuManager.h",
               "ToolTip": "C:\\Users\\aryan\\Desktop\\Current Project\\Arrays\\Array-Minesweeper\\header\\UI\\MainMenu\\MainMenuManager.h",
               "RelativeToolTip": "header\\UI\\MainMenu\\MainMenuManager.h",
-              "ViewState": "AgIAABsAAAAAAAAAAAAAACkAAAAxAAAAAAAAAA==",
+              "ViewState": "AgIAABgAAAAAAAAAAAAAAAQAAAA3AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2024-11-11T13:00:25.392Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 9,
               "Title": "GameWindowManager.h",
               "DocumentMoniker": "C:\\Users\\aryan\\Desktop\\Current Project\\Arrays\\Array-Minesweeper\\header\\GameWindow\\GameWindowManager.h",
               "RelativeDocumentMoniker": "header\\GameWindow\\GameWindowManager.h",
@@ -200,12 +234,23 @@
               "RelativeToolTip": "header\\GameWindow\\GameWindowManager.h",
               "ViewState": "AgIAABIAAAAAAAAAAAAAAAUAAAAYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-11-11T07:34:28.54Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-11T07:34:28.54Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
+              "Title": "EventPollingManager.cpp",
+              "DocumentMoniker": "C:\\Users\\aryan\\Desktop\\Current Project\\Arrays\\Array-Minesweeper\\source\\Event\\EventPollingManager.cpp",
+              "RelativeDocumentMoniker": "source\\Event\\EventPollingManager.cpp",
+              "ToolTip": "C:\\Users\\aryan\\Desktop\\Current Project\\Arrays\\Array-Minesweeper\\source\\Event\\EventPollingManager.cpp",
+              "RelativeToolTip": "source\\Event\\EventPollingManager.cpp",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAlwDwAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-11-11T08:01:20.954Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
               "Title": "EventPollingManager.h",
               "DocumentMoniker": "C:\\Users\\aryan\\Desktop\\Current Project\\Arrays\\Array-Minesweeper\\header\\Event\\EventPollingManager.h",
               "RelativeDocumentMoniker": "header\\Event\\EventPollingManager.h",
@@ -213,12 +258,11 @@
               "RelativeToolTip": "header\\Event\\EventPollingManager.h",
               "ViewState": "AgIAAAwAAAAAAAAAAAAAAAYAAAAcAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-11-10T13:41:36.999Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-10T13:41:36.999Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 11,
               "Title": "TimeManager.h",
               "DocumentMoniker": "C:\\Users\\aryan\\Desktop\\Current Project\\Arrays\\Array-Minesweeper\\header\\Time\\TimeManager.h",
               "RelativeDocumentMoniker": "header\\Time\\TimeManager.h",
@@ -226,25 +270,11 @@
               "RelativeToolTip": "header\\Time\\TimeManager.h",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-11-11T13:06:21.811Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-11T13:06:21.811Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "GameLoop.h",
-              "DocumentMoniker": "C:\\Users\\aryan\\Desktop\\Current Project\\Arrays\\Array-Minesweeper\\header\\GameLoop\\GameLoop.h",
-              "RelativeDocumentMoniker": "header\\GameLoop\\GameLoop.h",
-              "ToolTip": "C:\\Users\\aryan\\Desktop\\Current Project\\Arrays\\Array-Minesweeper\\header\\GameLoop\\GameLoop.h",
-              "RelativeToolTip": "header\\GameLoop\\GameLoop.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-11-11T12:41:23.976Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 15,
               "Title": "main.cpp",
               "DocumentMoniker": "C:\\Users\\aryan\\Desktop\\Current Project\\Arrays\\Array-Minesweeper\\main.cpp",
               "RelativeDocumentMoniker": "main.cpp",
@@ -256,7 +286,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 12,
               "Title": "SplashScreenManager.cpp",
               "DocumentMoniker": "C:\\Users\\aryan\\Desktop\\Current Project\\Arrays\\Array-Minesweeper\\source\\UI\\SplashScreen\\SplashScreenManager.cpp",
               "RelativeDocumentMoniker": "source\\UI\\SplashScreen\\SplashScreenManager.cpp",
@@ -268,7 +298,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 20,
               "Title": "SoundManager.cpp",
               "DocumentMoniker": "C:\\Users\\aryan\\Desktop\\Current Project\\Arrays\\Array-Minesweeper\\source\\Sound\\SoundManager.cpp",
               "RelativeDocumentMoniker": "source\\Sound\\SoundManager.cpp",
@@ -280,7 +310,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 14,
               "Title": "SplashScreenManager.h",
               "DocumentMoniker": "C:\\Users\\aryan\\Desktop\\Current Project\\Arrays\\Array-Minesweeper\\header\\UI\\SplashScreenManager\\SplashScreenManager.h",
               "RelativeDocumentMoniker": "header\\UI\\SplashScreenManager\\SplashScreenManager.h",
@@ -292,7 +322,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 13,
               "Title": "GameplayManager.cpp",
               "DocumentMoniker": "C:\\Users\\aryan\\Desktop\\Current Project\\Arrays\\Array-Minesweeper\\source\\GameLoop\\Gameplay\\GameplayManager.cpp",
               "RelativeDocumentMoniker": "source\\GameLoop\\Gameplay\\GameplayManager.cpp",
@@ -304,7 +334,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 19,
               "Title": "Cell.cpp",
               "DocumentMoniker": "C:\\Users\\aryan\\Desktop\\Current Project\\Arrays\\Array-Minesweeper\\source\\GameLoop\\Gameplay\\Cell.cpp",
               "RelativeDocumentMoniker": "source\\GameLoop\\Gameplay\\Cell.cpp",
@@ -316,7 +346,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 18,
               "Title": "Board.cpp",
               "DocumentMoniker": "C:\\Users\\aryan\\Desktop\\Current Project\\Arrays\\Array-Minesweeper\\source\\GameLoop\\Gameplay\\Board.cpp",
               "RelativeDocumentMoniker": "source\\GameLoop\\Gameplay\\Board.cpp",
@@ -328,7 +358,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 17,
               "Title": "GameplayUI.cpp",
               "DocumentMoniker": "C:\\Users\\aryan\\Desktop\\Current Project\\Arrays\\Array-Minesweeper\\source\\UI\\GameplayUI\\GameplayUI.cpp",
               "RelativeDocumentMoniker": "source\\UI\\GameplayUI\\GameplayUI.cpp",
@@ -340,7 +370,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 16,
               "Title": "TimeManager.cpp",
               "DocumentMoniker": "C:\\Users\\aryan\\Desktop\\Current Project\\Arrays\\Array-Minesweeper\\source\\Time\\TimeManager.cpp",
               "RelativeDocumentMoniker": "source\\Time\\TimeManager.cpp",
@@ -352,7 +382,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 23,
               "Title": "Board.h",
               "DocumentMoniker": "C:\\Users\\aryan\\Desktop\\Current Project\\Arrays\\Array-Minesweeper\\header\\GameLoop\\Gameplay\\Board.h",
               "RelativeDocumentMoniker": "header\\GameLoop\\Gameplay\\Board.h",
@@ -364,7 +394,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 22,
               "Title": "Cell.h",
               "DocumentMoniker": "C:\\Users\\aryan\\Desktop\\Current Project\\Arrays\\Array-Minesweeper\\header\\GameLoop\\Gameplay\\Cell.h",
               "RelativeDocumentMoniker": "header\\GameLoop\\Gameplay\\Cell.h",
@@ -376,7 +406,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 21,
               "Title": "SoundManager.h",
               "DocumentMoniker": "C:\\Users\\aryan\\Desktop\\Current Project\\Arrays\\Array-Minesweeper\\header\\Sound\\SoundManager.h",
               "RelativeDocumentMoniker": "header\\Sound\\SoundManager.h",
@@ -388,7 +418,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 24,
               "Title": "GameplayUI.h",
               "DocumentMoniker": "C:\\Users\\aryan\\Desktop\\Current Project\\Arrays\\Array-Minesweeper\\header\\UI\\GameplayUI\\GameplayUI.h",
               "RelativeDocumentMoniker": "header\\UI\\GameplayUI\\GameplayUI.h",
@@ -400,7 +430,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 25,
               "Title": "GameplayManager.h",
               "DocumentMoniker": "C:\\Users\\aryan\\Desktop\\Current Project\\Arrays\\Array-Minesweeper\\header\\GameLoop\\Gameplay\\GameplayManager.h",
               "RelativeDocumentMoniker": "header\\GameLoop\\Gameplay\\GameplayManager.h",
@@ -412,7 +442,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 26,
               "Title": "GameWindowManager.cpp",
               "DocumentMoniker": "C:\\Users\\aryan\\Desktop\\Current Project\\Arrays\\Array-Minesweeper\\source\\GameWindow\\GameWindowManager.cpp",
               "RelativeDocumentMoniker": "source\\GameWindow\\GameWindowManager.cpp",
