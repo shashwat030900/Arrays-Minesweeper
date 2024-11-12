@@ -1,4 +1,5 @@
 #include "../../header/GameLoop/GameLoop.h"
+#include <iostream>
 
 GameLoop::GameLoop() {
     windowManager = new GameWindow::GameWindowManager();
@@ -26,14 +27,22 @@ void GameLoop::handleState() {
         break;
 
     case GameState::MAIN_MENU:
-        mainMenuManager->show();
+        mainMenuManager->update(*eventManager);
+        eventManager->update();
+
+        if (mainMenuManager->isPlayButtonPressed()) {
+            mainMenuManager->resetButtonStates();
+            currentState = GameState::GAMEPLAY;
+        }
+        else if (mainMenuManager->isQuitButtonPressed()) {
+            mainMenuManager->resetButtonStates();
+            currentState = GameState::EXIT;
+        }
         break;
 
-    //case GameState::GAMEPLAY:
-    //    gameplayManager->startGame(windowManager->getGameWindow());
-    //    // Logic to check if game should exit or go to main menu
-    //    currentState = GameState::EXIT; // Example end state
-    //    break;
+    case GameState::GAMEPLAY:
+        currentState = GameState::EXIT;
+        break;
 
     case GameState::EXIT:
         windowManager->getGameWindow()->close();

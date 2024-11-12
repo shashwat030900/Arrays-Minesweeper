@@ -2,6 +2,10 @@
 #define MAINMENUMANAGER_H
 
 #include <SFML/Graphics.hpp>
+#include "../../header/UI/UI Elements/Button/Buttons.h"
+#include "../../header/Event/EventPollingManager.h"
+
+using namespace Event;
 
 class MainMenuManager {
 private:
@@ -13,7 +17,9 @@ private:
     sf::Texture quit_button_texture;
     sf::Sprite quit_button_sprite;
 
-    bool initialized = false;
+    Button *play_button = nullptr;
+    Button *quit_button = nullptr;
+
 
     // Constants:
     const float button_width = 300.f;           
@@ -33,11 +39,16 @@ public:
     ~MainMenuManager();
 
     void initialize();
-    void update();
+    void update(EventPollingManager& eventManager);
     void render();
     void show();
-    void handleEvent(const sf::Event& event, bool& startGame, bool& showInstructions, bool& quitGame);
-    bool needsInitialization() const { return !initialized; }
+    void updateButtonStates(EventPollingManager& eventManager);
+
+    bool isPlayButtonPressed() const;
+    bool isQuitButtonPressed() const;
+
+    void resetButtonStates();
+
 };
 
 #endif

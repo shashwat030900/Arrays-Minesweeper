@@ -4,7 +4,7 @@
 
 namespace Event
 {
-	enum class ButtonState
+	enum class MouseButtonState
 	{
 		PRESSED,
 		HELD,
@@ -18,14 +18,14 @@ namespace Event
 		sf::RenderWindow* game_window;
 
 
-		ButtonState left_mouse_button_state;
-		ButtonState right_mouse_button_state;
+		MouseButtonState left_mouse_button_state;
+		MouseButtonState right_mouse_button_state;
 
 		bool isGameWindowOpen();
 		bool gameWindowWasClosed();
 		bool hasQuitGame();
 		bool isKeyboardEvent();
-		void updateButtonsState(ButtonState& button_state);
+		void updateButtonsState(MouseButtonState& button_state);
 
 	public:
 		EventPollingManager(sf::RenderWindow* window);

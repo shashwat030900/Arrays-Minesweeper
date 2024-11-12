@@ -6,6 +6,7 @@
 #include "../../header/UI/SplashScreenManager/SplashScreenManager.h"
 #include "../../header/UI/MainMenu/MainMenuManager.h"
 #include "../../header/GameLoop/Gameplay/GameplayManager.h"
+#include <iostream>
 
 enum class GameState {
     SPLASH_SCREEN,

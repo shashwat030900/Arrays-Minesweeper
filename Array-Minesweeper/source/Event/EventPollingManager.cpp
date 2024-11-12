@@ -30,23 +30,23 @@ namespace Event
         }
     }
 
-    void EventPollingManager::updateButtonsState(ButtonState& button_state)
+    void EventPollingManager::updateButtonsState(MouseButtonState& button_state)
     {
         if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
         {
             switch (button_state)
             {
-            case ButtonState::RELEASED:
-                button_state = ButtonState::PRESSED;
+            case MouseButtonState::RELEASED:
+                button_state = MouseButtonState::PRESSED;
                 break;
-            case ButtonState::PRESSED:
-                button_state = ButtonState::HELD;
+            case MouseButtonState::PRESSED:
+                button_state = MouseButtonState::HELD;
                 break;
             }
         }
         else
         {
-            button_state = ButtonState::RELEASED;
+            button_state = MouseButtonState::RELEASED;
         }
     }
 
@@ -60,7 +60,7 @@ namespace Event
 
     bool EventPollingManager::pressedEscapeKey() { return game_event.key.code == sf::Keyboard::Escape; }
 
-    bool EventPollingManager::pressedLeftMouseButton() { return left_mouse_button_state == ButtonState::PRESSED; }
+    bool EventPollingManager::pressedLeftMouseButton() { return left_mouse_button_state == MouseButtonState::PRESSED; }
 
-    bool EventPollingManager::pressedRightMouseButton() { return right_mouse_button_state == ButtonState::PRESSED; }
+    bool EventPollingManager::pressedRightMouseButton() { return right_mouse_button_state == MouseButtonState::PRESSED; }
 }

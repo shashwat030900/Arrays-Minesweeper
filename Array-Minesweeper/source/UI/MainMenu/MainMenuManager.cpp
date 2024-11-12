@@ -6,12 +6,14 @@ MainMenuManager::MainMenuManager(sf::RenderWindow* window) {
 }
 
 MainMenuManager::~MainMenuManager() {
+    delete play_button;
+    delete quit_button;
+    
 }
 
 void MainMenuManager::initialize() {
     initializeBackground();
     initializeButtons();
-    initialized = true;
 }
 
 void MainMenuManager::initializeBackground() {
@@ -23,19 +25,8 @@ void MainMenuManager::initializeBackground() {
 }
 
 void MainMenuManager::initializeButtons() {
-    if (!play_button_texture.loadFromFile("assets/textures/play_button.png")) {
-        std::cerr << "Failed to load play button texture" << std::endl;
-    }
-    play_button_sprite.setTexture(play_button_texture);
-    play_button_sprite.setScale(button_width / play_button_texture.getSize().x, button_height / play_button_texture.getSize().y);
-    play_button_sprite.setPosition(getButtonPosition(0.f, play_button_y_position));
-
-    if (!quit_button_texture.loadFromFile("assets/textures/quit_button.png")) {
-        std::cerr << "Failed to load quit button texture" << std::endl;
-    }
-    quit_button_sprite.setTexture(quit_button_texture);
-    quit_button_sprite.setScale(button_width / quit_button_texture.getSize().x, button_height / quit_button_texture.getSize().y);
-    quit_button_sprite.setPosition(getButtonPosition(0.f, quit_button_y_position));
+    play_button = new Button("assets/textures/play_button.png", getButtonPosition(0.f, play_button_y_position), sf::Vector2f(button_width, button_height));
+    quit_button = new Button("assets/textures/quit_button.png", getButtonPosition(0.f, quit_button_y_position), sf::Vector2f(button_width, button_height));
 }
 
 
@@ -45,14 +36,16 @@ sf::Vector2f MainMenuManager::getButtonPosition(float offsetX, float offsetY) {
     return sf::Vector2f(x_position, y_position);
 }
 
-void MainMenuManager::update() {
+void MainMenuManager::update(EventPollingManager& eventManager) {
     // Update logic if needed (e.g., animations)
+    show();
+    updateButtonStates(eventManager);
 }
 
 void MainMenuManager::render() {
     game_window->draw(background_sprite);
-    game_window->draw(play_button_sprite);
-    game_window->draw(quit_button_sprite);
+    if (play_button) play_button->render(*game_window);
+    if (quit_button) quit_button->render(*game_window);
 }
 
 void MainMenuManager::show() {
@@ -60,16 +53,20 @@ void MainMenuManager::show() {
     render();
 }
 
-//void MainMenuManager::handleEvent(const sf::Event& event, bool& startGame, bool& quitGame) {
-//    if (event.type == sf::Event::MouseButtonPressed) {
-//        sf::Vector2i mouse_position = sf::Mouse::getPosition(*game_window);
-//
-//        if (play_button_sprite.getGlobalBounds().contains(mouse_position.x, mouse_position.y)) {
-//            startGame = true;
-//        }
-//
-//        if (quit_button_sprite.getGlobalBounds().contains(mouse_position.x, mouse_position.y)) {
-//            quitGame = true;
-//        }
-//    }
-//}
+void MainMenuManager::updateButtonStates(EventPollingManager& eventManager) {
+    if (play_button) play_button->updateState(eventManager, *game_window);
+    if (quit_button) quit_button->updateState(eventManager, *game_window);
+}
+
+bool MainMenuManager::isPlayButtonPressed() const {
+    return play_button && play_button->getState() == ButtonState::PRESSED;
+}
+
+bool MainMenuManager::isQuitButtonPressed() const {
+    return quit_button && quit_button->getState() == ButtonState::PRESSED;
+}
+
+void MainMenuManager::resetButtonStates() {
+    if (play_button) play_button->resetState();
+    if (quit_button) quit_button->resetState();
+}
