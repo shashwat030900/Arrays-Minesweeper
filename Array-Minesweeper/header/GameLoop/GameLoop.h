@@ -6,10 +6,12 @@
 #include "../../header/UI/SplashScreenManager/SplashScreenManager.h"
 #include "../../header/UI/MainMenu/MainMenuManager.h"
 #include "../../header/GameLoop/Gameplay/GameplayManager.h"
+#include "../../header/GameLoop/Gameplay/Board.h"
 #include <iostream>
 
 using namespace GameWindow;
 using namespace Event;
+using namespace Gameplay;
 
 enum class GameState {
     SPLASH_SCREEN,
@@ -26,6 +28,7 @@ private:
     MainMenuManager* mainMenuManager;
     GameplayManager* gameplayManager;
     GameState currentState;
+    Board* board;
 
     void handleState();
 

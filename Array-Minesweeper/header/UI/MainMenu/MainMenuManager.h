@@ -3,13 +3,15 @@
 
 #include <SFML/Graphics.hpp>
 #include "../../header/UI/UI Elements/Button/Buttons.h"
+#include "../../header/UI/UI Elements/Image/Image.h"
 #include "../../header/Event/EventPollingManager.h"
+
+
 
 class MainMenuManager {
 private:
     sf::RenderWindow* game_window;
-    sf::Texture background_texture;
-    sf::Sprite background_sprite;
+    Image backgroundImage;
 
     Button* play_button;
     Button* quit_button;

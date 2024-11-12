@@ -32,6 +32,7 @@ void GameLoop::handleState() {
 
         if (mainMenuManager->IsPlayButtonPressed()) {
             mainMenuManager->ResetButtonStates();
+            gameplayManager->Initialize(*windowManager->getGameWindow());
             currentState = GameState::GAMEPLAY;
         }
         else if (mainMenuManager->IsQuitButtonPressed()) {
@@ -41,7 +42,18 @@ void GameLoop::handleState() {
         break;
 
     case GameState::GAMEPLAY:
-        currentState = GameState::EXIT;
+        gameplayManager->Update(*eventManager, *windowManager->getGameWindow());
+        gameplayManager->Render(*windowManager->getGameWindow());
+
+        // Optionally handle game over conditions here
+        if (gameplayManager->GetRemainingTime() <= 0.0f || gameplayManager->GetMinesCount() == 0) {
+            if (gameplayManager->GetMinesCount() == 0) {
+                gameplayManager->EndGame(GameResult::WON);
+            }
+            else {
+                gameplayManager->EndGame(GameResult::LOST);
+            }
+        }
         break;
 
     case GameState::EXIT:

@@ -51,10 +51,10 @@
     <ClCompile Include="source\Sound\SoundManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\UI\UI Elements\Button\Buttons.cpp">
+    <ClCompile Include="source\UI\UI Elements\Image\Image.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\UI\UI Elements\Image\Image.cpp">
+    <ClCompile Include="source\UI\UI Elements\Button\Buttons.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

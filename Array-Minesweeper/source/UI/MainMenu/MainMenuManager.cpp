@@ -18,16 +18,14 @@ void MainMenuManager::Initialize() {
 }
 
 void MainMenuManager::InitializeBackground() {
-    if (!background_texture.loadFromFile("assets/textures/minesweeper_bg.png")) {
+    if (!backgroundImage.Initialize("assets/textures/minesweeper_bg.png", game_window->getSize().x, game_window->getSize().y, sf::Vector2f(0, 0))) {
         std::cerr << "Failed to load background texture" << std::endl;
     }
-    background_sprite.setTexture(background_texture);
-    background_sprite.setColor(sf::Color(255, 255, 255, background_alpha));
+    backgroundImage.SetImageAlpha(background_alpha);
 }
-
 void MainMenuManager::InitializeButtons() {
-    play_button = new Button("assets/textures/play_button.png", GetButtonPosition(0.f, play_button_y_position), sf::Vector2f(button_width, button_height));
-    quit_button = new Button("assets/textures/quit_button.png", GetButtonPosition(0.f, quit_button_y_position), sf::Vector2f(button_width, button_height));
+    play_button = new Button("assets/textures/play_button.png", GetButtonPosition(0.f, play_button_y_position), button_width, button_height);
+    quit_button = new Button("assets/textures/quit_button.png", GetButtonPosition(0.f, quit_button_y_position), button_width, button_height);
 }
 
 sf::Vector2f MainMenuManager::GetButtonPosition(float offsetX, float offsetY) {
@@ -43,7 +41,7 @@ void MainMenuManager::Update(Event::EventPollingManager& eventManager) {
 }
 
 void MainMenuManager::Render() {
-    game_window->draw(background_sprite);
+    backgroundImage.Render(*game_window);
     if (play_button) play_button->Render(*game_window);
     if (quit_button) quit_button->Render(*game_window);
 }

@@ -1,21 +1,15 @@
 #include "../../header/UI/UI Elements/Button/Buttons.h"
 #include <iostream>
 
-Button::Button(const std::string& texturePath, const sf::Vector2f& position, const sf::Vector2f& size) {
-    // Initialize Image with texture path, size, and position
-    image.Initialize(texturePath, size.x, size.y, position);
-}
-
-void Button::Render(sf::RenderWindow& window) {
-    // Use Image class to render
-    image.Render(window);
+Button::Button(const std::string& texturePath, const sf::Vector2f& position, float width, float height) {
+    Image::Initialize(texturePath, width, height, position);
 }
 
 void Button::UpdateState(Event::EventPollingManager& eventManager, const sf::RenderWindow& window) {
     sf::Vector2i mouse_position = sf::Mouse::getPosition(window);
 
     if (eventManager.pressedLeftMouseButton() &&
-        image.GetGlobalBounds().contains(static_cast<float>(mouse_position.x), static_cast<float>(mouse_position.y))) {
+        GetGlobalBounds().contains(static_cast<float>(mouse_position.x), static_cast<float>(mouse_position.y))) {
         state = ButtonState::PRESSED;
     }
     else if (state == ButtonState::PRESSED && !eventManager.pressedLeftMouseButton()) {
