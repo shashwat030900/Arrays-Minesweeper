@@ -113,10 +113,13 @@ namespace Gameplay
         {
             cell_state = CellState::HIDDEN;
         }
+        std::cout << "Cell flag toggled at position: (" << position.x << ", " << position.y << ")\n";
     }
 
     void Cell::OpenCell()
     {
         SetCellState(CellState::OPEN);
+        std::cout << "Cell opened at position: (" << position.x << ", " << position.y << ")\n";
+
     }
 }
