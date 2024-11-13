@@ -28,7 +28,11 @@ namespace Gameplay
         }
 
         board.Update(eventManager, window);
-        ui.update(GetMinesCount(), static_cast<int>(remaining_time), eventManager, window);
+
+        if (game_result == GameResult::NONE) {
+            ui.update(GetMinesCount(), static_cast<int>(remaining_time), eventManager, window);
+        }
+        
         if (eventManager.pressedLeftMouseButton() || eventManager.pressedRightMouseButton())
         {
             // Get mouse position relative to the window

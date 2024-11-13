@@ -29,7 +29,6 @@ namespace Gameplay
 
         void UpdateRemainingTime();
         bool IsTimeOver();
-        void BeginGameOverTimer();
 
         void GameWon();
         void GameLost();
