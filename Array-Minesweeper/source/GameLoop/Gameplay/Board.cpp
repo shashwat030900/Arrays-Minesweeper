@@ -137,9 +137,9 @@ namespace Gameplay
     {
         int mines_around = 0;
 
-        for (int a = -1; a <= 2; ++a)
+        for (int a = -1; a <= 1; ++a)
         {
-            for (int b = -1; b <= 2; ++b)
+            for (int b = -1; b <= 1; ++b)
             {
                 if ((a == 0 && b == 0) || !IsValidCellPosition(sf::Vector2i(cell_position.x + a, cell_position.y + b)))
                     continue;

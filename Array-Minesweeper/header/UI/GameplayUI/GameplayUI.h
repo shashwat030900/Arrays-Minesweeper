@@ -40,5 +40,6 @@ public:
     void initialize();
     void update(int remaining_mines, int remaining_time, Event::EventPollingManager& eventManager, sf::RenderWindow& window);
     void render(sf::RenderWindow& window);
+    void updateMineText(const std::string& text);
     bool isRestartButtonPressed();
 };

@@ -107,6 +107,7 @@ namespace Gameplay
         game_result = GameResult::WON;
         board.FlagAllMines();
         board.SetBoardState(BoardState::COMPLETED);
+        ui.updateMineText("Game Won");
         std::cout << "Congratulations! You won the game!" << std::endl;
     }
 
@@ -118,6 +119,7 @@ namespace Gameplay
             BeginGameOverTimer();
             board.ShowBoard();
             board.SetBoardState(BoardState::COMPLETED);
+            ui.updateMineText("Game Lost");
         }
     }
 
@@ -128,7 +130,7 @@ namespace Gameplay
 
     void GameplayManager::UpdateRemainingTime()
     {
-        if (game_result == GameResult::WON)
+        if (game_result == GameResult::WON || game_result == GameResult::LOST)
             return;
 
         remaining_time -= time_manager.GetDeltaTime();

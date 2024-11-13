@@ -39,7 +39,6 @@ void GameplayUI::initializeTexts() {
 }
 
 void GameplayUI::initializeButton() {
-    // The button initialization is handled in the constructor.
     restart_button = new Button("assets/textures/restart_button.png", sf::Vector2f(restart_button_left_offset, restart_button_top_offset), button_width, button_height);
 }
 
@@ -53,6 +52,11 @@ void GameplayUI::render(sf::RenderWindow& window) {
     window.draw(mine_text);
     window.draw(time_text);
     restart_button->Render(window);
+}
+
+void GameplayUI::updateMineText(const std::string& text)
+{
+    mine_text.setString(text);
 }
 
 bool GameplayUI::isRestartButtonPressed() {
