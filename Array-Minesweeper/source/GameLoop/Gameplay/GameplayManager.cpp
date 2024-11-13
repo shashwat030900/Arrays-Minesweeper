@@ -23,6 +23,7 @@ namespace Gameplay
 
         if (IsTimeOver())
         {
+            std::cout << "Time Over\n";
             EndGame(GameResult::LOST);
         }
 
@@ -30,15 +31,39 @@ namespace Gameplay
 
         if (eventManager.pressedLeftMouseButton() || eventManager.pressedRightMouseButton())
         {
-            sf::Vector2i cell_position; // Get actual cell position from mouse click
-            board.ProcessCellInput(eventManager, cell_position);
+            // Get mouse position relative to the window
+            sf::Vector2i mouse_position = sf::Mouse::getPosition(window);
 
-            if (board.AreAllCellsOpen())
+            // Retrieve cell dimensions and offsets from a sample cell
+            float cell_width = board.GetCellWidth();
+            float cell_height = board.GetCellHeight();
+
+            // Assuming all cells share the same offset within a board, retrieve it from a cell
+            float cell_left_offset = board.GetSampleCellLeftOffset();
+            float cell_top_offset = board.GetSampleCellTopOffset();
+
+            // Calculate grid coordinates based on mouse click and cell dimensions
+            int grid_x = (mouse_position.x - cell_left_offset) / cell_width;
+            int grid_y = (mouse_position.y - cell_top_offset) / cell_height;
+
+            // Check if grid coordinates are within bounds
+            if (grid_x >= 0 && grid_x < board.GetNumberOfColumns() &&
+                grid_y >= 0 && grid_y < board.GetNumberOfRows())
             {
-                EndGame(GameResult::WON);
+                sf::Vector2i cell_position(grid_x, grid_y);
+                std::cout << "Cell position: " << cell_position.x << ", " << cell_position.y << std::endl;
+
+                // Process cell input
+                board.ProcessCellInput(eventManager, cell_position);
+
+                if (board.AreAllCellsOpen())
+                {
+                    EndGame(GameResult::WON);
+                }
             }
         }
     }
+
 
     void GameplayManager::Render(sf::RenderWindow& window)
     {

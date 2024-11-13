@@ -122,4 +122,15 @@ namespace Gameplay
         std::cout << "Cell opened at position: (" << position.x << ", " << position.y << ")\n";
 
     }
+
+    float Cell::GetCellLeftOffset() const
+    {
+        return cell_left_offset;
+    }
+
+    float Cell::GetCellTopOffset() const
+    {
+        return cell_top_offset;
+    }
+
 }

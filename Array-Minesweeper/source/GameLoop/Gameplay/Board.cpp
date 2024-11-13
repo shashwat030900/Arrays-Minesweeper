@@ -136,18 +136,19 @@ namespace Gameplay
     int Board::CountMinesAround(sf::Vector2i cell_position)
     {
         int mines_around = 0;
-        for (int dx = -1; dx <= 1; ++dx)
+
+        for (int a = -1; a <= 2; ++a)
         {
-            for (int dy = -1; dy <= 1; ++dy)
+            for (int b = -1; b <= 2; ++b)
             {
-                if (dx == 0 && dy == 0)
+                if ((a == 0 && b == 0) || !IsValidCellPosition(sf::Vector2i(cell_position.x + a, cell_position.y + b)))
                     continue;
 
-                sf::Vector2i neighbor(cell_position.x + dx, cell_position.y + dy);
-                if (IsValidCellPosition(neighbor) && board[neighbor.x][neighbor.y]->GetCellType() == CellType::MINE)
-                    ++mines_around;
+                if (board[cell_position.x + a][cell_position.y + b]->GetCellType() == CellType::MINE)
+                    mines_around++;
             }
         }
+
         return mines_around;
     }
 
@@ -282,7 +283,7 @@ namespace Gameplay
         switch (board_state)
         {
         case BoardState::FIRST_CELL:
-            PopulateBoard(sf::Vector2i(0, 0)); // Assuming first cell is at (0, 0) for simplicity
+            PopulateBoard(sf::Vector2i(0, 0));
             OpenAllCells();
             break;
         case BoardState::PLAYING:
@@ -298,9 +299,9 @@ namespace Gameplay
 
     void Board::OpenAllCells()
     {
-        for (int a = 0; a < number_of_rows; a++)
+        for (int a = 0; a < number_of_rows; ++a)
         {
-            for (int b = 0; b < number_of_columns; b++)
+            for (int b = 0; b < number_of_columns; ++b)
             {
                 board[a][b]->OpenCell();
             }
@@ -336,4 +337,27 @@ namespace Gameplay
     {
         return (board_height - board_height_offset) / static_cast<float>(number_of_rows);
     }
+
+
+    float Board::GetSampleCellLeftOffset() const
+    {
+        return board[0][0]->GetCellLeftOffset();
+    }
+
+    float Board::GetSampleCellTopOffset() const
+    {
+        return board[0][0]->GetCellTopOffset();
+    }
+
+    int Board::GetNumberOfColumns() const
+    {
+        return number_of_columns;
+    }
+
+    int Board::GetNumberOfRows() const
+    {
+        return number_of_rows;
+    }
+
+
 }

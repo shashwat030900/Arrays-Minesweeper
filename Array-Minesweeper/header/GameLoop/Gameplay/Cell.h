@@ -44,12 +44,14 @@ namespace Gameplay
         Button cell_button;
 
         // Private helper functions
-        sf::Vector2f GetCellScreenPosition(float width, float height) const;
+        
         void SetCellTexture();
 
     public:
         Cell(sf::Vector2i grid_position);
         ~Cell() = default;
+
+        sf::Vector2f GetCellScreenPosition(float width, float height) const;
 
         // Initialization and rendering functions
         void Initialize(float width, float height);
@@ -68,6 +70,9 @@ namespace Gameplay
 
         int GetMinesAround() const;
         void SetMinesAround(int mine_count);
+
+        float GetCellLeftOffset() const;
+        float GetCellTopOffset() const;
 
         void Reset();
         bool CanOpenCell() const;

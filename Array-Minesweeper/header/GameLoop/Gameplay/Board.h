@@ -79,6 +79,12 @@ namespace Gameplay
         float GetCellWidth() const;
         float GetCellHeight() const;
 
+        float GetSampleCellLeftOffset() const;
+        float GetSampleCellTopOffset() const;
+        int GetNumberOfColumns() const;
+        int GetNumberOfRows() const;
+
+
         bool AreAllCellsOpen();
         void FlagAllMines();
         void ShowBoard();
