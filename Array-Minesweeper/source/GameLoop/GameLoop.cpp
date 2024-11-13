@@ -46,16 +46,6 @@ void GameLoop::handleState() {
         gameplayManager->Update(*eventManager, *windowManager->getGameWindow());
         eventManager->update();
         gameplayManager->Render(*windowManager->getGameWindow());
-
-        // Optionally handle game over conditions here
-        if (gameplayManager->GetRemainingTime() <= 0.0f || gameplayManager->GetMinesCount() == 0) {
-            if (gameplayManager->GetMinesCount() == 0) {
-                gameplayManager->EndGame(GameResult::WON);
-            }
-            else {
-                gameplayManager->EndGame(GameResult::LOST);
-            }
-        }
         break;
 
     case GameState::EXIT:
