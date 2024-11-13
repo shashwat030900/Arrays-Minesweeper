@@ -1,6 +1,7 @@
 #pragma once
 #include "../../header/UI/UI Elements/Image/Image.h"
 #include "../../header/Event/EventPollingManager.h"
+#include "../../header/Sound/SoundManager.h"
 
 enum class ButtonState {
     RELEASED,

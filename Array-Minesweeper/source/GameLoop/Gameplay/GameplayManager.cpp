@@ -4,7 +4,6 @@
 namespace Gameplay
 {
     GameplayManager::GameplayManager()
-        : remaining_time(max_level_duration), game_result(GameResult::NONE)
     {
     }
 
@@ -29,7 +28,7 @@ namespace Gameplay
         }
 
         board.Update(eventManager, window);
-
+        ui.update(GetMinesCount(), static_cast<int>(remaining_time), eventManager, window);
         if (eventManager.pressedLeftMouseButton() || eventManager.pressedRightMouseButton())
         {
             // Get mouse position relative to the window
@@ -52,9 +51,6 @@ namespace Gameplay
                 grid_y >= 0 && grid_y < board.GetNumberOfRows())
             {
                 sf::Vector2i cell_position(grid_x, grid_y);
-                std::cout << "Cell position: " << cell_position.x << ", " << cell_position.y << std::endl;
-
-                // Process cell input
                 board.ProcessCellInput(eventManager, cell_position);
 
                 if (board.AreAllCellsOpen())
@@ -62,8 +58,9 @@ namespace Gameplay
                     EndGame(GameResult::WON);
                 }
             }
+            
         }
-        ui.update(GetMinesCount(), static_cast<int>(remaining_time), eventManager, window);
+        
 
         // Check if restart button is pressed
         if (ui.isRestartButtonPressed())
@@ -106,31 +103,29 @@ namespace Gameplay
     {
         game_result = GameResult::WON;
         board.FlagAllMines();
-        board.SetBoardState(BoardState::COMPLETED);
         ui.updateMineText("Game Won");
+        Sound::SoundManager::PlaySound(Sound::SoundType::GAME_WON);
+        board.SetBoardState(BoardState::COMPLETED);
+        
         std::cout << "Congratulations! You won the game!" << std::endl;
     }
 
     void GameplayManager::GameLost()
     {
-        if (game_result == GameResult::NONE)
-        {
-            game_result = GameResult::LOST;
-            BeginGameOverTimer();
-            board.ShowBoard();
-            board.SetBoardState(BoardState::COMPLETED);
-            ui.updateMineText("Game Lost");
-        }
+        game_result = GameResult::LOST;
+        board.ShowBoard();
+        ui.updateMineText("Game Lost");
+        Sound::SoundManager::PlaySound(Sound::SoundType::EXPLOSION);
+
+        board.SetBoardState(BoardState::COMPLETED);
+        std::cout << "You lost the game!" << std::endl;
     }
 
-    void GameplayManager::BeginGameOverTimer()
-    {
-        remaining_time = game_over_time;
-    }
+
 
     void GameplayManager::UpdateRemainingTime()
     {
-        if (game_result == GameResult::WON || game_result == GameResult::LOST)
+        if (game_result == GameResult::WON || game_result == GameResult::LOST || board.GetBoardState() == BoardState::COMPLETED)
             return;
 
         remaining_time -= time_manager.GetDeltaTime();

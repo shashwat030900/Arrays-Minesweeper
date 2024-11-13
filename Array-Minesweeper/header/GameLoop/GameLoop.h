@@ -7,6 +7,7 @@
 #include "../../header/UI/MainMenu/MainMenuManager.h"
 #include "../../header/GameLoop/Gameplay/GameplayManager.h"
 #include "../../header/GameLoop/Gameplay/Board.h"
+#include "../../header/Sound/SoundManager.h"
 #include <iostream>
 
 using namespace GameWindow;

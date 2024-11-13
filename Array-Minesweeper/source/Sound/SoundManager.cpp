@@ -14,11 +14,11 @@ namespace Sound
     void SoundManager::Initialize()
     {
         // Update the paths based on the directory structure
-        LoadBackgroundMusicFromFile("assets/sounds/background_music.ogg");
-        LoadSoundFromFile("assets/sounds/button_click_sound.ogg",
-            "assets/sounds/flag_sound.ogg",
-            "assets/sounds/explosion_sound.ogg",
-            "assets/sounds/game_won_sound.ogg");
+        LoadBackgroundMusicFromFile("assets/sounds/background_music.mp3");
+        LoadSoundFromFile("assets/sounds/button_click_sound.wav",
+            "assets/sounds/flag_sound.wav",
+            "assets/sounds/explosion_sound.wav",
+            "assets/sounds/game_won_sound.wav");
     }
 
     void SoundManager::LoadBackgroundMusicFromFile(const std::string& path)

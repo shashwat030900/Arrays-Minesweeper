@@ -10,6 +10,7 @@ void Button::UpdateState(Event::EventPollingManager& eventManager, const sf::Ren
 
     if (eventManager.pressedLeftMouseButton() &&
         GetGlobalBounds().contains(static_cast<float>(mouse_position.x), static_cast<float>(mouse_position.y))) {
+        Sound::SoundManager::PlaySound(Sound::SoundType::BUTTON_CLICK);
         state = ButtonState::PRESSED;
     }
     else if (state == ButtonState::PRESSED && !eventManager.pressedLeftMouseButton()) {

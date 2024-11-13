@@ -88,9 +88,16 @@ namespace Gameplay
             return;
 
         if (eventManager.pressedLeftMouseButton())
+        {
+            Sound::SoundManager::PlaySound(Sound::SoundType::BUTTON_CLICK);
             OpenCell(cell_position);
-        else if (eventManager.pressedRightMouseButton())
+        }
+            
+        else if (eventManager.pressedRightMouseButton()) {
+            Sound::SoundManager::PlaySound(Sound::SoundType::FLAG);
             FlagCell(cell_position);
+        }
+            
     }
 
     void Board::PopulateBoard(sf::Vector2i first_cell_position)
@@ -217,7 +224,6 @@ namespace Gameplay
             ProcessMineCell(cell_position);
             break;
         default:
-            // If it's a number, no further processing is needed
             break;
         }
     }
@@ -230,6 +236,7 @@ namespace Gameplay
     // Process a cell that contains a mine, triggering game over logic
     void Board::ProcessMineCell(sf::Vector2i cell_position) {
         std::cout << "Mine triggered at (" << cell_position.x << ", " << cell_position.y << ") - Game Over\n";
+        Sound::SoundManager::PlaySound(Sound::SoundType::EXPLOSION);
         RevealAllMines();
         board_state = BoardState::COMPLETED;
     }

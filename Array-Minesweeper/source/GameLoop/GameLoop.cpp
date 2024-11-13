@@ -9,6 +9,8 @@ GameLoop::GameLoop() {
     mainMenuManager = new MainMenuManager(windowManager->getGameWindow());
     gameplayManager = new GameplayManager();
     currentState = GameState::SPLASH_SCREEN;
+    Sound::SoundManager::Initialize();
+    Sound::SoundManager::PlayBackgroundMusic();
 }
 
 GameLoop::~GameLoop() {
