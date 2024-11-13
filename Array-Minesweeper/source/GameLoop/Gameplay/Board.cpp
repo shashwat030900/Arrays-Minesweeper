@@ -230,25 +230,30 @@ namespace Gameplay
     // Process a cell that contains a mine, triggering game over logic
     void Board::ProcessMineCell(sf::Vector2i cell_position) {
         std::cout << "Mine triggered at (" << cell_position.x << ", " << cell_position.y << ") - Game Over\n";
+        RevealAllMines();
         board_state = BoardState::COMPLETED;
     }
 
     // Open all contiguous empty cells starting from the given cell
     void Board::OpenEmptyCells(sf::Vector2i cell_position) {
-        if (board[cell_position.x][cell_position.y]->GetCellState() == CellState::OPEN) {
+        switch (board[cell_position.x][cell_position.y]->GetCellState())
+        {
+        case::Gameplay::CellState::OPEN:
             return;
+        case::Gameplay::CellState::FLAGGED:
+            flagged_cells--;
+        default:
+            board[cell_position.x][cell_position.y]->OpenCell();
         }
 
-        board[cell_position.x][cell_position.y]->SetCellState(CellState::OPEN);
+        for (int a = -1; a < 2; a++)
+        {
+            for (int b = -1; b < 2; b++)
+            {
+                if ((a == 0 && b == 0) || !IsValidCellPosition(sf::Vector2i(a + cell_position.x, b + cell_position.y))) continue;
 
-        for (int dx = -1; dx <= 1; ++dx) {
-            for (int dy = -1; dy <= 1; ++dy) {
-                if (dx == 0 && dy == 0) continue;
-
-                sf::Vector2i neighbor(cell_position.x + dx, cell_position.y + dy);
-                if (IsValidCellPosition(neighbor) && board[neighbor.x][neighbor.y]->GetCellType() == CellType::EMPTY) {
-                    OpenEmptyCells(neighbor);
-                }
+                sf::Vector2i next_cell_position = sf::Vector2i(a + cell_position.x, b + cell_position.y);
+                OpenCell(next_cell_position);
             }
         }
     }
@@ -304,6 +309,22 @@ namespace Gameplay
             for (int b = 0; b < number_of_columns; ++b)
             {
                 board[a][b]->OpenCell();
+            }
+        }
+    }
+
+    void Board::RevealAllMines()
+    {
+        for (int row = 0; row < number_of_rows; row++)
+        {
+            for (int col = 0; col < number_of_columns; col++)
+            {
+                // Check if the cell contains a mine
+                if (board[row][col]->GetCellType() == CellType::MINE)
+                {
+                    // Open the mine cell
+                    board[row][col]->SetCellState(CellState::OPEN);
+                }
             }
         }
     }

@@ -60,6 +60,7 @@ namespace Gameplay
         void ResetBoard();
         void DeleteBoard();
         void OpenAllCells();
+        void RevealAllMines();
 
     public:
         Board();
