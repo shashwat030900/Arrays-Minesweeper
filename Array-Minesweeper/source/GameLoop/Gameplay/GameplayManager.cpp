@@ -12,6 +12,7 @@ namespace Gameplay
     {
         board.Initialize(window);
         time_manager.Initialize();
+        ui.initialize();
         remaining_time = max_level_duration;
         game_result = GameResult::NONE;
     }
@@ -62,12 +63,20 @@ namespace Gameplay
                 }
             }
         }
+        ui.update(GetMinesCount(), static_cast<int>(remaining_time), eventManager, window);
+
+        // Check if restart button is pressed
+        if (ui.isRestartButtonPressed())
+        {
+            Restart();
+        }
     }
 
 
     void GameplayManager::Render(sf::RenderWindow& window)
     {
         board.Render(window);
+        ui.render(window);
     }
 
     void GameplayManager::Restart()
