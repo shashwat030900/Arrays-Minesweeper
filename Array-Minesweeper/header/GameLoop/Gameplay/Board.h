@@ -3,7 +3,6 @@
 #include <SFML/Graphics.hpp>
 #include <random>
 #include "../../header/GameLoop/Gameplay/Cell.h"
-#include "../../header/UI/UI Elements/Image/Image.h"
 #include "../../header/Event/EventPollingManager.h"
 #include "../../header/Sound/SoundManager.h"
 
@@ -35,8 +34,11 @@ namespace Gameplay
         const float board_width = 866.f;
         const float board_height = 1080.f;
         const float background_alpha = 85.f;
-        Image board_image;
-        Image background_image;
+
+        sf::Texture background_texture;
+        sf::Sprite background_sprite;
+        sf::Texture board_texture;
+        sf::Sprite board_sprite;
 
         // Randomization
         std::default_random_engine random_engine;
@@ -44,8 +46,8 @@ namespace Gameplay
 
         // Private helper methods
         void CreateBoard();
-        void InitializeBackgroundImage(sf::RenderWindow& window);
-        void InitializeBoardImage(sf::RenderWindow& window) ;
+        void InitializeBackgroundImage();
+        void InitializeBoardImage();
         void InitializeCells();
         void PopulateBoard(sf::Vector2i first_cell_position);
         void PopulateMines(sf::Vector2i first_cell_position);
@@ -68,7 +70,7 @@ namespace Gameplay
         ~Board();
 
         // Game flow methods
-        void Initialize(sf::RenderWindow& window);
+        void Initialize();
         void Update(Event::EventPollingManager& eventManager, sf::RenderWindow& window);
         void Render(sf::RenderWindow& window);
         void ProcessCellInput(Event::EventPollingManager& eventManager, sf::Vector2i cell_position);

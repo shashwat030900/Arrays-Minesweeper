@@ -37,7 +37,7 @@ namespace Gameplay
         GameplayManager();
         ~GameplayManager() = default;
 
-        void Initialize(sf::RenderWindow& window);
+        void Initialize();
         void Update(Event::EventPollingManager& eventManager, sf::RenderWindow& window);
         void Render(sf::RenderWindow& window);
 

@@ -14,24 +14,35 @@ namespace Gameplay
         DeleteBoard();
     }
 
-    void Board::Initialize(sf::RenderWindow& window)
+    void Board::Initialize()
     {
-        InitializeBackgroundImage(window);
-        InitializeBoardImage(window);
+        InitializeBackgroundImage();
+        InitializeBoardImage();
         InitializeCells();
         Reset();
     }
 
-    void Board::InitializeBackgroundImage(sf::RenderWindow& window)
+    void Board::InitializeBackgroundImage()
     {
-        background_image.Initialize("assets/textures/minesweeper_bg.png", window.getSize().x, window.getSize().y, sf::Vector2f(0, 0));
-        background_image.SetImageAlpha(background_alpha);
+        if (!background_texture.loadFromFile("assets/textures/minesweeper_bg.png"))
+        {
+            std::cerr << "Failed to load background texture!" << std::endl;
+            return;
+        }
+        background_sprite.setTexture(background_texture);
+        background_sprite.setColor(sf::Color(255, 255, 255, background_alpha));
     }
 
-    void Board::InitializeBoardImage(sf::RenderWindow& window)
+    void Board::InitializeBoardImage()
     {
-        board_image.Initialize("assets/textures/board.png", board_width, board_height, sf::Vector2f(0, 0));
-        board_image.SetCentreAlinged(window);
+        if (!board_texture.loadFromFile("assets/textures/board.png"))
+        {
+            std::cerr << "Failed to load board texture!" << std::endl;
+            return;
+        }
+        board_sprite.setTexture(board_texture);
+        board_sprite.setPosition(530.f, 0);
+        board_sprite.setScale(board_width / board_texture.getSize().x, board_height / board_texture.getSize().y);
     }
 
     void Board::CreateBoard()
@@ -71,8 +82,8 @@ namespace Gameplay
 
     void Board::Render(sf::RenderWindow& window)
     {
-        background_image.Render(window);
-        board_image.Render(window);
+        window.draw(background_sprite);
+        window.draw(board_sprite);
         for (int row = 0; row < number_of_rows; ++row)
         {
             for (int col = 0; col < number_of_columns; ++col)

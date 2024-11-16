@@ -7,9 +7,9 @@ namespace Gameplay
     {
     }
 
-    void GameplayManager::Initialize(sf::RenderWindow& window)
+    void GameplayManager::Initialize()
     {
-        board.Initialize(window);
+        board.Initialize();
         time_manager.Initialize();
         ui.initialize();
         remaining_time = max_level_duration;

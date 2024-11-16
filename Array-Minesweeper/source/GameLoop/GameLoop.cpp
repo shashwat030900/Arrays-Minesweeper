@@ -30,11 +30,12 @@ void GameLoop::handleState() {
 
     case GameState::MAIN_MENU:
         mainMenuManager->Update(*eventManager);
+        mainMenuManager->Render();
         eventManager->update();
 
         if (mainMenuManager->IsPlayButtonPressed()) {
             mainMenuManager->ResetButtonStates();
-            gameplayManager->Initialize(*windowManager->getGameWindow());
+            gameplayManager->Initialize();
             std::cout << "Switching to Gameplay state\n";
             currentState = GameState::GAMEPLAY;
         }

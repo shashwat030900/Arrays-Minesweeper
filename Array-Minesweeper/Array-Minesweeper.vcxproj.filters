@@ -51,9 +51,6 @@
     <ClCompile Include="source\Sound\SoundManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\UI\UI Elements\Image\Image.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="source\UI\UI Elements\Button\Buttons.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -93,9 +90,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="header\UI\UI Elements\Button\Buttons.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="header\UI\UI Elements\Image\Image.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

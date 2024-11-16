@@ -12,7 +12,7 @@ namespace Gameplay
     void Cell::Initialize(float width, float height)
     {
         sf::Vector2f cell_screen_position = GetCellScreenPosition(width, height);
-        cell_button.Initialize("assets/textures/cells.jpeg", width * slice_count, height, cell_screen_position);
+        cell_button.Initialize("assets/textures/cells.jpeg", cell_screen_position, width * slice_count, height);
     }
 
     sf::Vector2f Cell::GetCellScreenPosition(float width, float height) const
