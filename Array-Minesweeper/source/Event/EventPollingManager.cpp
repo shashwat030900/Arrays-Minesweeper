@@ -7,36 +7,36 @@ namespace Event
     using namespace GameWindow;
 
     EventPollingManager::EventPollingManager(sf::RenderWindow* window)
-        : game_window(window), left_mouse_button_state(MouseButtonState::RELEASED), right_mouse_button_state(MouseButtonState::RELEASED) {}
+        : gameWindow(window), leftMouseButtonState(MouseButtonState::RELEASED), rightMouseButtonState(MouseButtonState::RELEASED) {}
 
     EventPollingManager::~EventPollingManager() = default;
 
-    void EventPollingManager::initialize(sf::RenderWindow* window)
+    void EventPollingManager::Initialize(sf::RenderWindow* window)
     {
-        game_window = window;
-        left_mouse_button_state = MouseButtonState::RELEASED;
-        right_mouse_button_state = MouseButtonState::RELEASED;
+        gameWindow = window;
+        leftMouseButtonState = MouseButtonState::RELEASED;
+        rightMouseButtonState = MouseButtonState::RELEASED;
     }
 
-    void EventPollingManager::update()
+    void EventPollingManager::Update()
     {
-        updateButtonsState(left_mouse_button_state, sf::Mouse::Left);
-        updateButtonsState(right_mouse_button_state, sf::Mouse::Right);
+        UpdateButtonsState(leftMouseButtonState, sf::Mouse::Left);
+        UpdateButtonsState(rightMouseButtonState, sf::Mouse::Right);
     }
 
-    void EventPollingManager::processEvents()
+    void EventPollingManager::ProcessEvents()
     {
-        if (isGameWindowOpen())
+        if (IsGameWindowOpen())
         {
-            while (game_window->pollEvent(game_event))
+            while (gameWindow->pollEvent(gameEvent))
             {
-                if (gameWindowWasClosed() || hasQuitGame())
-                    game_window->close();
+                if (GameWindowWasClosed() || HasQuitGame())
+                    gameWindow->close();
             }
         }
     }
 
-    void EventPollingManager::updateButtonsState(MouseButtonState& button_state, sf::Mouse::Button button_type)
+    void EventPollingManager::UpdateButtonsState(MouseButtonState& button_state, sf::Mouse::Button button_type)
     {
         if (sf::Mouse::isButtonPressed(button_type))
         {
@@ -56,38 +56,43 @@ namespace Event
         }
     }
 
-    bool EventPollingManager::isGameWindowOpen()
+    bool EventPollingManager::IsGameWindowOpen()
     {
-        return game_window != nullptr;
+        return gameWindow != nullptr;
     }
 
-    bool EventPollingManager::gameWindowWasClosed()
+    bool EventPollingManager::GameWindowWasClosed()
     {
-        return game_event.type == sf::Event::Closed;
+        return gameEvent.type == sf::Event::Closed;
     }
 
-    bool EventPollingManager::hasQuitGame()
+    bool EventPollingManager::HasQuitGame()
     {
-        return (isKeyboardEvent() && pressedEscapeKey());
+        return (IsKeyboardEvent() && PressedEscapeKey());
     }
 
-    bool EventPollingManager::isKeyboardEvent()
+    bool EventPollingManager::IsKeyboardEvent()
     {
-        return game_event.type == sf::Event::KeyPressed;
+        return gameEvent.type == sf::Event::KeyPressed;
     }
 
-    bool EventPollingManager::pressedEscapeKey()
+    bool EventPollingManager::PressedEscapeKey()
     {
-        return game_event.key.code == sf::Keyboard::Escape;
+        return gameEvent.key.code == sf::Keyboard::Escape;
     }
 
-    bool EventPollingManager::pressedLeftMouseButton()
+    bool EventPollingManager::PressedLeftMouseButton()
     {
-        return left_mouse_button_state == MouseButtonState::PRESSED;
+        return leftMouseButtonState == MouseButtonState::PRESSED;
     }
 
-    bool EventPollingManager::pressedRightMouseButton()
+    bool EventPollingManager::PressedRightMouseButton()
     {
-        return right_mouse_button_state == MouseButtonState::PRESSED;
+        return rightMouseButtonState == MouseButtonState::PRESSED;
+    }
+
+    sf::Vector2i EventPollingManager::GetMousePosition(const sf::RenderWindow& window)
+    {
+        return sf::Mouse::getPosition(window);
     }
 }

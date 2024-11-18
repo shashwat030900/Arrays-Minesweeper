@@ -2,14 +2,14 @@
 #include <iostream>
 
 MainMenuManager::MainMenuManager(sf::RenderWindow* window) {
-    game_window = window;
-    play_button = nullptr;
-    quit_button = nullptr;
+    gameWindow = window;
+    playButton = nullptr;
+    quitButton = nullptr;
 }
 
 MainMenuManager::~MainMenuManager() {
-    delete play_button;
-    delete quit_button;
+    delete playButton;
+    delete quitButton;
 }
 
 void MainMenuManager::Initialize() {
@@ -18,20 +18,20 @@ void MainMenuManager::Initialize() {
 }
 
 void MainMenuManager::InitializeBackground() {
-    if (!background_texture.loadFromFile("assets/textures/minesweeper_bg.png")) {
+    if (!backgroundTexture.loadFromFile("assets/textures/minesweeper_bg.png")) {
         std::cerr << "Failed to load background texture" << std::endl;
         return;
     }
-    background_sprite.setTexture(background_texture);
-    background_sprite.setColor(sf::Color(255, 255, 255, background_alpha));
+    backgroundSprite.setTexture(backgroundTexture);
+    backgroundSprite.setColor(sf::Color(255, 255, 255, backgroundAlpha));
 }
 void MainMenuManager::InitializeButtons() {
-    play_button = new Button("assets/textures/play_button.png", GetButtonPosition(0.f, play_button_y_position), button_width, button_height);
-    quit_button = new Button("assets/textures/quit_button.png", GetButtonPosition(0.f, quit_button_y_position), button_width, button_height);
+    playButton = new Button("assets/textures/play_button.png", GetButtonPosition(0.f, playButtonYPosition), buttonWidth, buttonHeight);
+    quitButton = new Button("assets/textures/quit_button.png", GetButtonPosition(0.f, quitButtonYPosition), buttonWidth, buttonHeight);
 }
 
 sf::Vector2f MainMenuManager::GetButtonPosition(float offsetX, float offsetY) {
-    float x_position = (game_window->getSize().x - button_width) / 2.0f + offsetX;
+    float x_position = (gameWindow->getSize().x - buttonWidth) / 2.0f + offsetX;
     float y_position = offsetY;
     return sf::Vector2f(x_position, y_position);
 }
@@ -48,25 +48,25 @@ void MainMenuManager::Render() {
 }
 
 void MainMenuManager::Show() {
-    game_window->draw(background_sprite);
-    if (play_button) play_button->Render(*game_window);
-    if (quit_button) quit_button->Render(*game_window);
+    gameWindow->draw(backgroundSprite);
+    if (playButton) playButton->Render(*gameWindow);
+    if (quitButton) quitButton->Render(*gameWindow);
 }
 
 void MainMenuManager::UpdateButtonStates(Event::EventPollingManager& eventManager) {
-    if (play_button) play_button->UpdateState(eventManager, *game_window);
-    if (quit_button) quit_button->UpdateState(eventManager, *game_window);
+    if (playButton) playButton->UpdateState(eventManager, *gameWindow);
+    if (quitButton) quitButton->UpdateState(eventManager, *gameWindow);
 }
 
 bool MainMenuManager::IsPlayButtonPressed() const {
-    return play_button && play_button->GetState() == ButtonState::PRESSED;
+    return playButton && playButton->GetState() == ButtonState::PRESSED;
 }
 
 bool MainMenuManager::IsQuitButtonPressed() const {
-    return quit_button && quit_button->GetState() == ButtonState::PRESSED;
+    return quitButton && quitButton->GetState() == ButtonState::PRESSED;
 }
 
 void MainMenuManager::ResetButtonStates() {
-    if (play_button) play_button->ResetState();
-    if (quit_button) quit_button->ResetState();
+    if (playButton) playButton->ResetState();
+    if (quitButton) quitButton->ResetState();
 }

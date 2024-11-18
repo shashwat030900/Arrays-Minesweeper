@@ -19,30 +19,30 @@ namespace Gameplay
     {
     private:
         // Board Constants
-        static const int number_of_rows = 9;
-        static const int number_of_columns = 9;
-        static const int mines_count = 9;
+        static const int numberOfRows = 9;
+        static const int numberOfColumns = 9;
+        static const int minesCount = 9;
 
         // State and View Members
-        BoardState board_state;
-        Cell* board[number_of_rows][number_of_columns];
-        int flagged_cells;
+        BoardState boardState;
+        Cell* board[numberOfRows][numberOfColumns];
+        int flaggedCells;
 
         // Rendering
-        const float board_width_offset = 115.f;
-        const float board_height_offset = 329.f;
-        const float board_width = 866.f;
-        const float board_height = 1080.f;
-        const float background_alpha = 85.f;
+        const float boardWidthOffset = 115.f;
+        const float boardHeightOffset = 329.f;
+        const float boardWidth = 866.f;
+        const float boardHeight = 1080.f;
+        const float backgroundAlpha = 85.f;
 
-        sf::Texture background_texture;
-        sf::Sprite background_sprite;
-        sf::Texture board_texture;
-        sf::Sprite board_sprite;
+        sf::Texture backgroundTexture;
+        sf::Sprite backgroundSprite;
+        sf::Texture boardTexture;
+        sf::Sprite boardSprite;
 
         // Randomization
-        std::default_random_engine random_engine;
-        std::random_device random_device;
+        std::default_random_engine randomEngine;
+        std::random_device randomDevice;
 
         // Private helper methods
         void CreateBoard();
@@ -55,7 +55,6 @@ namespace Gameplay
         int CountMinesAround(sf::Vector2i cell_position);
         void FlagCell(sf::Vector2i cell_position);
         void OpenCell(sf::Vector2i cell_position);
-        bool IsValidCellPosition(sf::Vector2i cell_position);
         void ProcessCellType(sf::Vector2i cell_position);
         void ProcessEmptyCell(sf::Vector2i cell_position);
         void ProcessMineCell(sf::Vector2i cell_position);
@@ -74,6 +73,7 @@ namespace Gameplay
         void Update(Event::EventPollingManager& eventManager, sf::RenderWindow& window);
         void Render(sf::RenderWindow& window);
         void ProcessCellInput(Event::EventPollingManager& eventManager, sf::Vector2i cell_position);
+        bool IsValidCellPosition(sf::Vector2i cell_position);
         void Reset();
 
         // Getters
@@ -85,6 +85,8 @@ namespace Gameplay
 
         float GetSampleCellLeftOffset() const;
         float GetSampleCellTopOffset() const;
+        sf::Vector2i GetCellFromMousePosition(const sf::Vector2i& mouse_position) const;
+
         int GetNumberOfColumns() const;
         int GetNumberOfRows() const;
 

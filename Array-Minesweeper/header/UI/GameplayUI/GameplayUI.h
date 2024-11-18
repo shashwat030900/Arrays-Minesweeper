@@ -6,40 +6,44 @@
 
 class GameplayUI {
 private:
-    sf::Font bubble_bobble_font;
-    sf::Font ds_digib_font;
+    sf::Font bubbleBobbleFont;
+    sf::Font dsDigibFont;
 
     // Text elements
-    sf::Text mine_text;
-    sf::Text time_text;
+    sf::Text mineText;
+    sf::Text timeText;
 
     // Button element
-    Button *restart_button = nullptr;
+    Button *restartButton = nullptr;
 
     // Constants
-    const int font_size = 110;
-    const float mine_text_top_offset = 65.f;
-    const float mine_text_left_offset = 660.f;
-    const float time_text_top_offset = 65.f;
-    const float time_text_left_offset = 1090.f;
-    const float restart_button_top_offset = 100.f;
-    const float restart_button_left_offset = 920.f;
-    const float button_width = 80.f;
-    const float button_height = 80.f;
-    const sf::Color text_color = sf::Color::Red;
+    const int fontSize = 110;
+
+    const float minetextTopOffset = 65.f;
+    const float mineTextLeftOffset = 660.f;
+
+    const float timeTextTopOffset = 65.f;
+    const float timeTextLeftOffset = 1090.f;
+
+    const float restartButtonTopOffset = 100.f;
+    const float restartButtonLeftOffset = 920.f;
+
+    const float buttonWidth = 80.f;
+    const float buttonHeight = 80.f;
+    const sf::Color textColor = sf::Color::Red;
 
     // Private methods for initialization
-    void initializeTexts();
-    void initializeButton();
-    void loadFonts();
+    void InitializeTexts();
+    void InitializeButton();
+    void LoadFonts();
 
 public:
     GameplayUI();
     ~GameplayUI() = default;
 
-    void initialize();
-    void update(int remaining_mines, int remaining_time, Event::EventPollingManager& eventManager, sf::RenderWindow& window);
-    void render(sf::RenderWindow& window);
-    void updateMineText(const std::string& text);
-    bool isRestartButtonPressed();
+    void Initialize();
+    void Update(int remaining_mines, int remaining_time, Event::EventPollingManager& eventManager, sf::RenderWindow& window);
+    void Render(sf::RenderWindow& window);
+    void UpdateMineText(const std::string& text);
+    bool IsRestartButtonPressed();
 };

@@ -6,33 +6,33 @@ Button::Button(const std::string& texturePath, const sf::Vector2f& position, flo
 }
 
 void Button::Initialize(const std::string& texturePath, const sf::Vector2f& position, float width, float height) {
-    if (!button_texture.loadFromFile(texturePath)) {
+    if (!buttonTexture.loadFromFile(texturePath)) {
         std::cerr << "Failed to load button texture: " << texturePath << std::endl;
         return;
     }
-    button_sprite.setTexture(button_texture);
-    button_sprite.setPosition(position);
-    button_sprite.setScale(width / button_texture.getSize().x, height / button_texture.getSize().y);
+    buttonSprite.setTexture(buttonTexture);
+    buttonSprite.setPosition(position);
+    buttonSprite.setScale(width / buttonTexture.getSize().x, height / buttonTexture.getSize().y);
 }
 void Button::UpdateState(Event::EventPollingManager& eventManager, const sf::RenderWindow& window) {
     sf::Vector2i mouse_position = sf::Mouse::getPosition(window);
 
-    if (eventManager.pressedLeftMouseButton() &&
-        button_sprite.getGlobalBounds().contains(static_cast<float>(mouse_position.x), static_cast<float>(mouse_position.y))) {
+    if (eventManager.PressedLeftMouseButton() &&
+        buttonSprite.getGlobalBounds().contains(static_cast<float>(mouse_position.x), static_cast<float>(mouse_position.y))) {
         Sound::SoundManager::PlaySound(Sound::SoundType::BUTTON_CLICK);
         state = ButtonState::PRESSED;
     }
-    else if (state == ButtonState::PRESSED && !eventManager.pressedLeftMouseButton()) {
+    else if (state == ButtonState::PRESSED && !eventManager.PressedLeftMouseButton()) {
         state = ButtonState::RELEASED;
     }
 }
 
 void Button::Render(sf::RenderWindow& window) const {
-    window.draw(button_sprite);
+    window.draw(buttonSprite);
 }
 
 void Button::SetTextureRect(const sf::IntRect& rect) {
-    button_sprite.setTextureRect(rect);
+    buttonSprite.setTextureRect(rect);
 }
 
 ButtonState Button::GetState() const {

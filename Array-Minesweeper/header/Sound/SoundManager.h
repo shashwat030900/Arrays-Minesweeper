@@ -15,13 +15,13 @@ namespace Sound
     class SoundManager
     {
     private:
-        static sf::Music background_music;
-        static sf::SoundBuffer buffer_button_click;
-        static sf::SoundBuffer buffer_flag_sound;
-        static sf::SoundBuffer buffer_explosion;
-        static sf::SoundBuffer buffer_game_won;
-        static sf::Sound sound_effect;
-        static float background_music_volume;
+        static sf::Music backgroundMusic;
+        static sf::SoundBuffer bufferButtonClick;
+        static sf::SoundBuffer bufferFlagSound;
+        static sf::SoundBuffer bufferExplosion;
+        static sf::SoundBuffer bufferGameWon;
+        static sf::Sound soundEffect;
+        static float backgroundMusicVolume;
 
     public:
         // Initialization and loading functions
@@ -32,6 +32,6 @@ namespace Sound
     private:
         static void LoadBackgroundMusicFromFile(const std::string& path);
         static void LoadSoundFromFile(const std::string& button_click_path, const std::string& flag_sound_path,
-            const std::string& explosion_sound_path, const std::string& game_won_sound_path);
+        const std::string& explosion_sound_path, const std::string& game_won_sound_path);
     };
 }

@@ -10,82 +10,64 @@ namespace Gameplay
     void GameplayManager::Initialize()
     {
         board.Initialize();
-        time_manager.Initialize();
-        ui.initialize();
-        remaining_time = max_level_duration;
-        game_result = GameResult::NONE;
+        Time::TimeManager::Initialize();
+        gameplayUI.Initialize();
+        remainingTime = maxLevelDuration;
+        gameResult = GameResult::NONE;
     }
 
     void GameplayManager::Update(Event::EventPollingManager& eventManager, sf::RenderWindow& window)
     {
-        time_manager.Update();
+        Time::TimeManager::Update();
         UpdateRemainingTime();
-
-        if (IsTimeOver())
-        {
-            std::cout << "Time Over\n";
-            EndGame(GameResult::LOST);
-        }
-
         board.Update(eventManager, window);
+        ProcessGameOver();
 
-        if (game_result == GameResult::NONE) {
-            ui.update(GetMinesCount(), static_cast<int>(remaining_time), eventManager, window);
+        if (gameResult == GameResult::NONE) {
+            gameplayUI.Update(GetMinesCount(), static_cast<int>(remainingTime), eventManager, window);
         }
         
-        if (eventManager.pressedLeftMouseButton() || eventManager.pressedRightMouseButton())
-        {
-            // Get mouse position relative to the window
-            sf::Vector2i mouse_position = sf::Mouse::getPosition(window);
-
-            // Retrieve cell dimensions and offsets from a sample cell
-            float cell_width = board.GetCellWidth();
-            float cell_height = board.GetCellHeight();
-
-            // Assuming all cells share the same offset within a board, retrieve it from a cell
-            float cell_left_offset = board.GetSampleCellLeftOffset();
-            float cell_top_offset = board.GetSampleCellTopOffset();
-
-            // Calculate grid coordinates based on mouse click and cell dimensions
-            int grid_x = (mouse_position.x - cell_left_offset) / cell_width;
-            int grid_y = (mouse_position.y - cell_top_offset) / cell_height;
-
-            // Check if grid coordinates are within bounds
-            if (grid_x >= 0 && grid_x < board.GetNumberOfColumns() &&
-                grid_y >= 0 && grid_y < board.GetNumberOfRows())
-            {
-                sf::Vector2i cell_position(grid_x, grid_y);
-                board.ProcessCellInput(eventManager, cell_position);
-
-                if (board.AreAllCellsOpen())
-                {
-                    EndGame(GameResult::WON);
-                }
-            }
-            
-        }
-        
-
-        // Check if restart button is pressed
-        if (ui.isRestartButtonPressed())
-        {
-            Restart();
-        }
+        ProcessMouseInput(eventManager, window);
+        CheckRestart();    
     }
 
 
     void GameplayManager::Render(sf::RenderWindow& window)
     {
         board.Render(window);
-        ui.render(window);
+        gameplayUI.Render(window);
     }
 
-    void GameplayManager::Restart()
+    void GameplayManager::ProcessMouseInput(Event::EventPollingManager& eventManager, sf::RenderWindow& window)
     {
-        game_result = GameResult::NONE;
-        board.Reset();
-        time_manager.Initialize();
-        remaining_time = max_level_duration;
+        sf::Vector2i mouse_position = eventManager.GetMousePosition(window);
+        sf::Vector2i cell_position = board.GetCellFromMousePosition(mouse_position);
+
+        if (board.IsValidCellPosition(cell_position))
+        {
+            board.ProcessCellInput(eventManager, cell_position);
+        }
+    }
+
+    void GameplayManager::ProcessGameOver() {
+        if (board.AreAllCellsOpen())
+        {
+            EndGame(GameResult::WON);
+        }
+        if (IsTimeOver())
+        {
+            EndGame(GameResult::LOST);
+        }
+    }
+
+    void GameplayManager::CheckRestart()
+    {
+        if (gameplayUI.IsRestartButtonPressed()) {
+            gameResult = GameResult::NONE;
+            board.Reset();
+            Time::TimeManager::Initialize();
+            remainingTime = maxLevelDuration;
+        }
     }
 
     void GameplayManager::EndGame(GameResult result)
@@ -105,43 +87,35 @@ namespace Gameplay
 
     void GameplayManager::GameWon()
     {
-        game_result = GameResult::WON;
+        gameResult = GameResult::WON;
         board.FlagAllMines();
-        ui.updateMineText("Game Won");
         Sound::SoundManager::PlaySound(Sound::SoundType::GAME_WON);
         board.SetBoardState(BoardState::COMPLETED);
-        
-        std::cout << "Congratulations! You won the game!" << std::endl;
     }
 
     void GameplayManager::GameLost()
     {
-        game_result = GameResult::LOST;
+        gameResult = GameResult::LOST;
         board.ShowBoard();
-        ui.updateMineText("Game Lost");
         Sound::SoundManager::PlaySound(Sound::SoundType::EXPLOSION);
-
         board.SetBoardState(BoardState::COMPLETED);
-        std::cout << "You lost the game!" << std::endl;
     }
-
-
 
     void GameplayManager::UpdateRemainingTime()
     {
-        if (game_result == GameResult::WON || game_result == GameResult::LOST || board.GetBoardState() == BoardState::COMPLETED)
+        if (gameResult == GameResult::WON || gameResult == GameResult::LOST || board.GetBoardState() == BoardState::COMPLETED)
             return;
 
-        remaining_time -= time_manager.GetDeltaTime();
-        if (remaining_time < 0)
+        remainingTime -= Time::TimeManager::GetDeltaTime();
+        if (remainingTime < 0)
         {
-            remaining_time = 0;
+            remainingTime = 0;
         }
     }
 
     bool GameplayManager::IsTimeOver()
     {
-        return remaining_time <= 1.0f;
+        return remainingTime <= 1.0f;
     }
 
     int GameplayManager::GetMinesCount() const
@@ -151,6 +125,6 @@ namespace Gameplay
 
     float GameplayManager::GetRemainingTime() const
     {
-        return remaining_time;
+        return remainingTime;
     }
 }

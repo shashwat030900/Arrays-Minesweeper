@@ -31,17 +31,17 @@ namespace Gameplay
     {
     private:
         // Cell data members
-        CellState cell_state;
-        CellType cell_type;
+        CellState currentCellState;
+        CellType cellType;
         sf::Vector2i position;
         int mines_around;
 
         // View and Rendering
-        const float cell_top_offset = 274.f;
-        const float cell_left_offset = 583.f;
-        const int tile_size = 32;
-        const int slice_count = 12;
-        Button cell_button;
+        const float cellTopOffset = 274.f;
+        const float cellLeftOffset = 583.f;
+        const int tileSize = 32;
+        const int sliceCount = 12;
+        Button cellButton;
 
         // Private helper functions
         
@@ -65,7 +65,6 @@ namespace Gameplay
         CellType GetCellType() const;
         void SetCellType(CellType type);
 
-        sf::Vector2i GetCellPosition() const;
         void SetCellPosition(sf::Vector2i grid_position);
 
         int GetMinesAround() const;

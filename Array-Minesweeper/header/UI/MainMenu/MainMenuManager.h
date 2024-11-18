@@ -9,19 +9,19 @@
 
 class MainMenuManager {
 private:
-    sf::RenderWindow* game_window;
-    sf::Texture background_texture;
-    sf::Sprite background_sprite;
+    sf::RenderWindow* gameWindow;
+    sf::Texture backgroundTexture;
+    sf::Sprite backgroundSprite;
 
-    Button* play_button;
-    Button* quit_button;
+    Button* playButton;
+    Button* quitButton;
 
     // Constants for button dimensions and positions
-    const float button_width = 300.f;
-    const float button_height = 100.f;
-    const float play_button_y_position = 600.f;
-    const float quit_button_y_position = 750.f;
-    const float background_alpha = 85.f;
+    const float buttonWidth = 300.f;
+    const float buttonHeight = 100.f;
+    const float playButtonYPosition = 600.f;
+    const float quitButtonYPosition = 750.f;
+    const float backgroundAlpha = 85.f;
 
     void InitializeBackground();
     void InitializeButtons();

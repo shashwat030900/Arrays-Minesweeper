@@ -3,13 +3,13 @@
 
 namespace Sound
 {
-    sf::Music SoundManager::background_music;
-    sf::SoundBuffer SoundManager::buffer_button_click;
-    sf::SoundBuffer SoundManager::buffer_flag_sound;
-    sf::SoundBuffer SoundManager::buffer_explosion;
-    sf::SoundBuffer SoundManager::buffer_game_won;
-    sf::Sound SoundManager::sound_effect;
-    float SoundManager::background_music_volume = 50.0f; // Default volume
+    sf::Music SoundManager::backgroundMusic;
+    sf::SoundBuffer SoundManager::bufferButtonClick;
+    sf::SoundBuffer SoundManager::bufferFlagSound;
+    sf::SoundBuffer SoundManager::bufferExplosion;
+    sf::SoundBuffer SoundManager::bufferGameWon;
+    sf::Sound SoundManager::soundEffect;
+    float SoundManager::backgroundMusicVolume = 50.0f; // Default volume
 
     void SoundManager::Initialize()
     {
@@ -23,20 +23,20 @@ namespace Sound
 
     void SoundManager::LoadBackgroundMusicFromFile(const std::string& path)
     {
-        if (!background_music.openFromFile(path))
+        if (!backgroundMusic.openFromFile(path))
             std::cerr << "Error loading background music file: " << path << std::endl;
     }
 
     void SoundManager::LoadSoundFromFile(const std::string& button_click_path, const std::string& flag_sound_path,
         const std::string& explosion_sound_path, const std::string& game_won_sound_path)
     {
-        if (!buffer_button_click.loadFromFile(button_click_path))
+        if (!bufferButtonClick.loadFromFile(button_click_path))
             std::cerr << "Error loading sound file: " << button_click_path << std::endl;
-        if (!buffer_flag_sound.loadFromFile(flag_sound_path))
+        if (!bufferFlagSound.loadFromFile(flag_sound_path))
             std::cerr << "Error loading sound file: " << flag_sound_path << std::endl;
-        if (!buffer_explosion.loadFromFile(explosion_sound_path))
+        if (!bufferExplosion.loadFromFile(explosion_sound_path))
             std::cerr << "Error loading sound file: " << explosion_sound_path << std::endl;
-        if (!buffer_game_won.loadFromFile(game_won_sound_path))
+        if (!bufferGameWon.loadFromFile(game_won_sound_path))
             std::cerr << "Error loading sound file: " << game_won_sound_path << std::endl;
     }
 
@@ -45,29 +45,29 @@ namespace Sound
         switch (soundType)
         {
         case SoundType::BUTTON_CLICK:
-            sound_effect.setBuffer(buffer_button_click);
+            soundEffect.setBuffer(bufferButtonClick);
             break;
         case SoundType::FLAG:
-            sound_effect.setBuffer(buffer_flag_sound);
+            soundEffect.setBuffer(bufferFlagSound);
             break;
         case SoundType::EXPLOSION:
-            sound_effect.setBuffer(buffer_explosion);
+            soundEffect.setBuffer(bufferExplosion);
             break;
         case SoundType::GAME_WON:
-            sound_effect.setBuffer(buffer_game_won);
+            soundEffect.setBuffer(bufferGameWon);
             break;
         default:
             std::cerr << "Invalid sound type" << std::endl;
             return;
         }
 
-        sound_effect.play();
+        soundEffect.play();
     }
 
     void SoundManager::PlayBackgroundMusic()
     {
-        background_music.setLoop(true);
-        background_music.setVolume(background_music_volume);
-        background_music.play();
+        backgroundMusic.setLoop(true);
+        backgroundMusic.setVolume(backgroundMusicVolume);
+        backgroundMusic.play();
     }
 }

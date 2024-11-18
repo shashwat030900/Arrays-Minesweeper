@@ -5,24 +5,23 @@
 
 class SplashScreenManager {
 private:
-    sf::RenderWindow* game_window;
-    sf::Texture logo_texture;
-    sf::Sprite logo_sprite;
-    const float logo_width = 600.f;
-    const float logo_height = 134.f;
-    const float logo_animation_duration = 2.0f;
+    sf::RenderWindow* gameWindow;
+    sf::Texture logoTexture;
+    sf::Sprite logoSprite;
+    const float logoWidth = 600.f;
+    const float logoHeight = 134.f;
+    const float logoAnimationDuration = 2.0f;
 
-    void initializeLogo();
-    sf::Vector2f getLogoPosition();
+    sf::Vector2f GetLogoPosition();
 
 public:
     SplashScreenManager(sf::RenderWindow* window);
     ~SplashScreenManager();
 
-    void initialize();
-    void update();
-    void render();
-    void show();
+    void Initialize();
+    void Update();
+    void Render();
+    void Show();
 };
 
 #endif

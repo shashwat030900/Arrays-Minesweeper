@@ -3,10 +3,10 @@
 
 GameLoop::GameLoop() {
     windowManager = new GameWindow::GameWindowManager();
-    windowManager->initialize();
-    eventManager = new Event::EventPollingManager(windowManager->getGameWindow());
-    splashScreenManager = new SplashScreenManager(windowManager->getGameWindow());
-    mainMenuManager = new MainMenuManager(windowManager->getGameWindow());
+    windowManager->Initialize();
+    eventManager = new Event::EventPollingManager(windowManager->GetGameWindow());
+    splashScreenManager = new SplashScreenManager(windowManager->GetGameWindow());
+    mainMenuManager = new MainMenuManager(windowManager->GetGameWindow());
     gameplayManager = new GameplayManager();
     currentState = GameState::SPLASH_SCREEN;
     Sound::SoundManager::Initialize();
@@ -21,47 +21,49 @@ GameLoop::~GameLoop() {
     delete gameplayManager;
 }
 
-void GameLoop::handleState() {
+void GameLoop::HandleStates() {
     switch (currentState) {
     case GameState::SPLASH_SCREEN:
-        splashScreenManager->show();
+        splashScreenManager->Show();
         currentState = GameState::MAIN_MENU;
         break;
 
     case GameState::MAIN_MENU:
         mainMenuManager->Update(*eventManager);
         mainMenuManager->Render();
-        eventManager->update();
-
-        if (mainMenuManager->IsPlayButtonPressed()) {
-            mainMenuManager->ResetButtonStates();
-            gameplayManager->Initialize();
-            std::cout << "Switching to Gameplay state\n";
-            currentState = GameState::GAMEPLAY;
-        }
-        else if (mainMenuManager->IsQuitButtonPressed()) {
-            mainMenuManager->ResetButtonStates();
-            currentState = GameState::EXIT;
-        }
+        eventManager->Update();
+        HandleMainMenuButtons();
         break;
 
     case GameState::GAMEPLAY:
-        gameplayManager->Update(*eventManager, *windowManager->getGameWindow());
-        eventManager->update();
-        gameplayManager->Render(*windowManager->getGameWindow());
+        gameplayManager->Update(*eventManager, *windowManager->GetGameWindow());
+        gameplayManager->Render(*windowManager->GetGameWindow());
+        eventManager->Update();
         break;
 
     case GameState::EXIT:
-        windowManager->getGameWindow()->close();
+        windowManager->GetGameWindow()->close();
         break;
     }
 }
 
+void GameLoop::HandleMainMenuButtons() {
+    if (mainMenuManager->IsPlayButtonPressed()) {
+        mainMenuManager->ResetButtonStates();
+        gameplayManager->Initialize();
+        currentState = GameState::GAMEPLAY;
+    }
+    else if (mainMenuManager->IsQuitButtonPressed()) {
+        mainMenuManager->ResetButtonStates();
+        currentState = GameState::EXIT;
+    }
+}
+
 void GameLoop::run() {
-    while (windowManager->isGameWindowOpen()) {
-        eventManager->processEvents();
-        windowManager->getGameWindow()->clear();
-        handleState();
-        windowManager->getGameWindow()->display();
+    while (windowManager->IsGameWindowOpen()) {
+        eventManager->ProcessEvents();
+        windowManager->GetGameWindow()->clear();
+        HandleStates();
+        windowManager->GetGameWindow()->display();
     }
 }

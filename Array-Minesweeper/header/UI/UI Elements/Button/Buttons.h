@@ -10,8 +10,8 @@ enum class ButtonState {
 
 class Button {
 private:
-    sf::Texture button_texture;
-    sf::Sprite button_sprite;
+    sf::Texture buttonTexture;
+    sf::Sprite buttonSprite;
     ButtonState state = ButtonState::RELEASED;
 
 public:

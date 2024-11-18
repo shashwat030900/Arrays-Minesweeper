@@ -6,32 +6,32 @@ namespace GameWindow
 	class GameWindowManager
 	{
 	private:
-		const int frame_rate = 60;
+		const int frameRate = 60;
 
-		const std::string game_window_title = "Outscal Presents - Minesweeper";
+		const std::string gameWindowTitle = "Outscal Presents - Minesweeper";
 
-		const int game_window_width = 1920;
-		const int game_window_height = 1080;
+		const int gameWindowWidth = 1920;
+		const int gameWindowHeight = 1080;
 
-		const sf::Color window_color = sf::Color(200, 200, 0, 255);
+		const sf::Color windowColor = sf::Color(200, 200, 0, 255);
 
-		sf::VideoMode video_mode;
-		sf::RenderWindow* game_window;
+		sf::VideoMode videoMode;
+		sf::RenderWindow* gameWindow;
 
-		void configureVideoMode();
-		void onDestroy();
+		void ConfigureVideoMode();
+		void OnDestroy();
 
 	public:
 		GameWindowManager();
 		~GameWindowManager();
 
-		sf::RenderWindow* createGameWindow();
+		sf::RenderWindow* CreateGameWindow();
 
-		void initialize();
-		void update();
-		void render();
-		bool isGameWindowOpen();
-		void setFrameRate(int);
-		sf::RenderWindow* getGameWindow();
+		void Initialize();
+		void Update();
+		void Render();
+		bool IsGameWindowOpen();
+		void SetFrameRate(int);
+		sf::RenderWindow* GetGameWindow();
 	};
 }

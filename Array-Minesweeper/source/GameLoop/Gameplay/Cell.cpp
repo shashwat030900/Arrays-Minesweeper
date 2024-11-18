@@ -4,77 +4,73 @@
 namespace Gameplay
 {
     Cell::Cell(sf::Vector2i grid_position)
-        : cell_button("assets/textures/cells.jpeg", sf::Vector2f(0, 0), tile_size, tile_size),
-        position(grid_position), cell_state(CellState::HIDDEN), cell_type(CellType::EMPTY), mines_around(0)
+        : cellButton("assets/textures/cells.jpeg", sf::Vector2f(0, 0), tileSize, tileSize),
+        position(grid_position), currentCellState(CellState::HIDDEN), cellType(CellType::EMPTY), mines_around(0)
     {
     }
 
     void Cell::Initialize(float width, float height)
     {
-        sf::Vector2f cell_screen_position = GetCellScreenPosition(width, height);
-        cell_button.Initialize("assets/textures/cells.jpeg", cell_screen_position, width * slice_count, height);
+        sf::Vector2f cellScreenPosition = GetCellScreenPosition(width, height);
+        cellButton.Initialize("assets/textures/cells.jpeg", cellScreenPosition, width * sliceCount, height);
     }
 
     sf::Vector2f Cell::GetCellScreenPosition(float width, float height) const
     {
-        float x_screen_position = cell_left_offset + position.x * width;
-        float y_screen_position = cell_top_offset + position.y * height;
-        return sf::Vector2f(x_screen_position, y_screen_position);
+        float xScreenPosition = cellLeftOffset + position.x * width;
+        float yScreenPosition = cellTopOffset + position.y * height;
+        return sf::Vector2f(xScreenPosition, yScreenPosition);
     }
 
     void Cell::SetCellTexture()
     {
-        int index = static_cast<int>(cell_type);
-        switch (cell_state)
+        int index = static_cast<int>(cellType);
+        switch (currentCellState)
         {
         case CellState::HIDDEN:
-            cell_button.SetTextureRect(sf::IntRect(10 * tile_size, 0, tile_size, tile_size));
+            cellButton.SetTextureRect(sf::IntRect(10 * tileSize, 0, tileSize, tileSize));
             break;
         case CellState::OPEN:
-            cell_button.SetTextureRect(sf::IntRect(index * tile_size, 0, tile_size, tile_size));
+            cellButton.SetTextureRect(sf::IntRect(index * tileSize, 0, tileSize, tileSize));
             break;
         case CellState::FLAGGED:
-            cell_button.SetTextureRect(sf::IntRect(11 * tile_size, 0, tile_size, tile_size));
+            cellButton.SetTextureRect(sf::IntRect(11 * tileSize, 0, tileSize, tileSize));
             break;
         }
     }
 
     void Cell::Update(Event::EventPollingManager& eventManager, sf::RenderWindow& window)
     {
-        cell_button.UpdateState(eventManager, window);
+        cellButton.UpdateState(eventManager, window);
     }
 
     void Cell::Render(sf::RenderWindow& window)
     {
         SetCellTexture();
-        cell_button.Render(window);
+        cellButton.Render(window);
     }
 
     // State and Type Management
     CellState Cell::GetCellState() const
     {
-        return cell_state;
+        return currentCellState;
     }
 
     void Cell::SetCellState(CellState state)
     {
-        cell_state = state;
+        currentCellState = state;
     }
 
     CellType Cell::GetCellType() const
     {
-        return cell_type;
+        return cellType;
     }
 
     void Cell::SetCellType(CellType type)
     {
-        cell_type = type;
+        cellType = type;
     }
 
-    sf::Vector2i Cell::GetCellPosition() const
-    {
-        return position;
-    }
 
     void Cell::SetCellPosition(sf::Vector2i grid_position)
     {
@@ -93,44 +89,41 @@ namespace Gameplay
 
     void Cell::Reset()
     {
-        cell_state = CellState::HIDDEN;
-        cell_type = CellType::EMPTY;
+        currentCellState = CellState::HIDDEN;
+        cellType = CellType::EMPTY;
         mines_around = 0;
     }
 
     bool Cell::CanOpenCell() const
     {
-        return cell_state != CellState::FLAGGED && cell_state != CellState::OPEN;
+        return currentCellState != CellState::FLAGGED && currentCellState != CellState::OPEN;
     }
 
     void Cell::ToggleFlag()
     {
-        if (cell_state == CellState::HIDDEN)
+        if (currentCellState == CellState::HIDDEN)
         {
-            cell_state = CellState::FLAGGED;
+            currentCellState = CellState::FLAGGED;
         }
-        else if (cell_state == CellState::FLAGGED)
+        else if (currentCellState == CellState::FLAGGED)
         {
-            cell_state = CellState::HIDDEN;
+            currentCellState = CellState::HIDDEN;
         }
-        std::cout << "Cell flag toggled at position: (" << position.x << ", " << position.y << ")\n";
     }
 
     void Cell::OpenCell()
     {
         SetCellState(CellState::OPEN);
-        std::cout << "Cell opened at position: (" << position.x << ", " << position.y << ")\n";
-
     }
 
     float Cell::GetCellLeftOffset() const
     {
-        return cell_left_offset;
+        return cellLeftOffset;
     }
 
     float Cell::GetCellTopOffset() const
     {
-        return cell_top_offset;
+        return cellTopOffset;
     }
 
 }

@@ -31,7 +31,9 @@ private:
     GameState currentState;
     Board* board;
 
-    void handleState();
+    void HandleStates();
+    void HandleMainMenuButtons();
+
 
 public:
     GameLoop();

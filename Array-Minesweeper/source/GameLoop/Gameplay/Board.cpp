@@ -4,7 +4,7 @@
 namespace Gameplay
 {
     Board::Board()
-        : board_state(BoardState::FIRST_CELL), flagged_cells(0), random_engine(random_device())
+        : boardState(BoardState::FIRST_CELL), flaggedCells(0), randomEngine(randomDevice())
     {
         CreateBoard();
     }
@@ -24,32 +24,32 @@ namespace Gameplay
 
     void Board::InitializeBackgroundImage()
     {
-        if (!background_texture.loadFromFile("assets/textures/minesweeper_bg.png"))
+        if (!backgroundTexture.loadFromFile("assets/textures/minesweeper_bg.png"))
         {
             std::cerr << "Failed to load background texture!" << std::endl;
             return;
         }
-        background_sprite.setTexture(background_texture);
-        background_sprite.setColor(sf::Color(255, 255, 255, background_alpha));
+        backgroundSprite.setTexture(backgroundTexture);
+        backgroundSprite.setColor(sf::Color(255, 255, 255, backgroundAlpha));
     }
 
     void Board::InitializeBoardImage()
     {
-        if (!board_texture.loadFromFile("assets/textures/board.png"))
+        if (!boardTexture.loadFromFile("assets/textures/board.png"))
         {
             std::cerr << "Failed to load board texture!" << std::endl;
             return;
         }
-        board_sprite.setTexture(board_texture);
-        board_sprite.setPosition(530.f, 0);
-        board_sprite.setScale(board_width / board_texture.getSize().x, board_height / board_texture.getSize().y);
+        boardSprite.setTexture(boardTexture);
+        boardSprite.setPosition(530.f, 0);
+        boardSprite.setScale(boardWidth / boardTexture.getSize().x, boardHeight / boardTexture.getSize().y);
     }
 
     void Board::CreateBoard()
     {
-        for (int row = 0; row < number_of_rows; ++row)
+        for (int row = 0; row < numberOfRows; ++row)
         {
-            for (int col = 0; col < number_of_columns; ++col)
+            for (int col = 0; col < numberOfColumns; ++col)
             {
                 board[row][col] = new Cell(sf::Vector2i(row, col));
             }
@@ -60,9 +60,9 @@ namespace Gameplay
     {
         float cell_width = GetCellWidth();
         float cell_height = GetCellHeight();
-        for (int row = 0; row < number_of_rows; ++row)
+        for (int row = 0; row < numberOfRows; ++row)
         {
-            for (int col = 0; col < number_of_columns; ++col)
+            for (int col = 0; col < numberOfColumns; ++col)
             {
                 board[row][col]->Initialize(cell_width, cell_height);
             }
@@ -71,9 +71,9 @@ namespace Gameplay
 
     void Board::Update(Event::EventPollingManager& eventManager, sf::RenderWindow& window)
     {
-        for (int row = 0; row < number_of_rows; ++row)
+        for (int row = 0; row < numberOfRows; ++row)
         {
-            for (int col = 0; col < number_of_columns; ++col)
+            for (int col = 0; col < numberOfColumns; ++col)
             {
                 board[row][col]->Update(eventManager, window);
             }
@@ -82,11 +82,11 @@ namespace Gameplay
 
     void Board::Render(sf::RenderWindow& window)
     {
-        window.draw(background_sprite);
-        window.draw(board_sprite);
-        for (int row = 0; row < number_of_rows; ++row)
+        window.draw(backgroundSprite);
+        window.draw(boardSprite);
+        for (int row = 0; row < numberOfRows; ++row)
         {
-            for (int col = 0; col < number_of_columns; ++col)
+            for (int col = 0; col < numberOfColumns; ++col)
             {
                 board[row][col]->Render(window);
             }
@@ -95,16 +95,16 @@ namespace Gameplay
 
     void Board::ProcessCellInput(Event::EventPollingManager& eventManager, sf::Vector2i cell_position)
     {
-        if (board_state == BoardState::COMPLETED)
+        if (boardState == BoardState::COMPLETED)
             return;
 
-        if (eventManager.pressedLeftMouseButton())
+        if (eventManager.PressedLeftMouseButton())
         {
             Sound::SoundManager::PlaySound(Sound::SoundType::BUTTON_CLICK);
             OpenCell(cell_position);
         }
             
-        else if (eventManager.pressedRightMouseButton()) {
+        else if (eventManager.PressedRightMouseButton()) {
             Sound::SoundManager::PlaySound(Sound::SoundType::FLAG);
             FlagCell(cell_position);
         }
@@ -119,14 +119,14 @@ namespace Gameplay
 
     void Board::PopulateMines(sf::Vector2i first_cell_position)
     {
-        std::uniform_int_distribution<int> x_dist(0, number_of_columns - 1);
-        std::uniform_int_distribution<int> y_dist(0, number_of_rows - 1);
+        std::uniform_int_distribution<int> x_dist(0, numberOfColumns - 1);
+        std::uniform_int_distribution<int> y_dist(0, numberOfRows - 1);
 
         int mines_placed = 0;
-        while (mines_placed < mines_count)
+        while (mines_placed < minesCount)
         {
-            int x = x_dist(random_engine);
-            int y = y_dist(random_engine);
+            int x = x_dist(randomEngine);
+            int y = y_dist(randomEngine);
 
             if ((x == first_cell_position.x && y == first_cell_position.y) || board[x][y]->GetCellType() == CellType::MINE)
                 continue;
@@ -138,9 +138,9 @@ namespace Gameplay
 
     void Board::PopulateCells()
     {
-        for (int row = 0; row < number_of_rows; ++row)
+        for (int row = 0; row < numberOfRows; ++row)
         {
-            for (int col = 0; col < number_of_columns; ++col)
+            for (int col = 0; col < numberOfColumns; ++col)
             {
                 if (board[row][col]->GetCellType() != CellType::MINE)
                 {
@@ -173,17 +173,17 @@ namespace Gameplay
     void Board::FlagCell(sf::Vector2i cell_position)
     {
         board[cell_position.x][cell_position.y]->ToggleFlag();
-        flagged_cells += (board[cell_position.x][cell_position.y]->GetCellState() == CellState::FLAGGED) ? 1 : -1;
+        flaggedCells += (board[cell_position.x][cell_position.y]->GetCellState() == CellState::FLAGGED) ? 1 : -1;
     }
 
     void Board::OpenCell(sf::Vector2i cell_position)
     {
         if (board[cell_position.x][cell_position.y]->CanOpenCell())
         {
-            if (board_state == BoardState::FIRST_CELL)
+            if (boardState == BoardState::FIRST_CELL)
             {
                 PopulateBoard(cell_position);
-                board_state = BoardState::PLAYING;
+                boardState = BoardState::PLAYING;
             }
 
             ProcessCellType(cell_position);
@@ -193,9 +193,9 @@ namespace Gameplay
 
     void Board::DeleteBoard()
     {
-        for (int row = 0; row < number_of_rows; ++row)
+        for (int row = 0; row < numberOfRows; ++row)
         {
-            for (int col = 0; col < number_of_columns; ++col)
+            for (int col = 0; col < numberOfColumns; ++col)
             {
                 delete board[row][col];
             }
@@ -204,11 +204,11 @@ namespace Gameplay
 
     // Check if all non-mine cells are open
     bool Board::AreAllCellsOpen() {
-        int total_cell_count = number_of_rows * number_of_columns;
+        int total_cell_count = numberOfRows * numberOfColumns;
         int open_cell_count = 0;
 
-        for (int row = 0; row < number_of_rows; ++row) {
-            for (int col = 0; col < number_of_columns; ++col) {
+        for (int row = 0; row < numberOfRows; ++row) {
+            for (int col = 0; col < numberOfColumns; ++col) {
                 if (board[row][col]->GetCellState() == CellState::OPEN && board[row][col]->GetCellType() != CellType::MINE) {
                     open_cell_count++;
                 }
@@ -216,13 +216,13 @@ namespace Gameplay
         }
 
         // Check if all non-mine cells are open
-        return (total_cell_count - open_cell_count == mines_count);
+        return (total_cell_count - open_cell_count == minesCount);
     }
 
     // Check if a given cell position is within the board boundaries
     bool Board::IsValidCellPosition(sf::Vector2i cell_position) {
         return (cell_position.x >= 0 && cell_position.y >= 0 &&
-            cell_position.x < number_of_columns && cell_position.y < number_of_rows);
+            cell_position.x < numberOfColumns && cell_position.y < numberOfRows);
     }
 
     // Process the cell type to determine if it’s empty, contains a mine, or has surrounding mines
@@ -246,20 +246,20 @@ namespace Gameplay
 
     // Process a cell that contains a mine, triggering game over logic
     void Board::ProcessMineCell(sf::Vector2i cell_position) {
-        std::cout << "Mine triggered at (" << cell_position.x << ", " << cell_position.y << ") - Game Over\n";
         Sound::SoundManager::PlaySound(Sound::SoundType::EXPLOSION);
         RevealAllMines();
-        board_state = BoardState::COMPLETED;
+        boardState = BoardState::COMPLETED;
     }
 
     // Open all contiguous empty cells starting from the given cell
     void Board::OpenEmptyCells(sf::Vector2i cell_position) {
+
         switch (board[cell_position.x][cell_position.y]->GetCellState())
         {
         case::Gameplay::CellState::OPEN:
             return;
         case::Gameplay::CellState::FLAGGED:
-            flagged_cells--;
+            flaggedCells--;
         default:
             board[cell_position.x][cell_position.y]->OpenCell();
         }
@@ -278,20 +278,20 @@ namespace Gameplay
 
     // Reset the board to its initial state
     void Board::ResetBoard() {
-        for (int row = 0; row < number_of_rows; ++row) {
-            for (int col = 0; col < number_of_columns; ++col) {
+        for (int row = 0; row < numberOfRows; ++row) {
+            for (int col = 0; col < numberOfColumns; ++col) {
                 board[row][col]->Reset();
             }
         }
-        flagged_cells = 0;
-        board_state = BoardState::FIRST_CELL;
+        flaggedCells = 0;
+        boardState = BoardState::FIRST_CELL;
     }
 
     void Board::FlagAllMines()
     {
-        for (int row = 0; row < number_of_rows; ++row)
+        for (int row = 0; row < numberOfRows; ++row)
         {
-            for (int col = 0; col < number_of_columns; ++col)
+            for (int col = 0; col < numberOfColumns; ++col)
             {
                 if (board[row][col]->GetCellType() == CellType::MINE && board[row][col]->GetCellState() != CellState::FLAGGED)
                 {
@@ -303,7 +303,7 @@ namespace Gameplay
 
     void Board::ShowBoard()
     {
-        switch (board_state)
+        switch (boardState)
         {
         case BoardState::FIRST_CELL:
             PopulateBoard(sf::Vector2i(0, 0));
@@ -322,9 +322,9 @@ namespace Gameplay
 
     void Board::OpenAllCells()
     {
-        for (int a = 0; a < number_of_rows; ++a)
+        for (int a = 0; a < numberOfRows; ++a)
         {
-            for (int b = 0; b < number_of_columns; ++b)
+            for (int b = 0; b < numberOfColumns; ++b)
             {
                 board[a][b]->OpenCell();
             }
@@ -333,9 +333,9 @@ namespace Gameplay
 
     void Board::RevealAllMines()
     {
-        for (int row = 0; row < number_of_rows; row++)
+        for (int row = 0; row < numberOfRows; row++)
         {
-            for (int col = 0; col < number_of_columns; col++)
+            for (int col = 0; col < numberOfColumns; col++)
             {
                 // Check if the cell contains a mine
                 if (board[row][col]->GetCellType() == CellType::MINE)
@@ -354,27 +354,27 @@ namespace Gameplay
 
     // Get the current state of the board
     BoardState Board::GetBoardState() const {
-        return board_state;
+        return boardState;
     }
 
     // Set the current state of the board
     void Board::SetBoardState(BoardState state) {
-        board_state = state;
+        boardState = state;
     }
 
     // Get the number of mines that have not been flagged
     int Board::GetMinesCount() const {
-        return mines_count - flagged_cells;
+        return minesCount - flaggedCells;
     }
 
     float Board::GetCellWidth() const
     {
-        return (board_width - board_width_offset) / static_cast<float>(number_of_columns);
+        return (boardWidth - boardWidthOffset) / static_cast<float>(numberOfColumns);
     }
 
     float Board::GetCellHeight() const
     {
-        return (board_height - board_height_offset) / static_cast<float>(number_of_rows);
+        return (boardHeight - boardHeightOffset) / static_cast<float>(numberOfRows);
     }
 
 
@@ -388,14 +388,27 @@ namespace Gameplay
         return board[0][0]->GetCellTopOffset();
     }
 
+    sf::Vector2i Board::GetCellFromMousePosition(const sf::Vector2i& mouse_position) const
+    {
+        float cell_width = GetCellWidth();
+        float cell_height = GetCellHeight();
+        float cell_left_offset = GetSampleCellLeftOffset();
+        float cell_top_offset = GetSampleCellTopOffset();
+
+        int grid_x = (mouse_position.x - cell_left_offset) / cell_width;
+        int grid_y = (mouse_position.y - cell_top_offset) / cell_height;
+
+        return sf::Vector2i(grid_x, grid_y);
+    }
+
     int Board::GetNumberOfColumns() const
     {
-        return number_of_columns;
+        return numberOfColumns;
     }
 
     int Board::GetNumberOfRows() const
     {
-        return number_of_rows;
+        return numberOfRows;
     }
 
 

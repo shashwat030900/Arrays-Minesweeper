@@ -3,13 +3,13 @@
 namespace Time
 {
     // Static variable definitions
-    std::chrono::time_point<std::chrono::steady_clock> TimeManager::previous_time;
-    float TimeManager::delta_time = 0.0f;
+    std::chrono::time_point<std::chrono::steady_clock> TimeManager::previousTime;
+    float TimeManager::deltaTime = 0.0f;
 
     void TimeManager::Initialize()
     {
-        previous_time = std::chrono::steady_clock::now();
-        delta_time = 0.0f;
+        previousTime = std::chrono::steady_clock::now();
+        deltaTime = 0.0f;
     }
 
     void TimeManager::Update()
@@ -19,12 +19,12 @@ namespace Time
 
     float TimeManager::GetDeltaTime()
     {
-        return delta_time;
+        return deltaTime;
     }
 
     void TimeManager::UpdateDeltaTime()
     {
-        delta_time = CalculateDeltaTime();
+        deltaTime = CalculateDeltaTime();
         UpdatePreviousTime();
     }
 
@@ -32,7 +32,7 @@ namespace Time
     {
         // Calculate time difference in microseconds between the current and previous frame.
         int delta = std::chrono::duration_cast<std::chrono::microseconds>(
-            std::chrono::steady_clock::now() - previous_time).count();
+            std::chrono::steady_clock::now() - previousTime).count();
 
         // Convert delta time from microseconds to seconds.
         return static_cast<float>(delta) / 1000000.0f;
@@ -40,6 +40,6 @@ namespace Time
 
     void TimeManager::UpdatePreviousTime()
     {
-        previous_time = std::chrono::steady_clock::now();
+        previousTime = std::chrono::steady_clock::now();
     }
 }

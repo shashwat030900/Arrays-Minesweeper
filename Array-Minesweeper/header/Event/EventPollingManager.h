@@ -15,28 +15,30 @@ namespace Event
     class EventPollingManager
     {
     private:
-        sf::Event game_event;
-        sf::RenderWindow* game_window;
+        sf::Event gameEvent;
+        sf::RenderWindow* gameWindow;
 
-        MouseButtonState left_mouse_button_state;
-        MouseButtonState right_mouse_button_state;
+        MouseButtonState leftMouseButtonState;
+        MouseButtonState rightMouseButtonState;
 
-        bool isGameWindowOpen();
-        bool gameWindowWasClosed();
-        bool hasQuitGame();
-        bool isKeyboardEvent();
-        void updateButtonsState(MouseButtonState& button_state, sf::Mouse::Button button_type);
+        bool IsGameWindowOpen();
+        bool GameWindowWasClosed();
+        bool HasQuitGame();
+        bool IsKeyboardEvent();
+        void UpdateButtonsState(MouseButtonState& button_state, sf::Mouse::Button button_type);
 
     public:
         EventPollingManager(sf::RenderWindow* window);
         ~EventPollingManager();
 
-        void initialize(sf::RenderWindow* window);
-        void update();
-        void processEvents();
+        void Initialize(sf::RenderWindow* window);
+        void Update();
+        void ProcessEvents();
 
-        bool pressedEscapeKey();
-        bool pressedLeftMouseButton();
-        bool pressedRightMouseButton();
+        bool PressedEscapeKey();
+        bool PressedLeftMouseButton();
+        bool PressedRightMouseButton();
+
+        sf::Vector2i GetMousePosition(const sf::RenderWindow& window);
     };
 }
