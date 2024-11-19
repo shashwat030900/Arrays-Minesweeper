@@ -19,9 +19,10 @@ namespace Gameplay
     void GameplayManager::Update(Event::EventPollingManager& eventManager, sf::RenderWindow& window)
     {
         Time::TimeManager::Update();
+        ProcessGameOver();
         UpdateRemainingTime();
         board.Update(eventManager, window);
-        ProcessGameOver();
+        
 
         if (gameResult == GameResult::NONE) {
             gameplayUI.Update(GetMinesCount(), static_cast<int>(remainingTime), eventManager, window);
@@ -87,9 +88,9 @@ namespace Gameplay
 
     void GameplayManager::GameWon()
     {
+        Sound::SoundManager::PlaySound(Sound::SoundType::GAME_WON);
         gameResult = GameResult::WON;
         board.FlagAllMines();
-        Sound::SoundManager::PlaySound(Sound::SoundType::GAME_WON);
         board.SetBoardState(BoardState::COMPLETED);
     }
 

@@ -6,6 +6,8 @@
 #include "../../header/Sound/SoundManager.h"
 #include <SFML/Graphics.hpp>
 
+
+using namespace UI;
 namespace Gameplay
 {
     enum class GameResult

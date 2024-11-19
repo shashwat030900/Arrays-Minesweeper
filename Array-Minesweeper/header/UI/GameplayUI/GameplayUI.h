@@ -4,46 +4,51 @@
 #include "../../header/UI/UI Elements/Button/Buttons.h"
 #include "../../header/Event/EventPollingManager.h"
 
-class GameplayUI {
-private:
-    sf::Font bubbleBobbleFont;
-    sf::Font dsDigibFont;
+using namespace UIElements;
 
-    // Text elements
-    sf::Text mineText;
-    sf::Text timeText;
+namespace UI {
 
-    // Button element
-    Button *restartButton = nullptr;
+    class GameplayUI {
+    private:
+        sf::Font bubbleBobbleFont;
+        sf::Font dsDigibFont;
 
-    // Constants
-    const int fontSize = 110;
+        // Text elements
+        sf::Text mineText;
+        sf::Text timeText;
 
-    const float minetextTopOffset = 65.f;
-    const float mineTextLeftOffset = 660.f;
+        // Button element
+        Button* restartButton = nullptr;
 
-    const float timeTextTopOffset = 65.f;
-    const float timeTextLeftOffset = 1090.f;
+        // Constants
+        const int fontSize = 110;
 
-    const float restartButtonTopOffset = 100.f;
-    const float restartButtonLeftOffset = 920.f;
+        const float minetextTopOffset = 65.f;
+        const float mineTextLeftOffset = 660.f;
 
-    const float buttonWidth = 80.f;
-    const float buttonHeight = 80.f;
-    const sf::Color textColor = sf::Color::Red;
+        const float timeTextTopOffset = 65.f;
+        const float timeTextLeftOffset = 1090.f;
 
-    // Private methods for initialization
-    void InitializeTexts();
-    void InitializeButton();
-    void LoadFonts();
+        const float restartButtonTopOffset = 100.f;
+        const float restartButtonLeftOffset = 920.f;
 
-public:
-    GameplayUI();
-    ~GameplayUI() = default;
+        const float buttonWidth = 80.f;
+        const float buttonHeight = 80.f;
+        const sf::Color textColor = sf::Color::Red;
 
-    void Initialize();
-    void Update(int remaining_mines, int remaining_time, Event::EventPollingManager& eventManager, sf::RenderWindow& window);
-    void Render(sf::RenderWindow& window);
-    void UpdateMineText(const std::string& text);
-    bool IsRestartButtonPressed();
-};
+        // Private methods for initialization
+        void InitializeTexts();
+        void InitializeButton();
+        void LoadFonts();
+
+    public:
+        GameplayUI();
+        ~GameplayUI() = default;
+
+        void Initialize();
+        void Update(int remaining_mines, int remaining_time, Event::EventPollingManager& eventManager, sf::RenderWindow& window);
+        void Render(sf::RenderWindow& window);
+        bool IsRestartButtonPressed();
+    };
+}
+

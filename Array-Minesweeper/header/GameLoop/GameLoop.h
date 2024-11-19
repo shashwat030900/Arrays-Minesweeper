@@ -13,6 +13,7 @@
 using namespace GameWindow;
 using namespace Event;
 using namespace Gameplay;
+using namespace UI;
 
 enum class GameState {
     SPLASH_SCREEN,

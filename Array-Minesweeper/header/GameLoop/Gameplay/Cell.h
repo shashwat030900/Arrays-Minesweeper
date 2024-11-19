@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include "../../header/UI/UI Elements/Button/Buttons.h"
 #include "../../header/Event/EventPollingManager.h"
+using namespace UIElements;
 
 namespace Gameplay
 {
