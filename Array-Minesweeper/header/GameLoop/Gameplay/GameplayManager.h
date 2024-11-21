@@ -20,16 +20,16 @@ namespace Gameplay
     class GameplayManager
     {
     private:
-        const float maxLevelDuration = 201.0f;
+        const float maxLevelDuration = 4.0f;
         const float gameOverTime = 11.0f;
         float remainingTime;
 
-        Board board;
+        Board *board;
         GameResult gameResult = GameResult::NONE;
         GameplayUI gameplayUI;
 
         void UpdateRemainingTime();
-        bool IsTimeOver();
+        void ProcessTimeOver();
 
         void GameWon();
         void GameLost();
@@ -42,13 +42,16 @@ namespace Gameplay
         void Update(Event::EventPollingManager& eventManager, sf::RenderWindow& window);
         void Render(sf::RenderWindow& window);
 
-        void ProcessGameOver();
+        void HandleGameWin();
         void ProcessMouseInput(Event::EventPollingManager& eventManager, sf::RenderWindow& window);
 
         void CheckRestart();
-        void EndGame(GameResult result);
+        void ProcessGameResult();
 
         int GetMinesCount() const;
         float GetRemainingTime() const;
+
+        GameResult GetGameResult();
+        void SetGameResult(GameResult gameResult);
     };
 }

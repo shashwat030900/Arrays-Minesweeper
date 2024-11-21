@@ -8,6 +8,7 @@
 
 namespace Gameplay
 {
+    class GameplayManager;
     enum class BoardState
     {
         FIRST_CELL,
@@ -18,10 +19,11 @@ namespace Gameplay
     class Board
     {
     private:
+        GameplayManager *gameplayManager;
         // Board Constants
         static const int numberOfRows = 9;
         static const int numberOfColumns = 9;
-        static const int minesCount = 9;
+        static const int minesCount = 3;
 
         // State and View Members
         BoardState boardState;
@@ -65,7 +67,7 @@ namespace Gameplay
         void RevealAllMines();
 
     public:
-        Board();
+        Board(GameplayManager *gameplayManager);
         ~Board();
 
         // Game flow methods

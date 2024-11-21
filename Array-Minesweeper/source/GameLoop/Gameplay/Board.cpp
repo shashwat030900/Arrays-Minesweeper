@@ -1,11 +1,13 @@
 #include "../../header/GameLoop/Gameplay/Board.h"
+#include "../../header/GameLoop/Gameplay/GameplayManager.h"
 #include <iostream>
 
 namespace Gameplay
 {
-    Board::Board()
+    Board::Board(GameplayManager *gameplayManager)
         : boardState(BoardState::FIRST_CELL), flaggedCells(0), randomEngine(randomDevice())
     {
+        this->gameplayManager = gameplayManager;
         CreateBoard();
     }
 
@@ -71,6 +73,8 @@ namespace Gameplay
 
     void Board::Update(Event::EventPollingManager& eventManager, sf::RenderWindow& window)
     {
+        if (boardState == BoardState::COMPLETED)
+            return;
         for (int row = 0; row < numberOfRows; ++row)
         {
             for (int col = 0; col < numberOfColumns; ++col)
@@ -232,7 +236,6 @@ namespace Gameplay
             ProcessEmptyCell(cell_position);
             break;
         case CellType::MINE:
-            Sound::SoundManager::PlaySound(Sound::SoundType::EXPLOSION);
             ProcessMineCell(cell_position);
             break;
         default:
@@ -247,8 +250,9 @@ namespace Gameplay
 
     // Process a cell that contains a mine, triggering game over logic
     void Board::ProcessMineCell(sf::Vector2i cell_position) {
-        RevealAllMines();
+        gameplayManager->SetGameResult(GameResult::LOST);
         boardState = BoardState::COMPLETED;
+        RevealAllMines();
     }
 
     // Open all contiguous empty cells starting from the given cell

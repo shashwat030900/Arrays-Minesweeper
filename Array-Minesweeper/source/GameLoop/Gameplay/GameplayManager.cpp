@@ -9,7 +9,8 @@ namespace Gameplay
 
     void GameplayManager::Initialize()
     {
-        board.Initialize();
+        board = new Board(this);
+        board->Initialize();
         Time::TimeManager::Initialize();
         gameplayUI.Initialize();
         remainingTime = maxLevelDuration;
@@ -19,113 +20,119 @@ namespace Gameplay
     void GameplayManager::Update(Event::EventPollingManager& eventManager, sf::RenderWindow& window)
     {
         Time::TimeManager::Update();
-        ProcessGameOver();
-        UpdateRemainingTime();
-        board.Update(eventManager, window);
-        
-
-        if (gameResult == GameResult::NONE) {
-            gameplayUI.Update(GetMinesCount(), static_cast<int>(remainingTime), eventManager, window);
+        if (gameResult == GameResult::NONE && board->GetBoardState() != BoardState::COMPLETED)
+        {
+            UpdateRemainingTime();
+            board->Update(eventManager, window);
+            ProcessMouseInput(eventManager, window);
+            HandleGameWin();
         }
-        
-        ProcessMouseInput(eventManager, window);
-        CheckRestart();    
+        gameplayUI.Update(GetMinesCount(), static_cast<int>(remainingTime), eventManager, window);
+        ProcessGameResult();
+        CheckRestart();
     }
 
 
     void GameplayManager::Render(sf::RenderWindow& window)
     {
-        board.Render(window);
+        board->Render(window);
         gameplayUI.Render(window);
     }
 
     void GameplayManager::ProcessMouseInput(Event::EventPollingManager& eventManager, sf::RenderWindow& window)
     {
         sf::Vector2i mouse_position = eventManager.GetMousePosition(window);
-        sf::Vector2i cell_position = board.GetCellFromMousePosition(mouse_position);
+        sf::Vector2i cell_position = board->GetCellFromMousePosition(mouse_position);
 
-        if (board.IsValidCellPosition(cell_position))
+        if (board->IsValidCellPosition(cell_position))
         {
-            board.ProcessCellInput(eventManager, cell_position);
+            board->ProcessCellInput(eventManager, cell_position);
         }
     }
 
-    void GameplayManager::ProcessGameOver() {
-        if (board.AreAllCellsOpen())
-        {
-            EndGame(GameResult::WON);
-        }
-        if (IsTimeOver())
-        {
-            EndGame(GameResult::LOST);
+    void GameplayManager::HandleGameWin() {
+        
+        if (board->AreAllCellsOpen()) {
+                gameResult = GameResult::WON;;
+                board->SetBoardState(BoardState::COMPLETED);
         }
     }
+
+
 
     void GameplayManager::CheckRestart()
     {
         if (gameplayUI.IsRestartButtonPressed()) {
             gameResult = GameResult::NONE;
-            board.Reset();
+            board->Reset();
             Time::TimeManager::Initialize();
             remainingTime = maxLevelDuration;
         }
     }
 
-    void GameplayManager::EndGame(GameResult result)
+    void GameplayManager::ProcessGameResult()
     {
-        switch (result)
+        switch (gameResult)
         {
         case GameResult::WON:
+            std::cout << "WON" << std::endl;
             GameWon();
             break;
         case GameResult::LOST:
+            std::cout << "LOST" << std::endl;
             GameLost();
             break;
         default:
             break;
         }
+        gameResult = GameResult::NONE;
     }
+
 
     void GameplayManager::GameWon()
     {
         Sound::SoundManager::PlaySound(Sound::SoundType::GAME_WON);
-        gameResult = GameResult::WON;
-        board.FlagAllMines();
-        board.SetBoardState(BoardState::COMPLETED);
+        board->FlagAllMines();
+        board->SetBoardState(BoardState::COMPLETED);
     }
 
     void GameplayManager::GameLost()
     {
-        gameResult = GameResult::LOST;
-        board.ShowBoard();
         Sound::SoundManager::PlaySound(Sound::SoundType::EXPLOSION);
-        board.SetBoardState(BoardState::COMPLETED);
+        board->SetBoardState(BoardState::COMPLETED);
     }
 
     void GameplayManager::UpdateRemainingTime()
     {
-        if (gameResult == GameResult::WON || gameResult == GameResult::LOST || board.GetBoardState() == BoardState::COMPLETED)
-            return;
-
         remainingTime -= Time::TimeManager::GetDeltaTime();
-        if (remainingTime < 0)
-        {
-            remainingTime = 0;
-        }
+        ProcessTimeOver();   
     }
 
-    bool GameplayManager::IsTimeOver()
+    void GameplayManager::ProcessTimeOver()
     {
-        return remainingTime <= 1.0f;
+        if (remainingTime <= 0)
+        {
+            remainingTime = 0;
+            gameResult = GameResult::LOST;
+            board->SetBoardState(BoardState::COMPLETED);
+        }
     }
 
     int GameplayManager::GetMinesCount() const
     {
-        return board.GetMinesCount();
+        return board->GetMinesCount();
     }
 
     float GameplayManager::GetRemainingTime() const
     {
         return remainingTime;
+    }
+    GameResult GameplayManager::GetGameResult()
+    {
+        return gameResult;
+    }
+    void GameplayManager::SetGameResult(GameResult gameResult)
+    {
+        this->gameResult = gameResult;
     }
 }
