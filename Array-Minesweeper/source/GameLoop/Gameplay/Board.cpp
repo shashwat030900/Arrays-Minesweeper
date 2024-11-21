@@ -232,6 +232,7 @@ namespace Gameplay
             ProcessEmptyCell(cell_position);
             break;
         case CellType::MINE:
+            Sound::SoundManager::PlaySound(Sound::SoundType::EXPLOSION);
             ProcessMineCell(cell_position);
             break;
         default:
@@ -246,7 +247,6 @@ namespace Gameplay
 
     // Process a cell that contains a mine, triggering game over logic
     void Board::ProcessMineCell(sf::Vector2i cell_position) {
-        Sound::SoundManager::PlaySound(Sound::SoundType::EXPLOSION);
         RevealAllMines();
         boardState = BoardState::COMPLETED;
     }

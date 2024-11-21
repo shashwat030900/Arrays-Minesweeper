@@ -2,6 +2,10 @@
 #include <iostream>
 
 GameLoop::GameLoop() {
+    Initialize();
+}
+
+void GameLoop::Initialize() {
     windowManager = new GameWindow::GameWindowManager();
     windowManager->Initialize();
     eventManager = new Event::EventPollingManager(windowManager->GetGameWindow());

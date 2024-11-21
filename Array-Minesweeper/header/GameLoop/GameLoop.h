@@ -32,6 +32,7 @@ private:
     GameState currentState;
     Board* board;
 
+    void Initialize();
     void HandleStates();
     void HandleMainMenuButtons();
 
