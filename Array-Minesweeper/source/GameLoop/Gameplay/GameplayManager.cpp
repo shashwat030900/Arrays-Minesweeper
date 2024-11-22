@@ -5,15 +5,14 @@ namespace Gameplay
 {
     GameplayManager::GameplayManager()
     {
+        Initialize();
     }
 
     void GameplayManager::Initialize()
     {
         InitializeBackgroundImage();
         board = new Board(this);
-        board->Initialize();
         Time::TimeManager::Initialize();
-        gameplayUI.Initialize();
         remainingTime = maxLevelDuration;
         gameResult = GameResult::NONE;
     }

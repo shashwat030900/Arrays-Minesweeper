@@ -4,7 +4,7 @@ namespace GameWindow
 {
 	GameWindowManager::GameWindowManager()
 	{
-		gameWindow = nullptr;
+		Initialize();
 	}
 
 	GameWindowManager::~GameWindowManager()

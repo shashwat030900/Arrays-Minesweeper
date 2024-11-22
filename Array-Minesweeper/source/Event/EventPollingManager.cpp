@@ -7,7 +7,9 @@ namespace Event
     using namespace GameWindow;
 
     EventPollingManager::EventPollingManager(sf::RenderWindow* window)
-        : gameWindow(window), leftMouseButtonState(MouseButtonState::RELEASED), rightMouseButtonState(MouseButtonState::RELEASED) {}
+    {
+        Initialize(window);
+    }
 
     EventPollingManager::~EventPollingManager() = default;
 

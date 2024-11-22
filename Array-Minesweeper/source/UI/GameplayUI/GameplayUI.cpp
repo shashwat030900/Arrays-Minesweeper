@@ -5,7 +5,7 @@ namespace UI {
 
     GameplayUI::GameplayUI()
     {
-
+        Initialize();
     }
 
     void GameplayUI::Initialize() {

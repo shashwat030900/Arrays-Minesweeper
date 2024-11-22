@@ -42,20 +42,20 @@ namespace Gameplay
         const float cellLeftOffset = 583.f;
         const int tileSize = 32;
         const int sliceCount = 12;
-        Button cellButton;
+        Button *cellButton;
 
         // Private helper functions
         
         void SetCellTexture();
 
     public:
-        Cell(sf::Vector2i grid_position);
+        Cell(float width, float height, sf::Vector2i position);
         ~Cell() = default;
 
         sf::Vector2f GetCellScreenPosition(float width, float height) const;
 
         // Initialization and rendering functions
-        void Initialize(float width, float height);
+        void Initialize(float width, float height, sf::Vector2i position);
         void Update(Event::EventPollingManager& eventManager, sf::RenderWindow& window);
         void Render(sf::RenderWindow& window);
 

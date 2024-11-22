@@ -4,6 +4,7 @@
 namespace UI {
     SplashScreenManager::SplashScreenManager(sf::RenderWindow* window) {
         gameWindow = window;
+        Initialize();
     }
 
     SplashScreenManager::~SplashScreenManager() {
@@ -18,11 +19,10 @@ namespace UI {
     }
 
     void SplashScreenManager::Update() {
-        // Update logic if needed (e.g., animations)
     }
 
     void SplashScreenManager::Render() {
-        gameWindow->draw(logoSprite);
+        Show();
     }
 
     sf::Vector2f SplashScreenManager::GetLogoPosition() {
@@ -32,13 +32,10 @@ namespace UI {
     }
 
     void SplashScreenManager::Show() {
-
-        Initialize();
-
         sf::Clock clock;
         while (clock.getElapsedTime().asSeconds() < logoAnimationDuration) {
             gameWindow->clear();
-            Render();
+            gameWindow->draw(logoSprite);
             gameWindow->display();
         }
     }

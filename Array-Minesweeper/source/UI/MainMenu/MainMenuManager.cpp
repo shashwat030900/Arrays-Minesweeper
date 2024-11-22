@@ -4,8 +4,7 @@
 namespace UI {
     MainMenuManager::MainMenuManager(sf::RenderWindow* window) {
         gameWindow = window;
-        playButton = nullptr;
-        quitButton = nullptr;
+        Initialize();
     }
 
     MainMenuManager::~MainMenuManager() {
@@ -38,13 +37,10 @@ namespace UI {
     }
 
     void MainMenuManager::Update(Event::EventPollingManager& eventManager) {
-        // Update logic if needed (e.g., animations)
-        Initialize();
         UpdateButtonStates(eventManager);
     }
 
     void MainMenuManager::Render() {
-
         Show();
     }
 

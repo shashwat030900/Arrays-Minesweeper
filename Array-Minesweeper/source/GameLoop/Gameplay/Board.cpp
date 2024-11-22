@@ -8,7 +8,7 @@ namespace Gameplay
         : boardState(BoardState::FIRST_CELL), flaggedCells(0), randomEngine(randomDevice())
     {
         this->gameplayManager = gameplayManager;
-        CreateBoard();
+        Initialize();
     }
 
     Board::~Board()
@@ -19,7 +19,7 @@ namespace Gameplay
     void Board::Initialize()
     {
         InitializeBoardImage();
-        InitializeCells();
+        CreateBoard();
         Reset();
     }
 
@@ -37,24 +37,13 @@ namespace Gameplay
 
     void Board::CreateBoard()
     {
-        for (int row = 0; row < numberOfRows; ++row)
-        {
-            for (int col = 0; col < numberOfColumns; ++col)
-            {
-                board[row][col] = new Cell(sf::Vector2i(row, col));
-            }
-        }
-    }
-
-    void Board::InitializeCells()
-    {
         float cell_width = GetCellWidth();
         float cell_height = GetCellHeight();
         for (int row = 0; row < numberOfRows; ++row)
         {
             for (int col = 0; col < numberOfColumns; ++col)
             {
-                board[row][col]->Initialize(cell_width, cell_height);
+                board[row][col] = new Cell(cell_width, cell_height, sf::Vector2i(row, col));
             }
         }
     }

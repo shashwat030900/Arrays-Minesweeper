@@ -3,16 +3,16 @@
 
 namespace Gameplay
 {
-    Cell::Cell(sf::Vector2i grid_position)
-        : cellButton("assets/textures/cells.jpeg", sf::Vector2f(0, 0), tileSize, tileSize),
-        position(grid_position), currentCellState(CellState::HIDDEN), cellType(CellType::EMPTY), mines_around(0)
+    Cell::Cell(float width, float height, sf::Vector2i position)
     {
+        Initialize(width, height, position);
     }
 
-    void Cell::Initialize(float width, float height)
+    void Cell::Initialize(float width, float height, sf::Vector2i position)
     {
+        this->position = position;
         sf::Vector2f cellScreenPosition = GetCellScreenPosition(width, height);
-        cellButton.Initialize("assets/textures/cells.jpeg", cellScreenPosition, width * sliceCount, height);
+        cellButton = new Button("assets/textures/cells.jpeg", cellScreenPosition, width * sliceCount, height);
     }
 
     sf::Vector2f Cell::GetCellScreenPosition(float width, float height) const
@@ -28,26 +28,26 @@ namespace Gameplay
         switch (currentCellState)
         {
         case CellState::HIDDEN:
-            cellButton.SetTextureRect(sf::IntRect(10 * tileSize, 0, tileSize, tileSize));
+            cellButton->SetTextureRect(sf::IntRect(10 * tileSize, 0, tileSize, tileSize));
             break;
         case CellState::OPEN:
-            cellButton.SetTextureRect(sf::IntRect(index * tileSize, 0, tileSize, tileSize));
+            cellButton->SetTextureRect(sf::IntRect(index * tileSize, 0, tileSize, tileSize));
             break;
         case CellState::FLAGGED:
-            cellButton.SetTextureRect(sf::IntRect(11 * tileSize, 0, tileSize, tileSize));
+            cellButton->SetTextureRect(sf::IntRect(11 * tileSize, 0, tileSize, tileSize));
             break;
         }
     }
 
     void Cell::Update(Event::EventPollingManager& eventManager, sf::RenderWindow& window)
     {
-        cellButton.UpdateState(eventManager, window);
+        cellButton->UpdateState(eventManager, window);
     }
 
     void Cell::Render(sf::RenderWindow& window)
     {
         SetCellTexture();
-        cellButton.Render(window);
+        cellButton->Render(window);
     }
 
     // State and Type Management
