@@ -30,9 +30,10 @@ namespace Gameplay
         Cell* board[numberOfRows][numberOfColumns];
         int flaggedCells;
 
+        
+        const float horizontalCellPadding = 115.f;
+        const float verticalCellPadding = 329.f;
         // Board Rendering
-        const float boardWidthOffset = 115.f;
-        const float boardHeightOffset = 329.f;
         const float boardWidth = 866.f;
         const float boardHeight = 1080.f;
 
@@ -78,8 +79,8 @@ namespace Gameplay
         BoardState GetBoardState() const;
         void SetBoardState(BoardState state);
         int GetMinesCount() const;
-        float GetCellWidth() const;
-        float GetCellHeight() const;
+        float GetCellWidthInBoard() const;
+        float GetCellHeightInBoard() const;
 
         float GetSampleCellLeftOffset() const;
         float GetSampleCellTopOffset() const;

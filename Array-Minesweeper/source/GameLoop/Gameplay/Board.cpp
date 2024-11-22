@@ -37,8 +37,8 @@ namespace Gameplay
 
     void Board::CreateBoard()
     {
-        float cell_width = GetCellWidth();
-        float cell_height = GetCellHeight();
+        float cell_width = GetCellWidthInBoard();
+        float cell_height = GetCellHeightInBoard();
         for (int row = 0; row < numberOfRows; ++row)
         {
             for (int col = 0; col < numberOfColumns; ++col)
@@ -347,14 +347,14 @@ namespace Gameplay
         return minesCount - flaggedCells;
     }
 
-    float Board::GetCellWidth() const
+    float Board::GetCellWidthInBoard() const
     {
-        return (boardWidth - boardWidthOffset) / static_cast<float>(numberOfColumns);
+        return (boardWidth - horizontalCellPadding) / static_cast<float>(numberOfColumns);
     }
 
-    float Board::GetCellHeight() const
+    float Board::GetCellHeightInBoard() const
     {
-        return (boardHeight - boardHeightOffset) / static_cast<float>(numberOfRows);
+        return (boardHeight - verticalCellPadding) / static_cast<float>(numberOfRows);
     }
 
 
@@ -370,8 +370,8 @@ namespace Gameplay
 
     sf::Vector2i Board::GetCellFromMousePosition(const sf::Vector2i& mouse_position) const
     {
-        float cell_width = GetCellWidth();
-        float cell_height = GetCellHeight();
+        float cell_width = GetCellWidthInBoard();
+        float cell_height = GetCellHeightInBoard();
         float cell_left_offset = GetSampleCellLeftOffset();
         float cell_top_offset = GetSampleCellTopOffset();
 
