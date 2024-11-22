@@ -33,16 +33,16 @@ void GameLoop::HandleStates() {
         break;
 
     case GameState::MAIN_MENU:
-        mainMenuManager->Update(*eventManager);
-        mainMenuManager->Render();
         eventManager->Update();
         HandleMainMenuButtons();
+        mainMenuManager->Update(*eventManager);
+        mainMenuManager->Render();
         break;
 
     case GameState::GAMEPLAY:
+        eventManager->Update();
         gameplayManager->Update(*eventManager, *windowManager->GetGameWindow());
         gameplayManager->Render(*windowManager->GetGameWindow());
-        eventManager->Update();
         break;
 
     case GameState::EXIT:

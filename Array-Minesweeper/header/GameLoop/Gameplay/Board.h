@@ -30,15 +30,12 @@ namespace Gameplay
         Cell* board[numberOfRows][numberOfColumns];
         int flaggedCells;
 
-        // Rendering
+        // Board Rendering
         const float boardWidthOffset = 115.f;
         const float boardHeightOffset = 329.f;
         const float boardWidth = 866.f;
         const float boardHeight = 1080.f;
-        const float backgroundAlpha = 85.f;
 
-        sf::Texture backgroundTexture;
-        sf::Sprite backgroundSprite;
         sf::Texture boardTexture;
         sf::Sprite boardSprite;
 
@@ -48,7 +45,6 @@ namespace Gameplay
 
         // Private helper methods
         void CreateBoard();
-        void InitializeBackgroundImage();
         void InitializeBoardImage();
         void InitializeCells();
         void PopulateBoard(sf::Vector2i first_cell_position);

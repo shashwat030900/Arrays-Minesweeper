@@ -9,12 +9,24 @@ namespace Gameplay
 
     void GameplayManager::Initialize()
     {
+        InitializeBackgroundImage();
         board = new Board(this);
         board->Initialize();
         Time::TimeManager::Initialize();
         gameplayUI.Initialize();
         remainingTime = maxLevelDuration;
         gameResult = GameResult::NONE;
+    }
+
+    void GameplayManager::InitializeBackgroundImage()
+    {
+        if (!backgroundTexture.loadFromFile("assets/textures/minesweeper_bg.png"))
+        {
+            std::cerr << "Failed to load background texture!" << std::endl;
+            return;
+        }
+        backgroundSprite.setTexture(backgroundTexture);
+        backgroundSprite.setColor(sf::Color(255, 255, 255, backgroundAlpha));
     }
 
     void GameplayManager::Update(Event::EventPollingManager& eventManager, sf::RenderWindow& window)
@@ -35,6 +47,7 @@ namespace Gameplay
 
     void GameplayManager::Render(sf::RenderWindow& window)
     {
+        window.draw(backgroundSprite);
         board->Render(window);
         gameplayUI.Render(window);
     }

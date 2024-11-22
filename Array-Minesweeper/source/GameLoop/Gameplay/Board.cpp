@@ -18,21 +18,9 @@ namespace Gameplay
 
     void Board::Initialize()
     {
-        InitializeBackgroundImage();
         InitializeBoardImage();
         InitializeCells();
         Reset();
-    }
-
-    void Board::InitializeBackgroundImage()
-    {
-        if (!backgroundTexture.loadFromFile("assets/textures/minesweeper_bg.png"))
-        {
-            std::cerr << "Failed to load background texture!" << std::endl;
-            return;
-        }
-        backgroundSprite.setTexture(backgroundTexture);
-        backgroundSprite.setColor(sf::Color(255, 255, 255, backgroundAlpha));
     }
 
     void Board::InitializeBoardImage()
@@ -86,7 +74,6 @@ namespace Gameplay
 
     void Board::Render(sf::RenderWindow& window)
     {
-        window.draw(backgroundSprite);
         window.draw(boardSprite);
         for (int row = 0; row < numberOfRows; ++row)
         {

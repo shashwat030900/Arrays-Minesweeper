@@ -24,6 +24,11 @@ namespace Gameplay
         const float gameOverTime = 11.0f;
         float remainingTime;
 
+        const float backgroundAlpha = 85.f;
+
+        sf::Texture backgroundTexture;
+        sf::Sprite backgroundSprite;
+
         Board *board;
         GameResult gameResult = GameResult::NONE;
         GameplayUI gameplayUI;
@@ -39,6 +44,8 @@ namespace Gameplay
         ~GameplayManager() = default;
 
         void Initialize();
+        void InitializeBackgroundImage();
+
         void Update(Event::EventPollingManager& eventManager, sf::RenderWindow& window);
         void Render(sf::RenderWindow& window);
 
