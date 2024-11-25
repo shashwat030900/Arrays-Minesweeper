@@ -42,6 +42,12 @@ namespace UI {
 
     void GameplayUI::InitializeButton() {
         restartButton = new Button("assets/textures/restart_button.png", sf::Vector2f(restartButtonLeftOffset, restartButtonTopOffset), buttonWidth, buttonHeight);
+
+        restartButton->RegisterCallbackFunction([this](UIElements::ButtonType buttonType) {
+            if (buttonType == UIElements::ButtonType::LEFT_MOUSE_BUTTON) {
+                OnRestartButtonClicked();
+            }
+            });
     }
 
     void GameplayUI::Update(int remaining_mines, int remaining_time, Event::EventPollingManager& eventManager, sf::RenderWindow& window) {
@@ -56,8 +62,8 @@ namespace UI {
         restartButton->Render(window);
     }
 
-    bool GameplayUI::IsRestartButtonPressed() {
-        return restartButton->GetState() == ButtonState::PRESSED;
+    bool GameplayUI::OnRestartButtonClicked() {
+        return true;
     }
 }
 

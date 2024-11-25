@@ -13,6 +13,19 @@ namespace Gameplay
         this->position = position;
         sf::Vector2f cellScreenPosition = GetCellScreenPosition(width, height);
         cellButton = new Button("assets/textures/cells.jpeg", cellScreenPosition, width * sliceCount, height);
+
+        cellButton->RegisterCallbackFunction([this](UIElements::ButtonType buttonType) {
+            OnButtonClicked(buttonType);
+            });
+    }
+
+    void Cell::OnButtonClicked(UIElements::ButtonType buttonType) {
+        if (buttonType == UIElements::ButtonType::LEFT_MOUSE_BUTTON) {
+            OpenCell();
+        }
+        else if (buttonType == UIElements::ButtonType::RIGHT_MOUSE_BUTTON) {
+            ToggleFlag();
+        }
     }
 
     sf::Vector2f Cell::GetCellScreenPosition(float width, float height) const
@@ -41,16 +54,22 @@ namespace Gameplay
 
     void Cell::Update(Event::EventPollingManager& eventManager, sf::RenderWindow& window)
     {
-        cellButton->UpdateState(eventManager, window);
+        if (cellButton) cellButton->UpdateState(eventManager, window);
     }
 
     void Cell::Render(sf::RenderWindow& window)
     {
         SetCellTexture();
-        cellButton->Render(window);
+        if (cellButton) cellButton->Render(window);
     }
 
-    // State and Type Management
+    void Cell::RegisterButtonCallback(std::function<void(UIElements::ButtonType)> callback)
+    {
+        if (cellButton) {
+            cellButton->RegisterCallbackFunction(callback);
+        }
+    }
+
     CellState Cell::GetCellState() const
     {
         return currentCellState;

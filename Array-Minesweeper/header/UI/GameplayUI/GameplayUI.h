@@ -48,7 +48,7 @@ namespace UI {
         void Initialize();
         void Update(int remaining_mines, int remaining_time, Event::EventPollingManager& eventManager, sf::RenderWindow& window);
         void Render(sf::RenderWindow& window);
-        bool IsRestartButtonPressed();
+        bool OnRestartButtonClicked();
     };
 }
 

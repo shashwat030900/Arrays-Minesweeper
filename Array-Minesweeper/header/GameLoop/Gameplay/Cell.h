@@ -56,9 +56,10 @@ namespace Gameplay
 
         // Initialization and rendering functions
         void Initialize(float width, float height, sf::Vector2i position);
+        void OnButtonClicked(UIElements::ButtonType buttonType);
         void Update(Event::EventPollingManager& eventManager, sf::RenderWindow& window);
         void Render(sf::RenderWindow& window);
-
+        void RegisterButtonCallback(std::function<void(UIElements::ButtonType)> callback);
         // Cell state and type management
         CellState GetCellState() const;
         void SetCellState(CellState state);

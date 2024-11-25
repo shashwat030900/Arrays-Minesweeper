@@ -44,7 +44,25 @@ namespace Gameplay
             for (int col = 0; col < numberOfColumns; ++col)
             {
                 board[row][col] = new Cell(cell_width, cell_height, sf::Vector2i(row, col));
+
+                board[row][col]->RegisterButtonCallback([this, row, col](ButtonType buttonType) {
+                    OnCellButtonClicked(sf::Vector2i(row, col), buttonType);
+                    });
             }
+        }
+    }
+
+    void Board::OnCellButtonClicked(sf::Vector2i cell_position, ButtonType buttonType) {
+        if (boardState == BoardState::COMPLETED)
+            return;
+
+        if (buttonType == ButtonType::LEFT_MOUSE_BUTTON) {
+            Sound::SoundManager::PlaySound(Sound::SoundType::BUTTON_CLICK);
+            OpenCell(cell_position);
+        }
+        else if (buttonType == ButtonType::RIGHT_MOUSE_BUTTON) {
+            Sound::SoundManager::PlaySound(Sound::SoundType::FLAG);
+            FlagCell(cell_position);
         }
     }
 

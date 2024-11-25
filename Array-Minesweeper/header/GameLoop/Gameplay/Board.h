@@ -46,8 +46,8 @@ namespace Gameplay
 
         // Private helper methods
         void CreateBoard();
+        void OnCellButtonClicked(sf::Vector2i cell_position, ButtonType buttonType);
         void InitializeBoardImage();
-        void InitializeCells();
         void PopulateBoard(sf::Vector2i first_cell_position);
         void PopulateMines(sf::Vector2i first_cell_position);
         void PopulateCells();

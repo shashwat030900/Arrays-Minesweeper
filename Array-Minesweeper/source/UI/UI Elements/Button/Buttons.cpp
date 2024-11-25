@@ -15,16 +15,17 @@ namespace UIElements {
         buttonSprite.setPosition(position);
         buttonSprite.setScale(width / buttonTexture.getSize().x, height / buttonTexture.getSize().y);
     }
-    void Button::UpdateState(Event::EventPollingManager& eventManager, const sf::RenderWindow& window) {
-        sf::Vector2i mouse_position = sf::Mouse::getPosition(window);
 
+    void Button::UpdateState(Event::EventPollingManager& eventManager, const sf::RenderWindow& window) {
+
+        sf::Vector2i mouse_position = eventManager.GetMousePosition(window);
         if (eventManager.PressedLeftMouseButton() &&
             buttonSprite.getGlobalBounds().contains(static_cast<float>(mouse_position.x), static_cast<float>(mouse_position.y))) {
-            Sound::SoundManager::PlaySound(Sound::SoundType::BUTTON_CLICK);
-            state = ButtonState::PRESSED;
+            if (callback_function) callback_function(ButtonType::LEFT_MOUSE_BUTTON);
         }
-        else if (state == ButtonState::PRESSED && !eventManager.PressedLeftMouseButton()) {
-            state = ButtonState::RELEASED;
+        else if (eventManager.PressedRightMouseButton() &&
+            buttonSprite.getGlobalBounds().contains(static_cast<float>(mouse_position.x), static_cast<float>(mouse_position.y))) {
+            if (callback_function) callback_function(ButtonType::RIGHT_MOUSE_BUTTON);
         }
     }
 
@@ -36,12 +37,8 @@ namespace UIElements {
         buttonSprite.setTextureRect(rect);
     }
 
-    ButtonState Button::GetState() const {
-        return state;
-    }
-
-    void Button::ResetState() {
-        state = ButtonState::RELEASED;
+    void Button::RegisterCallbackFunction(CallbackFunction button_callback) {
+        callback_function = button_callback;
     }
 }
 

@@ -35,7 +35,7 @@ namespace Gameplay
         {
             UpdateRemainingTime();
             board->Update(eventManager, window);
-            ProcessMouseInput(eventManager, window);
+            /*ProcessMouseInput(eventManager, window);*/
             HandleGameWin();
         }
         gameplayUI.Update(GetMinesCount(), static_cast<int>(remainingTime), eventManager, window);
@@ -51,16 +51,16 @@ namespace Gameplay
         gameplayUI.Render(window);
     }
 
-    void GameplayManager::ProcessMouseInput(Event::EventPollingManager& eventManager, sf::RenderWindow& window)
-    {
-        sf::Vector2i mouse_position = eventManager.GetMousePosition(window);
-        sf::Vector2i cell_position = board->GetCellFromMousePosition(mouse_position);
+    //void GameplayManager::ProcessMouseInput(Event::EventPollingManager& eventManager, sf::RenderWindow& window)
+    //{
+    //    sf::Vector2i mouse_position = eventManager.GetMousePosition(window);
+    //    sf::Vector2i cell_position = board->GetCellFromMousePosition(mouse_position);
 
-        if (board->IsValidCellPosition(cell_position))
-        {
-            board->ProcessCellInput(eventManager, cell_position);
-        }
-    }
+    //    if (board->IsValidCellPosition(cell_position))
+    //    {
+    //        board->ProcessCellInput(eventManager, cell_position);
+    //    }
+    //}
 
     void GameplayManager::HandleGameWin() {
         
@@ -74,7 +74,7 @@ namespace Gameplay
 
     void GameplayManager::CheckRestart()
     {
-        if (gameplayUI.IsRestartButtonPressed()) {
+        if (gameplayUI.OnRestartButtonClicked()) {
             gameResult = GameResult::NONE;
             board->Reset();
             Time::TimeManager::Initialize();

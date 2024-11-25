@@ -38,6 +38,8 @@ namespace UI {
         void Show();
 
         void UpdateButtonStates(Event::EventPollingManager& eventManager);
+        bool OnPlayButtonClicked();
+        bool OnQuitButtonClicked();
         bool IsPlayButtonPressed() const;
         bool IsQuitButtonPressed() const;
         void ResetButtonStates();

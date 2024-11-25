@@ -28,6 +28,19 @@ namespace UI {
     void MainMenuManager::InitializeButtons() {
         playButton = new Button("assets/textures/play_button.png", GetButtonPosition(0.f, playButtonYPosition), buttonWidth, buttonHeight);
         quitButton = new Button("assets/textures/quit_button.png", GetButtonPosition(0.f, quitButtonYPosition), buttonWidth, buttonHeight);
+
+        playButton->RegisterCallbackFunction([this](UIElements::ButtonType buttonType) {
+            if (buttonType == UIElements::ButtonType::LEFT_MOUSE_BUTTON) {
+                OnPlayButtonClicked();
+            }
+            });
+
+        // Register callback for the quit button
+        quitButton->RegisterCallbackFunction([this](UIElements::ButtonType buttonType) {
+            if (buttonType == UIElements::ButtonType::LEFT_MOUSE_BUTTON) {
+                OnQuitButtonClicked();
+            }
+            });
     }
 
     sf::Vector2f MainMenuManager::GetButtonPosition(float offsetX, float offsetY) {
@@ -55,17 +68,27 @@ namespace UI {
         if (quitButton) quitButton->UpdateState(eventManager, *gameWindow);
     }
 
-    bool MainMenuManager::IsPlayButtonPressed() const {
-        return playButton && playButton->GetState() == ButtonState::PRESSED;
+    bool MainMenuManager::OnPlayButtonClicked() {
+        std::cout << "Play button clicked! Transitioning to gameplay..." << std::endl;
+        return true;
     }
 
-    bool MainMenuManager::IsQuitButtonPressed() const {
-        return quitButton && quitButton->GetState() == ButtonState::PRESSED;
+    bool MainMenuManager::OnQuitButtonClicked() {
+        std::cout << "Quit button clicked! Exiting the game..." << std::endl;
+        return true;
     }
 
-    void MainMenuManager::ResetButtonStates() {
-        if (playButton) playButton->ResetState();
-        if (quitButton) quitButton->ResetState();
-    }
+    //bool MainMenuManager::IsPlayButtonPressed() const {
+    //    return playButton && playButton->GetState() == ButtonState::PRESSED;
+    //}
+
+    //bool MainMenuManager::IsQuitButtonPressed() const {
+    //    return quitButton && quitButton->GetState() == ButtonState::PRESSED;
+    //}
+
+    //void MainMenuManager::ResetButtonStates() {
+    //    if (playButton) playButton->ResetState();
+    //    if (quitButton) quitButton->ResetState();
+    //}
 
 }
