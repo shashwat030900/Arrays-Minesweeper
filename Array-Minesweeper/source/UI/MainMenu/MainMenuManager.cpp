@@ -31,14 +31,16 @@ namespace UI {
 
         playButton->RegisterCallbackFunction([this](UIElements::ButtonType buttonType) {
             if (buttonType == UIElements::ButtonType::LEFT_MOUSE_BUTTON) {
-                OnPlayButtonClicked();
+                Sound::SoundManager::PlaySound(Sound::SoundType::BUTTON_CLICK);
+                playButtonClicked = true;
             }
             });
 
         // Register callback for the quit button
         quitButton->RegisterCallbackFunction([this](UIElements::ButtonType buttonType) {
             if (buttonType == UIElements::ButtonType::LEFT_MOUSE_BUTTON) {
-                OnQuitButtonClicked();
+                Sound::SoundManager::PlaySound(Sound::SoundType::BUTTON_CLICK);
+                quitButtonClicked = true;
             }
             });
     }
@@ -69,13 +71,17 @@ namespace UI {
     }
 
     bool MainMenuManager::OnPlayButtonClicked() {
-        std::cout << "Play button clicked! Transitioning to gameplay..." << std::endl;
-        return true;
+        return playButtonClicked;
     }
 
     bool MainMenuManager::OnQuitButtonClicked() {
-        std::cout << "Quit button clicked! Exiting the game..." << std::endl;
-        return true;
+// Set the flag
+        return quitButtonClicked;
+    }
+
+    void MainMenuManager::ResetButtonStates() {
+        playButtonClicked = false;
+        quitButtonClicked = false;
     }
 
     //bool MainMenuManager::IsPlayButtonPressed() const {

@@ -19,6 +19,7 @@ namespace UIElements {
     void Button::UpdateState(Event::EventPollingManager& eventManager, const sf::RenderWindow& window) {
 
         sf::Vector2i mouse_position = eventManager.GetMousePosition(window);
+
         if (eventManager.PressedLeftMouseButton() &&
             buttonSprite.getGlobalBounds().contains(static_cast<float>(mouse_position.x), static_cast<float>(mouse_position.y))) {
             if (callback_function) callback_function(ButtonType::LEFT_MOUSE_BUTTON);

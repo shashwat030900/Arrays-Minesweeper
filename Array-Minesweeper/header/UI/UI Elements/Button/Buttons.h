@@ -11,8 +11,6 @@ namespace UIElements {
         RIGHT_MOUSE_BUTTON
     };
 
-    
-
     class Button {
     private:
         sf::Texture buttonTexture;

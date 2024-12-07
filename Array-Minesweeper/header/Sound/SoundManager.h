@@ -23,6 +23,13 @@ namespace Sound
         static sf::Sound soundEffect;
         static float backgroundMusicVolume;
 
+        static std::string button_click_path;
+        static std::string flag_sound_path;
+        static std::string explosion_sound_path;
+        static std::string game_won_sound_path;
+
+        static std::string background_path;
+
     public:
         // Initialization and loading functions
         static void Initialize();
@@ -30,8 +37,7 @@ namespace Sound
         static void PlayBackgroundMusic();
 
     private:
-        static void LoadBackgroundMusicFromFile(const std::string& path);
-        static void LoadSoundFromFile(const std::string& button_click_path, const std::string& flag_sound_path,
-        const std::string& explosion_sound_path, const std::string& game_won_sound_path);
+        static void LoadBackgroundMusicFromFile();
+        static void LoadSoundFromFile();
     };
 }

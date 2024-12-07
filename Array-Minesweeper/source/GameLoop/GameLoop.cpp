@@ -55,11 +55,13 @@ void GameLoop::HandleStates() {
 void GameLoop::HandleMainMenuButtons() {
     if (mainMenuManager->OnPlayButtonClicked()) {
         //mainMenuManager->ResetButtonStates();
-        currentState = GameState::GAMEPLAY;
+        currentState = GameState::GAMEPLAY;  // Switch to gameplay state
+        mainMenuManager->ResetButtonStates();  // Reset the flags
     }
     else if (mainMenuManager->OnQuitButtonClicked()) {
         /*mainMenuManager->ResetButtonStates();*/
         currentState = GameState::EXIT;
+        mainMenuManager->ResetButtonStates();
     }
 }
 

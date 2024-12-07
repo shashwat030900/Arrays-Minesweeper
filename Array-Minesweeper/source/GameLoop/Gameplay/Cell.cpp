@@ -38,6 +38,9 @@ namespace Gameplay
     void Cell::SetCellTexture()
     {
         int index = static_cast<int>(cellType);
+        std::cout << "Setting cell texture: State=" << static_cast<int>(currentCellState)
+            << ", Type=" << static_cast<int>(cellType) << ", Index=" << index << std::endl;
+
         switch (currentCellState)
         {
         case CellState::HIDDEN:

@@ -176,17 +176,30 @@ namespace Gameplay
 
     void Board::OpenCell(sf::Vector2i cell_position)
     {
-        if (board[cell_position.x][cell_position.y]->CanOpenCell())
-        {
-            if (boardState == BoardState::FIRST_CELL)
-            {
-                PopulateBoard(cell_position);
-                boardState = BoardState::PLAYING;
-            }
-
-            ProcessCellType(cell_position);
-            board[cell_position.x][cell_position.y]->SetCellState(CellState::OPEN);
+        if (!board[cell_position.x][cell_position.y]->CanOpenCell()) {
+            std::cout << "Cell at (" << cell_position.x << ", " << cell_position.y << ") cannot be opened." << std::endl;
+            return;
         }
+
+        // Handle first click logic
+        if (boardState == BoardState::FIRST_CELL) {
+            PopulateBoard(cell_position);
+            boardState = BoardState::PLAYING;
+            ShowBoard();
+        }
+
+        // Debugging: Check the state before setting it
+        std::cout << "Opening cell at (" << cell_position.x << ", " << cell_position.y << "). Current state: "
+            << static_cast<int>(board[cell_position.x][cell_position.y]->GetCellState()) << std::endl;
+
+        // Open the cell and process its type
+        board[cell_position.x][cell_position.y]->SetCellState(CellState::OPEN);
+
+        // Debugging: Confirm the state is updated
+        std::cout << "Cell at (" << cell_position.x << ", " << cell_position.y << ") is now open. New state: "
+            << static_cast<int>(board[cell_position.x][cell_position.y]->GetCellState()) << std::endl;
+
+        ProcessCellType(cell_position);
     }
 
     void Board::DeleteBoard()
@@ -225,6 +238,8 @@ namespace Gameplay
 
     // Process the cell type to determine if it’s empty, contains a mine, or has surrounding mines
     void Board::ProcessCellType(sf::Vector2i cell_position) {
+        std::cout << "Processing Cell Type" << "\n";
+
         switch (board[cell_position.x][cell_position.y]->GetCellType()) {
         case CellType::EMPTY:
             ProcessEmptyCell(cell_position);
@@ -237,21 +252,19 @@ namespace Gameplay
         }
     }
 
-    // Process an empty cell, opening neighboring cells if applicable
     void Board::ProcessEmptyCell(sf::Vector2i cell_position) {
+        std::cout << "Processing Empty Cell" << "\n";
         OpenEmptyCells(cell_position);
     }
 
-    // Process a cell that contains a mine, triggering game over logic
     void Board::ProcessMineCell(sf::Vector2i cell_position) {
         gameplayManager->SetGameResult(GameResult::LOST);
         boardState = BoardState::COMPLETED;
         RevealAllMines();
     }
 
-    // Open all contiguous empty cells starting from the given cell
     void Board::OpenEmptyCells(sf::Vector2i cell_position) {
-
+        std::cout << "Opening Empty Cells" << "\n";
         switch (board[cell_position.x][cell_position.y]->GetCellState())
         {
         case::Gameplay::CellState::OPEN:
@@ -274,7 +287,6 @@ namespace Gameplay
         }
     }
 
-    // Reset the board to its initial state
     void Board::ResetBoard() {
         for (int row = 0; row < numberOfRows; ++row) {
             for (int col = 0; col < numberOfColumns; ++col) {
