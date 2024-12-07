@@ -46,7 +46,6 @@ namespace Gameplay
 
         // Private helper methods
         void CreateBoard();
-        void OnCellButtonClicked(sf::Vector2i cell_position, ButtonType buttonType);
         void InitializeBoardImage();
         void PopulateBoard(sf::Vector2i first_cell_position);
         void PopulateMines(sf::Vector2i first_cell_position);
@@ -71,6 +70,7 @@ namespace Gameplay
         void Initialize();
         void Update(Event::EventPollingManager& eventManager, sf::RenderWindow& window);
         void Render(sf::RenderWindow& window);
+        void OnCellButtonClicked(sf::Vector2i cell_position, ButtonType buttonType);
         void ProcessCellInput(Event::EventPollingManager& eventManager, sf::Vector2i cell_position);
         bool IsValidCellPosition(sf::Vector2i cell_position);
         void Reset();

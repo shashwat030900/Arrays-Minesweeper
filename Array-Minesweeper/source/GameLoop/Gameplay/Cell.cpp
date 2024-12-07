@@ -1,11 +1,13 @@
 #include "../../header/GameLoop/Gameplay/Cell.h"
+#include "../../header/GameLoop/Gameplay/Board.h"
 #include <iostream>
 
 namespace Gameplay
 {
-    Cell::Cell(float width, float height, sf::Vector2i position)
+    Cell::Cell(float width, float height, sf::Vector2i position, Board* board)
     {
         Initialize(width, height, position);
+        this->board = board;
     }
 
     void Cell::Initialize(float width, float height, sf::Vector2i position)
@@ -13,19 +15,7 @@ namespace Gameplay
         this->position = position;
         sf::Vector2f cellScreenPosition = GetCellScreenPosition(width, height);
         cellButton = new Button("assets/textures/cells.jpeg", cellScreenPosition, width * sliceCount, height);
-
-        cellButton->RegisterCallbackFunction([this](UIElements::ButtonType buttonType) {
-            OnButtonClicked(buttonType);
-            });
-    }
-
-    void Cell::OnButtonClicked(UIElements::ButtonType buttonType) {
-        if (buttonType == UIElements::ButtonType::LEFT_MOUSE_BUTTON) {
-            OpenCell();
-        }
-        else if (buttonType == UIElements::ButtonType::RIGHT_MOUSE_BUTTON) {
-            ToggleFlag();
-        }
+        RegisterButtonCallback();
     }
 
     sf::Vector2f Cell::GetCellScreenPosition(float width, float height) const
@@ -38,7 +28,8 @@ namespace Gameplay
     void Cell::SetCellTexture()
     {
         int index = static_cast<int>(cellType);
-        std::cout << "Setting cell texture: State=" << static_cast<int>(currentCellState)
+        if (static_cast<int>(currentCellState) == 1)
+            std::cout << "Setting cell texture: State=" << static_cast<int>(currentCellState)
             << ", Type=" << static_cast<int>(cellType) << ", Index=" << index << std::endl;
 
         switch (currentCellState)
@@ -66,11 +57,18 @@ namespace Gameplay
         if (cellButton) cellButton->Render(window);
     }
 
-    void Cell::RegisterButtonCallback(std::function<void(UIElements::ButtonType)> callback)
+    void Cell::RegisterButtonCallback()
     {
-        if (cellButton) {
-            cellButton->RegisterCallbackFunction(callback);
-        }
+        cellButton->RegisterCallbackFunction([this](ButtonType buttonType) {
+            if (board) {
+                board->OnCellButtonClicked(GetCellPosition(), buttonType);
+            }
+            });
+    }
+
+    void Cell::cellButtonCallback(ButtonType button_type)
+    {
+        board->OnCellButtonClicked(GetCellPosition(), button_type);
     }
 
     CellState Cell::GetCellState() const
@@ -97,6 +95,11 @@ namespace Gameplay
     void Cell::SetCellPosition(sf::Vector2i grid_position)
     {
         position = grid_position;
+    }
+
+    sf::Vector2i Cell::GetCellPosition()
+    {
+        return position;
     }
 
     int Cell::GetMinesAround() const
@@ -135,6 +138,7 @@ namespace Gameplay
 
     void Cell::OpenCell()
     {
+        std::cout << "Changing cell state" << "\n";
         SetCellState(CellState::OPEN);
     }
 

@@ -43,16 +43,14 @@ namespace Gameplay
         {
             for (int col = 0; col < numberOfColumns; ++col)
             {
-                board[row][col] = new Cell(cell_width, cell_height, sf::Vector2i(row, col));
-
-                board[row][col]->RegisterButtonCallback([this, row, col](ButtonType buttonType) {
-                    OnCellButtonClicked(sf::Vector2i(row, col), buttonType);
-                    });
+                board[row][col] = new Cell(cell_width, cell_height, sf::Vector2i(row, col), this);
             }
         }
     }
 
     void Board::OnCellButtonClicked(sf::Vector2i cell_position, ButtonType buttonType) {
+        std::cout << "Called OnCellButtonClicked" << "\n";
+
         if (boardState == BoardState::COMPLETED)
             return;
 
@@ -91,23 +89,23 @@ namespace Gameplay
         }
     }
 
-    void Board::ProcessCellInput(Event::EventPollingManager& eventManager, sf::Vector2i cell_position)
-    {
-        if (boardState == BoardState::COMPLETED)
-            return;
+    //void Board::ProcessCellInput(Event::EventPollingManager& eventManager, sf::Vector2i cell_position)
+    //{
+    //    if (boardState == BoardState::COMPLETED)
+    //        return;
 
-        if (eventManager.PressedLeftMouseButton())
-        {
-            Sound::SoundManager::PlaySound(Sound::SoundType::BUTTON_CLICK);
-            OpenCell(cell_position);
-        }
-            
-        else if (eventManager.PressedRightMouseButton()) {
-            Sound::SoundManager::PlaySound(Sound::SoundType::FLAG);
-            FlagCell(cell_position);
-        }
-            
-    }
+    //    if (eventManager.PressedLeftMouseButton())
+    //    {
+    //        Sound::SoundManager::PlaySound(Sound::SoundType::BUTTON_CLICK);
+    //        OpenCell(cell_position);
+    //    }
+    //        
+    //    else if (eventManager.PressedRightMouseButton()) {
+    //        Sound::SoundManager::PlaySound(Sound::SoundType::FLAG);
+    //        FlagCell(cell_position);
+    //    }
+    //        
+    //}
 
     void Board::PopulateBoard(sf::Vector2i first_cell_position)
     {
@@ -177,29 +175,19 @@ namespace Gameplay
     void Board::OpenCell(sf::Vector2i cell_position)
     {
         if (!board[cell_position.x][cell_position.y]->CanOpenCell()) {
-            std::cout << "Cell at (" << cell_position.x << ", " << cell_position.y << ") cannot be opened." << std::endl;
             return;
         }
-
+        
         // Handle first click logic
         if (boardState == BoardState::FIRST_CELL) {
             PopulateBoard(cell_position);
             boardState = BoardState::PLAYING;
-            ShowBoard();
         }
 
-        // Debugging: Check the state before setting it
-        std::cout << "Opening cell at (" << cell_position.x << ", " << cell_position.y << "). Current state: "
-            << static_cast<int>(board[cell_position.x][cell_position.y]->GetCellState()) << std::endl;
-
         // Open the cell and process its type
-        board[cell_position.x][cell_position.y]->SetCellState(CellState::OPEN);
-
-        // Debugging: Confirm the state is updated
-        std::cout << "Cell at (" << cell_position.x << ", " << cell_position.y << ") is now open. New state: "
-            << static_cast<int>(board[cell_position.x][cell_position.y]->GetCellState()) << std::endl;
-
+        
         ProcessCellType(cell_position);
+        board[cell_position.x][cell_position.y]->OpenCell();
     }
 
     void Board::DeleteBoard()
@@ -268,10 +256,12 @@ namespace Gameplay
         switch (board[cell_position.x][cell_position.y]->GetCellState())
         {
         case::Gameplay::CellState::OPEN:
+            std::cout << "Cell state is already open" << "\n";
             return;
         case::Gameplay::CellState::FLAGGED:
             flaggedCells--;
         default:
+            std::cout << "Changing cell state" << "\n";
             board[cell_position.x][cell_position.y]->OpenCell();
         }
 

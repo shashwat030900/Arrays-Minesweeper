@@ -8,6 +8,7 @@ using namespace UIElements;
 
 namespace Gameplay
 {
+    class Board;
     enum class CellState
     {
         HIDDEN,
@@ -35,6 +36,7 @@ namespace Gameplay
         // Cell data members
         CellState currentCellState;
         CellType cellType;
+        Board* board;
         sf::Vector2i position;
         int mines_around;
 
@@ -50,7 +52,7 @@ namespace Gameplay
         void SetCellTexture();
 
     public:
-        Cell(float width, float height, sf::Vector2i position);
+        Cell(float width, float height, sf::Vector2i position, Board *board);
         ~Cell() = default;
 
         sf::Vector2f GetCellScreenPosition(float width, float height) const;
@@ -60,7 +62,8 @@ namespace Gameplay
         void OnButtonClicked(UIElements::ButtonType buttonType);
         void Update(Event::EventPollingManager& eventManager, sf::RenderWindow& window);
         void Render(sf::RenderWindow& window);
-        void RegisterButtonCallback(std::function<void(UIElements::ButtonType)> callback);
+        void RegisterButtonCallback();
+        void cellButtonCallback(ButtonType button_type);
         // Cell state and type management
         CellState GetCellState() const;
         void SetCellState(CellState state);
@@ -69,6 +72,7 @@ namespace Gameplay
         void SetCellType(CellType type);
 
         void SetCellPosition(sf::Vector2i grid_position);
+        sf::Vector2i GetCellPosition();
 
         int GetMinesAround() const;
         void SetMinesAround(int mine_count);
