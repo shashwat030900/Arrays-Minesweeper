@@ -35,6 +35,7 @@ namespace Gameplay
 
         void UpdateRemainingTime();
         void ProcessTimeOver();
+        void HandleGameplay(Event::EventPollingManager& eventManager, sf::RenderWindow& window);
 
         void GameWon();
         void GameLost();
@@ -50,8 +51,6 @@ namespace Gameplay
         void Render(sf::RenderWindow& window);
 
         void HandleGameWin();
-        void ProcessMouseInput(Event::EventPollingManager& eventManager, sf::RenderWindow& window);
-
         void CheckRestart();
         void ProcessGameResult();
 

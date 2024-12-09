@@ -16,7 +16,7 @@ namespace Sound
     sf::SoundBuffer SoundManager::bufferGameWon;
     sf::Sound SoundManager::soundEffect;
 
-    float SoundManager::backgroundMusicVolume = 0.0f;
+    float SoundManager::backgroundMusicVolume = 8.0f;
 
     void SoundManager::Initialize()
     {

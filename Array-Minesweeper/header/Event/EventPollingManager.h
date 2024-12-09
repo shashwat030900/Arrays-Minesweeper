@@ -12,6 +12,7 @@ namespace Event
         RELEASED,
     };
 
+
     class EventPollingManager
     {
     private:
@@ -25,7 +26,7 @@ namespace Event
         bool GameWindowWasClosed();
         bool HasQuitGame();
         bool IsKeyboardEvent();
-        void UpdateButtonsState(MouseButtonState& button_state, sf::Mouse::Button button_type);
+        void UpdateMouseButtonState(MouseButtonState& button_state, sf::Mouse::Button button_type);
 
     public:
         EventPollingManager(sf::RenderWindow* window);

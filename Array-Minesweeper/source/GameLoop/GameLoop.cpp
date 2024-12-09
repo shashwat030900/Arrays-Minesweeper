@@ -53,13 +53,13 @@ void GameLoop::HandleStates() {
 }
 
 void GameLoop::HandleMainMenuButtons() {
-    if (mainMenuManager->OnPlayButtonClicked()) {
-        //mainMenuManager->ResetButtonStates();
-        currentState = GameState::GAMEPLAY;  // Switch to gameplay state
-        mainMenuManager->ResetButtonStates();  // Reset the flags
+    if (mainMenuManager->GetPlayButtonState() == ButtonState::PRESSED) {
+        mainMenuManager->ResetButtonStates();
+        currentState = GameState::GAMEPLAY;
+        mainMenuManager->ResetButtonStates();
     }
-    else if (mainMenuManager->OnQuitButtonClicked()) {
-        /*mainMenuManager->ResetButtonStates();*/
+    else if (mainMenuManager->GetQuitButtonState() == ButtonState::PRESSED) {
+        mainMenuManager->ResetButtonStates();
         currentState = GameState::EXIT;
         mainMenuManager->ResetButtonStates();
     }

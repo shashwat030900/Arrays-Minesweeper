@@ -12,6 +12,7 @@ namespace UI {
         LoadFonts();
         InitializeTexts();
         InitializeButton();
+        RegisterButtonCallback();
     }
 
     void GameplayUI::LoadFonts() {
@@ -20,6 +21,21 @@ namespace UI {
         }
         if (!dsDigibFont.loadFromFile("assets/fonts/DS_DIGIB.ttf")) {
             std::cerr << "Error loading DS_DIGIB font!" << std::endl;
+        }
+    }
+
+    void GameplayUI::RegisterButtonCallback()
+    {
+        restartButton->RegisterCallbackFunction([this](UIElements::ButtonType buttonType) {
+            RestartButtonCallback(buttonType);
+            });
+    }
+
+    void GameplayUI::RestartButtonCallback(ButtonType buttonType)
+    {
+        if (buttonType == UIElements::ButtonType::LEFT_MOUSE_BUTTON) {
+            Sound::SoundManager::PlaySound(Sound::SoundType::BUTTON_CLICK);
+            restartButton->SetButtonsState(ButtonState::PRESSED);
         }
     }
 
@@ -43,11 +59,6 @@ namespace UI {
     void GameplayUI::InitializeButton() {
         restartButton = new Button("assets/textures/restart_button.png", sf::Vector2f(restartButtonLeftOffset, restartButtonTopOffset), buttonWidth, buttonHeight);
 
-        restartButton->RegisterCallbackFunction([this](UIElements::ButtonType buttonType) {
-            if (buttonType == UIElements::ButtonType::LEFT_MOUSE_BUTTON) {
-                OnRestartButtonClicked();
-            }
-            });
     }
 
     void GameplayUI::Update(int remaining_mines, int remaining_time, Event::EventPollingManager& eventManager, sf::RenderWindow& window) {
@@ -62,8 +73,13 @@ namespace UI {
         restartButton->Render(window);
     }
 
-    bool GameplayUI::OnRestartButtonClicked() {
-        return true;
+    ButtonState GameplayUI::GetRestartButtonState() {
+       return restartButton->GetButtonState();
+    }
+
+    void GameplayUI::ResetButtons()
+    {
+        restartButton->ResetButtonState();
     }
 }
 

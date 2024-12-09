@@ -49,7 +49,6 @@ namespace Gameplay
     }
 
     void Board::OnCellButtonClicked(sf::Vector2i cell_position, ButtonType buttonType) {
-        std::cout << "Called OnCellButtonClicked" << "\n";
 
         if (boardState == BoardState::COMPLETED)
             return;
@@ -88,24 +87,6 @@ namespace Gameplay
             }
         }
     }
-
-    //void Board::ProcessCellInput(Event::EventPollingManager& eventManager, sf::Vector2i cell_position)
-    //{
-    //    if (boardState == BoardState::COMPLETED)
-    //        return;
-
-    //    if (eventManager.PressedLeftMouseButton())
-    //    {
-    //        Sound::SoundManager::PlaySound(Sound::SoundType::BUTTON_CLICK);
-    //        OpenCell(cell_position);
-    //    }
-    //        
-    //    else if (eventManager.PressedRightMouseButton()) {
-    //        Sound::SoundManager::PlaySound(Sound::SoundType::FLAG);
-    //        FlagCell(cell_position);
-    //    }
-    //        
-    //}
 
     void Board::PopulateBoard(sf::Vector2i first_cell_position)
     {
@@ -186,7 +167,7 @@ namespace Gameplay
 
         // Open the cell and process its type
         ProcessCellType(cell_position);
-        board[cell_position.x][cell_position.y]->OpenCell();
+        board[cell_position.x][cell_position.y]->Open();
     }
 
     void Board::DeleteBoard()
@@ -225,7 +206,6 @@ namespace Gameplay
 
     // Process the cell type to determine if it’s empty, contains a mine, or has surrounding mines
     void Board::ProcessCellType(sf::Vector2i cell_position) {
-        std::cout << "Processing Cell Type" << "\n";
 
         switch (board[cell_position.x][cell_position.y]->GetCellType()) {
         case CellType::EMPTY:
@@ -240,7 +220,6 @@ namespace Gameplay
     }
 
     void Board::ProcessEmptyCell(sf::Vector2i cell_position) {
-        std::cout << "Processing Empty Cell" << "\n";
         OpenEmptyCells(cell_position);
     }
 
@@ -251,17 +230,14 @@ namespace Gameplay
     }
 
     void Board::OpenEmptyCells(sf::Vector2i cell_position) {
-        std::cout << "Opening Empty Cells" << "\n";
         switch (board[cell_position.x][cell_position.y]->GetCellState())
         {
         case::Gameplay::CellState::OPEN:
-            std::cout << "Cell state is already open" << "\n";
             return;
         case::Gameplay::CellState::FLAGGED:
             flaggedCells--;
         default:
-            std::cout << "Changing cell state" << "\n";
-            board[cell_position.x][cell_position.y]->OpenCell();
+            board[cell_position.x][cell_position.y]->Open();
         }
 
         for (int a = -1; a < 2; a++)
@@ -325,7 +301,7 @@ namespace Gameplay
         {
             for (int b = 0; b < numberOfColumns; ++b)
             {
-                board[a][b]->OpenCell();
+                board[a][b]->Open();
             }
         }
     }
@@ -375,40 +351,4 @@ namespace Gameplay
     {
         return (boardHeight - verticalCellPadding) / static_cast<float>(numberOfRows);
     }
-
-
-    float Board::GetSampleCellLeftOffset() const
-    {
-        return board[0][0]->GetCellLeftOffset();
-    }
-
-    float Board::GetSampleCellTopOffset() const
-    {
-        return board[0][0]->GetCellTopOffset();
-    }
-
-    sf::Vector2i Board::GetCellFromMousePosition(const sf::Vector2i& mouse_position) const
-    {
-        float cell_width = GetCellWidthInBoard();
-        float cell_height = GetCellHeightInBoard();
-        float cell_left_offset = GetSampleCellLeftOffset();
-        float cell_top_offset = GetSampleCellTopOffset();
-
-        int grid_x = (mouse_position.x - cell_left_offset) / cell_width;
-        int grid_y = (mouse_position.y - cell_top_offset) / cell_height;
-
-        return sf::Vector2i(grid_x, grid_y);
-    }
-
-    int Board::GetNumberOfColumns() const
-    {
-        return numberOfColumns;
-    }
-
-    int Board::GetNumberOfRows() const
-    {
-        return numberOfRows;
-    }
-
-
 }

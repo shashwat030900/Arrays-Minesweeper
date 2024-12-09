@@ -15,7 +15,7 @@ namespace Gameplay
         this->position = position;
         sf::Vector2f cellScreenPosition = GetCellScreenPosition(width, height);
         cellButton = new Button("assets/textures/cells.jpeg", cellScreenPosition, width * sliceCount, height);
-        RegisterButtonCallback();
+        RegisterCellButtonCallback();
     }
 
     sf::Vector2f Cell::GetCellScreenPosition(float width, float height) const
@@ -28,9 +28,6 @@ namespace Gameplay
     void Cell::SetCellTexture()
     {
         int index = static_cast<int>(cellType);
-        if (static_cast<int>(currentCellState) == 1)
-            std::cout << "Setting cell texture: State=" << static_cast<int>(currentCellState)
-            << ", Type=" << static_cast<int>(cellType) << ", Index=" << index << std::endl;
 
         switch (currentCellState)
         {
@@ -57,16 +54,45 @@ namespace Gameplay
         if (cellButton) cellButton->Render(window);
     }
 
-    void Cell::RegisterButtonCallback()
+    void Cell::RegisterCellButtonCallback()
     {
         cellButton->RegisterCallbackFunction([this](ButtonType buttonType) {
-            cellButtonCallback(buttonType);
+            CellButtonCallback(buttonType);
             });
     }
 
-    void Cell::cellButtonCallback(ButtonType button_type)
+    void Cell::CellButtonCallback(ButtonType button_type)
     {
         board->OnCellButtonClicked(GetCellPosition(), button_type);
+    }
+
+    void Cell::Reset()
+    {
+        currentCellState = CellState::HIDDEN;
+        cellType = CellType::EMPTY;
+        mines_around = 0;
+    }
+
+    bool Cell::CanOpenCell() const
+    {
+        return currentCellState != CellState::FLAGGED && currentCellState != CellState::OPEN;
+    }
+
+    void Cell::ToggleFlag()
+    {
+        if (currentCellState == CellState::HIDDEN)
+        {
+            currentCellState = CellState::FLAGGED;
+        }
+        else if (currentCellState == CellState::FLAGGED)
+        {
+            currentCellState = CellState::HIDDEN;
+        }
+    }
+
+    void Cell::Open()
+    {
+        SetCellState(CellState::OPEN);
     }
 
     CellState Cell::GetCellState() const
@@ -110,36 +136,6 @@ namespace Gameplay
         mines_around = mine_count;
     }
 
-    void Cell::Reset()
-    {
-        currentCellState = CellState::HIDDEN;
-        cellType = CellType::EMPTY;
-        mines_around = 0;
-    }
-
-    bool Cell::CanOpenCell() const
-    {
-        return currentCellState != CellState::FLAGGED && currentCellState != CellState::OPEN;
-    }
-
-    void Cell::ToggleFlag()
-    {
-        if (currentCellState == CellState::HIDDEN)
-        {
-            currentCellState = CellState::FLAGGED;
-        }
-        else if (currentCellState == CellState::FLAGGED)
-        {
-            currentCellState = CellState::HIDDEN;
-        }
-    }
-
-    void Cell::OpenCell()
-    {
-        std::cout << "Changing cell state" << "\n";
-        SetCellState(CellState::OPEN);
-    }
-
     float Cell::GetCellLeftOffset() const
     {
         return cellLeftOffset;
@@ -149,5 +145,4 @@ namespace Gameplay
     {
         return cellTopOffset;
     }
-
 }

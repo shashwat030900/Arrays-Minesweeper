@@ -19,6 +19,7 @@ namespace UI {
 
         // Button element
         Button* restartButton = nullptr;
+        bool restartButtonClicked = false;
 
         // Constants
         const int fontSize = 110;
@@ -41,6 +42,9 @@ namespace UI {
         void InitializeButton();
         void LoadFonts();
 
+        void RegisterButtonCallback();
+        void RestartButtonCallback(ButtonType buttonType);
+
     public:
         GameplayUI();
         ~GameplayUI() = default;
@@ -48,7 +52,8 @@ namespace UI {
         void Initialize();
         void Update(int remaining_mines, int remaining_time, Event::EventPollingManager& eventManager, sf::RenderWindow& window);
         void Render(sf::RenderWindow& window);
-        bool OnRestartButtonClicked();
+        ButtonState GetRestartButtonState();
+        void ResetButtons();
     };
 }
 

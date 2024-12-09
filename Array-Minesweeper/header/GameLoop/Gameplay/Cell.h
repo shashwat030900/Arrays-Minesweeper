@@ -59,11 +59,11 @@ namespace Gameplay
 
         // Initialization and rendering functions
         void Initialize(float width, float height, sf::Vector2i position);
-        void OnButtonClicked(UIElements::ButtonType buttonType);
         void Update(Event::EventPollingManager& eventManager, sf::RenderWindow& window);
         void Render(sf::RenderWindow& window);
-        void RegisterButtonCallback();
-        void cellButtonCallback(ButtonType button_type);
+        void RegisterCellButtonCallback();
+        void CellButtonCallback(ButtonType button_type);
+
         // Cell state and type management
         CellState GetCellState() const;
         void SetCellState(CellState state);
@@ -83,6 +83,6 @@ namespace Gameplay
         void Reset();
         bool CanOpenCell() const;
         void ToggleFlag();
-        void OpenCell();
+        void Open();
     };
 }

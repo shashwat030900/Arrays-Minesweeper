@@ -24,11 +24,9 @@ namespace UI {
         const float quitButtonYPosition = 750.f;
         const float backgroundAlpha = 85.f;
 
-        bool playButtonClicked = false;
-        bool quitButtonClicked = false;
-
         void InitializeBackground();
         void InitializeButtons();
+        void RegisterButtonCallbacks();
         sf::Vector2f GetButtonPosition(float offsetX, float offsetY);
 
     public:
@@ -41,10 +39,8 @@ namespace UI {
         void Show();
 
         void UpdateButtonStates(Event::EventPollingManager& eventManager);
-        bool OnPlayButtonClicked();
-        bool OnQuitButtonClicked();/*
-        bool IsPlayButtonPressed() const;
-        bool IsQuitButtonPressed();*/
+        ButtonState GetPlayButtonState();
+        ButtonState GetQuitButtonState();
         void ResetButtonStates();
     };
 }

@@ -11,10 +11,17 @@ namespace UIElements {
         RIGHT_MOUSE_BUTTON
     };
 
+    enum class ButtonState {
+        PRESSED,
+        HELD,
+        RELEASED
+    };
+
     class Button {
     private:
         sf::Texture buttonTexture;
         sf::Sprite buttonSprite;
+        ButtonState buttonState;
 
         using CallbackFunction = std::function<void(ButtonType)>;
         CallbackFunction callback_function = nullptr;
@@ -26,5 +33,9 @@ namespace UIElements {
         void SetTextureRect(const sf::IntRect& rect);
         void RegisterCallbackFunction(CallbackFunction button_callback);
         void Initialize(const std::string& texturePath, const sf::Vector2f& position, float width, float height);
+        
+        void ResetButtonState();
+        void SetButtonsState(ButtonState buttonState);
+        ButtonState GetButtonState();
     };
 }

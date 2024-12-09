@@ -31,13 +31,7 @@ namespace Gameplay
     void GameplayManager::Update(Event::EventPollingManager& eventManager, sf::RenderWindow& window)
     {
         Time::TimeManager::Update();
-        if (gameResult == GameResult::NONE && board->GetBoardState() != BoardState::COMPLETED)
-        {
-            UpdateRemainingTime();
-            board->Update(eventManager, window);
-            /*ProcessMouseInput(eventManager, window);*/
-            HandleGameWin();
-        }
+        HandleGameplay(eventManager, window);
         gameplayUI.Update(GetMinesCount(), static_cast<int>(remainingTime), eventManager, window);
         ProcessGameResult();
         CheckRestart();
@@ -51,17 +45,6 @@ namespace Gameplay
         gameplayUI.Render(window);
     }
 
-    //void GameplayManager::ProcessMouseInput(Event::EventPollingManager& eventManager, sf::RenderWindow& window)
-    //{
-    //    sf::Vector2i mouse_position = eventManager.GetMousePosition(window);
-    //    sf::Vector2i cell_position = board->GetCellFromMousePosition(mouse_position);
-
-    //    if (board->IsValidCellPosition(cell_position))
-    //    {
-    //        board->ProcessCellInput(eventManager, cell_position);
-    //    }
-    //}
-
     void GameplayManager::HandleGameWin() {
         
         if (board->AreAllCellsOpen()) {
@@ -70,12 +53,11 @@ namespace Gameplay
         }
     }
 
-
-
     void GameplayManager::CheckRestart()
     {
-        if (gameplayUI.OnRestartButtonClicked()) {
+        if (gameplayUI.GetRestartButtonState() == ButtonState::PRESSED) {
             gameResult = GameResult::NONE;
+            gameplayUI.ResetButtons();
             board->Reset();
             Time::TimeManager::Initialize();
             remainingTime = maxLevelDuration;
@@ -87,17 +69,15 @@ namespace Gameplay
         switch (gameResult)
         {
         case GameResult::WON:
-            std::cout << "WON" << std::endl;
             GameWon();
             break;
         case GameResult::LOST:
-            std::cout << "LOST" << std::endl;
             GameLost();
             break;
         default:
             break;
         }
-        gameResult = GameResult::NONE;
+        
     }
 
 
@@ -106,12 +86,14 @@ namespace Gameplay
         Sound::SoundManager::PlaySound(Sound::SoundType::GAME_WON);
         board->FlagAllMines();
         board->SetBoardState(BoardState::COMPLETED);
+        gameResult = GameResult::NONE;
     }
 
     void GameplayManager::GameLost()
     {
         Sound::SoundManager::PlaySound(Sound::SoundType::EXPLOSION);
         board->SetBoardState(BoardState::COMPLETED);
+        gameResult = GameResult::NONE;
     }
 
     void GameplayManager::UpdateRemainingTime()
@@ -127,6 +109,16 @@ namespace Gameplay
             remainingTime = 0;
             gameResult = GameResult::LOST;
             board->SetBoardState(BoardState::COMPLETED);
+        }
+    }
+
+    void GameplayManager::HandleGameplay(Event::EventPollingManager& eventManager, sf::RenderWindow& window)
+    {
+        if (gameResult == GameResult::NONE && board->GetBoardState() != BoardState::COMPLETED)
+        {
+            UpdateRemainingTime();
+            board->Update(eventManager, window);
+            HandleGameWin();
         }
     }
 

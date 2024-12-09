@@ -22,8 +22,8 @@ namespace Event
 
     void EventPollingManager::Update()
     {
-        UpdateButtonsState(leftMouseButtonState, sf::Mouse::Left);
-        UpdateButtonsState(rightMouseButtonState, sf::Mouse::Right);
+        UpdateMouseButtonState(leftMouseButtonState, sf::Mouse::Left);
+        UpdateMouseButtonState(rightMouseButtonState, sf::Mouse::Right);
     }
 
     void EventPollingManager::ProcessEvents()
@@ -38,7 +38,7 @@ namespace Event
         }
     }
 
-    void EventPollingManager::UpdateButtonsState(MouseButtonState& button_state, sf::Mouse::Button button_type)
+    void EventPollingManager::UpdateMouseButtonState(MouseButtonState& button_state, sf::Mouse::Button button_type)
     {
         if (sf::Mouse::isButtonPressed(button_type))
         {

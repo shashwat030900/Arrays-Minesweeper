@@ -34,6 +34,21 @@ namespace UIElements {
         window.draw(buttonSprite);
     }
 
+    void Button::ResetButtonState()
+    {
+        SetButtonsState(ButtonState::RELEASED);
+    }
+
+    void Button::SetButtonsState(ButtonState buttonState)
+    {
+        this->buttonState = buttonState;
+    }
+
+    ButtonState Button::GetButtonState()
+    {
+        return this->buttonState;
+    }
+
     void Button::SetTextureRect(const sf::IntRect& rect) {
         buttonSprite.setTextureRect(rect);
     }

@@ -23,7 +23,7 @@ namespace Gameplay
         // Board Constants
         static const int numberOfRows = 9;
         static const int numberOfColumns = 9;
-        static const int minesCount = 15;
+        static const int minesCount = 9;
 
         // State and View Members
         BoardState boardState;
@@ -71,7 +71,6 @@ namespace Gameplay
         void Update(Event::EventPollingManager& eventManager, sf::RenderWindow& window);
         void Render(sf::RenderWindow& window);
         void OnCellButtonClicked(sf::Vector2i cell_position, ButtonType buttonType);
-        void ProcessCellInput(Event::EventPollingManager& eventManager, sf::Vector2i cell_position);
         bool IsValidCellPosition(sf::Vector2i cell_position);
         void Reset();
 
@@ -81,13 +80,6 @@ namespace Gameplay
         int GetMinesCount() const;
         float GetCellWidthInBoard() const;
         float GetCellHeightInBoard() const;
-
-        float GetSampleCellLeftOffset() const;
-        float GetSampleCellTopOffset() const;
-        sf::Vector2i GetCellFromMousePosition(const sf::Vector2i& mouse_position) const;
-
-        int GetNumberOfColumns() const;
-        int GetNumberOfRows() const;
 
 
         bool AreAllCellsOpen();
