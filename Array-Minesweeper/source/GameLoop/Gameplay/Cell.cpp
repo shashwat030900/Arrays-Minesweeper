@@ -60,9 +60,7 @@ namespace Gameplay
     void Cell::RegisterButtonCallback()
     {
         cellButton->RegisterCallbackFunction([this](ButtonType buttonType) {
-            if (board) {
-                board->OnCellButtonClicked(GetCellPosition(), buttonType);
-            }
+            cellButtonCallback(buttonType);
             });
     }
 

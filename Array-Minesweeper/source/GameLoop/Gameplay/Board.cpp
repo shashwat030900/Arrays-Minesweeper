@@ -185,7 +185,6 @@ namespace Gameplay
         }
 
         // Open the cell and process its type
-        
         ProcessCellType(cell_position);
         board[cell_position.x][cell_position.y]->OpenCell();
     }
