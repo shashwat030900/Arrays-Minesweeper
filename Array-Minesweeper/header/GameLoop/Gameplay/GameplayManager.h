@@ -50,7 +50,7 @@ namespace Gameplay
         void Update(Event::EventPollingManager& eventManager, sf::RenderWindow& window);
         void Render(sf::RenderWindow& window);
 
-        void HandleGameWin();
+        void CheckGameWin();
         void CheckRestart();
         void ProcessGameResult();
 

@@ -31,7 +31,7 @@ namespace Gameplay
             return;
         }
         boardSprite.setTexture(boardTexture);
-        boardSprite.setPosition(530.f, 0);
+        boardSprite.setPosition(boardPosition, 0);
         boardSprite.setScale(boardWidth / boardTexture.getSize().x, boardHeight / boardTexture.getSize().y);
     }
 
@@ -67,6 +67,7 @@ namespace Gameplay
     {
         if (boardState == BoardState::COMPLETED)
             return;
+
         for (int row = 0; row < numberOfRows; ++row)
         {
             for (int col = 0; col < numberOfColumns; ++col)

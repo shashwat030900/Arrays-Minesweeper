@@ -37,6 +37,8 @@ namespace Gameplay
         const float boardWidth = 866.f;
         const float boardHeight = 1080.f;
 
+        const float boardPosition = 530.f;
+
         sf::Texture boardTexture;
         sf::Sprite boardSprite;
 

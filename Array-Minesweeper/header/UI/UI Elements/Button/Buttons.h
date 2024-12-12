@@ -26,6 +26,8 @@ namespace UIElements {
         using CallbackFunction = std::function<void(ButtonType)>;
         CallbackFunction callback_function = nullptr;
 
+        bool IsMouseOnSprite(Event::EventPollingManager& eventManager, const sf::RenderWindow& window);
+
     public:
         Button(const std::string& texturePath, const sf::Vector2f& position, float width, float height);
         void UpdateState(Event::EventPollingManager& eventManager, const sf::RenderWindow& window);

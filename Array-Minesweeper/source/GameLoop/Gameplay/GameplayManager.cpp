@@ -37,7 +37,6 @@ namespace Gameplay
         CheckRestart();
     }
 
-
     void GameplayManager::Render(sf::RenderWindow& window)
     {
         window.draw(backgroundSprite);
@@ -45,7 +44,7 @@ namespace Gameplay
         gameplayUI.Render(window);
     }
 
-    void GameplayManager::HandleGameWin() {
+    void GameplayManager::CheckGameWin() {
         
         if (board->AreAllCellsOpen()) {
                 gameResult = GameResult::WON;;
@@ -77,9 +76,7 @@ namespace Gameplay
         default:
             break;
         }
-        
     }
-
 
     void GameplayManager::GameWon()
     {
@@ -118,7 +115,7 @@ namespace Gameplay
         {
             UpdateRemainingTime();
             board->Update(eventManager, window);
-            HandleGameWin();
+            CheckGameWin();
         }
     }
 

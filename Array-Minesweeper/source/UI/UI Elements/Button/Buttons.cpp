@@ -2,6 +2,7 @@
 #include <iostream>
 
 namespace UIElements {
+
     Button::Button(const std::string& texturePath, const sf::Vector2f& position, float width, float height) {
         Initialize(texturePath, position, width, height);
     }
@@ -18,16 +19,19 @@ namespace UIElements {
 
     void Button::UpdateState(Event::EventPollingManager& eventManager, const sf::RenderWindow& window) {
 
-        sf::Vector2i mouse_position = eventManager.GetMousePosition(window);
-
-        if (eventManager.PressedLeftMouseButton() &&
-            buttonSprite.getGlobalBounds().contains(static_cast<float>(mouse_position.x), static_cast<float>(mouse_position.y))) {
+        if (eventManager.PressedLeftMouseButton() && IsMouseOnSprite(eventManager, window)) 
+        {
             if (callback_function) callback_function(ButtonType::LEFT_MOUSE_BUTTON);
         }
-        else if (eventManager.PressedRightMouseButton() &&
-            buttonSprite.getGlobalBounds().contains(static_cast<float>(mouse_position.x), static_cast<float>(mouse_position.y))) {
+        else if (eventManager.PressedRightMouseButton() && IsMouseOnSprite(eventManager, window)) {
             if (callback_function) callback_function(ButtonType::RIGHT_MOUSE_BUTTON);
         }
+    }
+
+    bool Button::IsMouseOnSprite(Event::EventPollingManager& eventManager, const sf::RenderWindow& window)
+    {
+        sf::Vector2i mouse_position = eventManager.GetMousePosition(window);
+        return buttonSprite.getGlobalBounds().contains(static_cast<float>(mouse_position.x), static_cast<float>(mouse_position.y));
     }
 
     void Button::Render(sf::RenderWindow& window) const {
