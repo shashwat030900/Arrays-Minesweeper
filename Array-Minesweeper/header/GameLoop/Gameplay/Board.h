@@ -39,6 +39,8 @@ namespace Gameplay
 
         const float boardPosition = 530.f;
 
+        const std::string boardTexturePath = "assets/textures/board.png";
+
         sf::Texture boardTexture;
         sf::Sprite boardSprite;
 

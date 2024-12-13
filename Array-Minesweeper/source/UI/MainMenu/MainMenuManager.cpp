@@ -18,7 +18,7 @@ namespace UI {
     }
 
     void MainMenuManager::InitializeBackground() {
-        if (!backgroundTexture.loadFromFile("assets/textures/minesweeper_bg.png")) {
+        if (!backgroundTexture.loadFromFile(backgroundTexturePath)) {
             std::cerr << "Failed to load background texture" << std::endl;
             return;
         }
@@ -27,8 +27,8 @@ namespace UI {
     }
 
     void MainMenuManager::InitializeButtons() {
-        playButton = new Button("assets/textures/play_button.png", GetButtonPosition(0.f, playButtonYPosition), buttonWidth, buttonHeight);
-        quitButton = new Button("assets/textures/quit_button.png", GetButtonPosition(0.f, quitButtonYPosition), buttonWidth, buttonHeight);
+        playButton = new Button(playButtonTexturePath, GetButtonPosition(0.f, playButtonYPosition), buttonWidth, buttonHeight);
+        quitButton = new Button(quitButtonTexturePath, GetButtonPosition(0.f, quitButtonYPosition), buttonWidth, buttonHeight);
         RegisterButtonCallbacks();
     }
 

@@ -45,6 +45,9 @@ namespace Gameplay
         const float cellLeftOffset = 583.f;
         const int tileSize = 32;
         const int sliceCount = 12;
+        const std::string cellTexturePath = "assets/textures/cells.jpeg";
+        
+        
         Button *cellButton;
 
         // Private helper functions

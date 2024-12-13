@@ -57,7 +57,7 @@ namespace UI {
     }
 
     void GameplayUI::InitializeButton() {
-        restartButton = new Button("assets/textures/restart_button.png", sf::Vector2f(restartButtonLeftOffset, restartButtonTopOffset), buttonWidth, buttonHeight);
+        restartButton = new Button(restartButtonTexturePath, sf::Vector2f(restartButtonLeftOffset, restartButtonTopOffset), buttonWidth, buttonHeight);
 
     }
 

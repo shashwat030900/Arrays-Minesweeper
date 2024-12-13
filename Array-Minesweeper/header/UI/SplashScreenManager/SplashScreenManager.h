@@ -9,9 +9,11 @@ namespace UI {
         sf::RenderWindow* gameWindow;
         sf::Texture logoTexture;
         sf::Sprite logoSprite;
+
         const float logoWidth = 600.f;
         const float logoHeight = 134.f;
         const float logoAnimationDuration = 2.0f;
+        const std::string logoTexturePath = "assets/textures/outscal_logo.png";
 
         sf::Vector2f GetLogoPosition();
 

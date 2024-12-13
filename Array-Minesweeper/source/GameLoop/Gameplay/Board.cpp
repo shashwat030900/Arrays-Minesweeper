@@ -25,7 +25,7 @@ namespace Gameplay
 
     void Board::InitializeBoardImage()
     {
-        if (!boardTexture.loadFromFile("assets/textures/board.png"))
+        if (!boardTexture.loadFromFile(boardTexturePath))
         {
             std::cerr << "Failed to load board texture!" << std::endl;
             return;

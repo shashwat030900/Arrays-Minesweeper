@@ -18,6 +18,10 @@ namespace UI {
         Button* quitButton;
 
         // Constants for button dimensions and positions
+        const std::string backgroundTexturePath = "assets/textures/minesweeper_bg.png";
+        const std::string playButtonTexturePath = "assets/textures/play_button.png";
+        const std::string quitButtonTexturePath = "assets/textures/quit_button.png";
+
         const float buttonWidth = 300.f;
         const float buttonHeight = 100.f;
         const float playButtonYPosition = 600.f;

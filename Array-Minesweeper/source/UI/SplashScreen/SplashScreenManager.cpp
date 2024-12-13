@@ -11,7 +11,7 @@ namespace UI {
     }
 
     void SplashScreenManager::Initialize() {
-        if (!logoTexture.loadFromFile("assets/textures/outscal_logo.png")) {
+        if (!logoTexture.loadFromFile(logoTexturePath)) {
             std::cerr << "Failed to load logo texture" << std::endl;
         }
         logoSprite.setTexture(logoTexture);

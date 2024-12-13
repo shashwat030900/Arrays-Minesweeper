@@ -14,7 +14,7 @@ namespace Gameplay
     {
         this->position = position;
         sf::Vector2f cellScreenPosition = GetCellScreenPosition(width, height);
-        cellButton = new Button("assets/textures/cells.jpeg", cellScreenPosition, width * sliceCount, height);
+        cellButton = new Button(cellTexturePath, cellScreenPosition, width * sliceCount, height);
         RegisterCellButtonCallback();
     }
 
