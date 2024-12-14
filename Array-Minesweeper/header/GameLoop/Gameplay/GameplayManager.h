@@ -29,6 +29,8 @@ namespace Gameplay
         sf::Texture backgroundTexture;
         sf::Sprite backgroundSprite;
 
+        std::string backgroundTexturePath = "assets/textures/minesweeper_bg.png";
+
         Board *board;
         GameResult gameResult = GameResult::NONE;
         GameplayUI gameplayUI;

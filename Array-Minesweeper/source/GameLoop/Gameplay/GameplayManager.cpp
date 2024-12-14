@@ -19,7 +19,7 @@ namespace Gameplay
 
     void GameplayManager::InitializeBackgroundImage()
     {
-        if (!backgroundTexture.loadFromFile("assets/textures/minesweeper_bg.png"))
+        if (!backgroundTexture.loadFromFile(backgroundTexturePath))
         {
             std::cerr << "Failed to load background texture!" << std::endl;
             return;
