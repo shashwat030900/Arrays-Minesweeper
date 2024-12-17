@@ -19,18 +19,18 @@ namespace UIElements {
 
     void Button::UpdateState(Event::EventPollingManager& eventManager, const sf::RenderWindow& window) {
 
-        if (eventManager.PressedLeftMouseButton() && IsMouseOnSprite(eventManager, window)) 
+        if (eventManager.pressedLeftMouseButton() && IsMouseOnSprite(eventManager, window)) 
         {
             if (callback_function) callback_function(ButtonType::LEFT_MOUSE_BUTTON);
         }
-        else if (eventManager.PressedRightMouseButton() && IsMouseOnSprite(eventManager, window)) {
+        else if (eventManager.pressedRightMouseButton() && IsMouseOnSprite(eventManager, window)) {
             if (callback_function) callback_function(ButtonType::RIGHT_MOUSE_BUTTON);
         }
     }
 
     bool Button::IsMouseOnSprite(Event::EventPollingManager& eventManager, const sf::RenderWindow& window)
     {
-        sf::Vector2i mouse_position = eventManager.GetMousePosition(window);
+        sf::Vector2i mouse_position = eventManager.getMousePosition(window);
         return buttonSprite.getGlobalBounds().contains(static_cast<float>(mouse_position.x), static_cast<float>(mouse_position.y));
     }
 

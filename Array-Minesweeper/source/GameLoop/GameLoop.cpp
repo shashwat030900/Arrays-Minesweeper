@@ -34,7 +34,7 @@ GameLoop::~GameLoop()
 
 void GameLoop::update()
 {
-    event_manager->Update();
+    event_manager->update();
     window_manager->Update();
 
     switch (current_state)
@@ -80,7 +80,7 @@ void GameLoop::run()
 {
     while (window_manager->IsGameWindowOpen())
     {
-        event_manager->ProcessEvents();
+        event_manager->processEvents();
         update();
         render();
     }
