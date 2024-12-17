@@ -1,75 +1,87 @@
 #include "../../header/GameLoop/GameLoop.h"
+#include "../../header/GameLoop/Gameplay/GameplayManager.h"
 #include <iostream>
 
-GameLoop::GameLoop() {
-    Initialize();
-}
+GameLoop::GameLoop() { initialize(); }
 
-void GameLoop::Initialize() {
-    windowManager = new GameWindow::GameWindowManager();
-    eventManager = new Event::EventPollingManager(windowManager->GetGameWindow());
-    splashScreenManager = new SplashScreenManager(windowManager->GetGameWindow());
-    mainMenuManager = new MainMenuManager(windowManager->GetGameWindow());
-    gameplayManager = new GameplayManager();
+void GameLoop::initialize()
+{
+    // Create Managers:
+    window_manager = new GameWindowManager();
+    game_window = window_manager->GetGameWindow();
+    event_manager = new EventPollingManager(game_window);
 
-    currentState = GameState::SPLASH_SCREEN;
+    splash_screen_manager = new SplashScreenManager(game_window);
+    main_menu_manager = new MainMenuManager(game_window);
+    gameplay_manager = new GameplayManager();
 
+    // Initialize Game State:
+    current_state = GameState::SPLASH_SCREEN;
+
+    // Initialize Sounds:
     Sound::SoundManager::Initialize();
     Sound::SoundManager::PlayBackgroundMusic();
 }
 
-GameLoop::~GameLoop() {
-    delete windowManager;
-    delete eventManager;
-    delete splashScreenManager;
-    delete mainMenuManager;
-    delete gameplayManager;
+GameLoop::~GameLoop()
+{
+    delete window_manager;
+    delete event_manager;
+    delete splash_screen_manager;
+    delete main_menu_manager;
+    delete gameplay_manager;
 }
 
-void GameLoop::HandleStates() {
-    switch (currentState) {
+void GameLoop::update()
+{
+    event_manager->Update();
+    window_manager->Update();
+
+    switch (current_state)
+    {
     case GameState::SPLASH_SCREEN:
-        splashScreenManager->Render();
-        currentState = GameState::MAIN_MENU;
+        splash_screen_manager->Update();
         break;
-
     case GameState::MAIN_MENU:
-        eventManager->Update();
-        HandleMainMenuButtons();
-        mainMenuManager->Update(*eventManager);
-        mainMenuManager->Render();
+        main_menu_manager->Update(event_manager);
         break;
-
     case GameState::GAMEPLAY:
-        eventManager->Update();
-        gameplayManager->Update(*eventManager, *windowManager->GetGameWindow());
-        gameplayManager->Render(*windowManager->GetGameWindow());
+        gameplay_manager->Update(event_manager, game_window);
         break;
-
     case GameState::EXIT:
-        windowManager->GetGameWindow()->close();
+        game_window->close();
         break;
     }
+    
 }
 
-void GameLoop::HandleMainMenuButtons() {
-    if (mainMenuManager->GetPlayButtonState() == ButtonState::PRESSED) {
-        mainMenuManager->ResetButtonStates();
-        currentState = GameState::GAMEPLAY;
-        mainMenuManager->ResetButtonStates();
+void GameLoop::render()
+{
+    game_window->clear();
+    window_manager->Render();
+
+    switch (current_state)
+    {
+    case GameState::SPLASH_SCREEN:
+        splash_screen_manager->Render();
+        break;
+    case GameState::MAIN_MENU:
+        main_menu_manager->Render();
+        break;
+    case GameState::GAMEPLAY:
+        gameplay_manager->Render(game_window);
+        break;
     }
-    else if (mainMenuManager->GetQuitButtonState() == ButtonState::PRESSED) {
-        mainMenuManager->ResetButtonStates();
-        currentState = GameState::EXIT;
-        mainMenuManager->ResetButtonStates();
-    }
+    
+    game_window->display();
 }
 
-void GameLoop::run() {
-    while (windowManager->IsGameWindowOpen()) {
-        eventManager->ProcessEvents();
-        windowManager->GetGameWindow()->clear();
-        HandleStates();
-        windowManager->GetGameWindow()->display();
+void GameLoop::run()
+{
+    while (window_manager->IsGameWindowOpen())
+    {
+        event_manager->ProcessEvents();
+        update();
+        render();
     }
 }

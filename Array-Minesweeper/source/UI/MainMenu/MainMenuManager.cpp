@@ -17,6 +17,22 @@ namespace UI {
         InitializeButtons();
     }
 
+    void MainMenuManager::handleButtons()
+    {
+        if (GetPlayButtonState() == ButtonState::PRESSED)
+        {
+            ResetButtonStates();
+            current_state = GameState::GAMEPLAY;
+            ResetButtonStates();
+        }
+        else if (GetQuitButtonState() == ButtonState::PRESSED)
+        {
+            ResetButtonStates();
+            current_state = GameState::EXIT;
+            ResetButtonStates();
+        }
+    }
+
     void MainMenuManager::InitializeBackground() {
         if (!backgroundTexture.loadFromFile(backgroundTexturePath)) {
             std::cerr << "Failed to load background texture" << std::endl;
@@ -56,7 +72,9 @@ namespace UI {
         return sf::Vector2f(x_position, y_position);
     }
 
-    void MainMenuManager::Update(Event::EventPollingManager& eventManager) {
+    void MainMenuManager::Update(Event::EventPollingManager& eventManager)
+    {
+        handleButtons();
         UpdateButtonStates(eventManager);
     }
 

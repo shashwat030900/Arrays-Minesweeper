@@ -28,6 +28,7 @@ namespace UI {
         const float quitButtonYPosition = 750.f;
         const float backgroundAlpha = 85.f;
 
+        void handleButtons();
         void InitializeBackground();
         void InitializeButtons();
         void RegisterButtonCallbacks();

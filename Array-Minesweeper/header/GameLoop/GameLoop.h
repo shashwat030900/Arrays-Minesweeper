@@ -1,14 +1,9 @@
-#ifndef GAMELOOP_H
-#define GAMELOOP_H
-
+#pragma once
 #include "../../header/GameWindow/GameWindowManager.h"
 #include "../../header/Event/EventPollingManager.h"
 #include "../../header/UI/SplashScreenManager/SplashScreenManager.h"
 #include "../../header/UI/MainMenu/MainMenuManager.h"
-#include "../../header/GameLoop/Gameplay/GameplayManager.h"
 #include "../../header/GameLoop/Gameplay/Board.h"
-#include "../../header/Sound/SoundManager.h"
-#include <iostream>
 
 using namespace GameWindow;
 using namespace Event;
@@ -24,23 +19,24 @@ enum class GameState {
 
 class GameLoop {
 private:
-    GameWindowManager* windowManager;
-    EventPollingManager* eventManager;
-    SplashScreenManager* splashScreenManager;
-    MainMenuManager* mainMenuManager;
-    GameplayManager* gameplayManager;
-    GameState currentState;
-    Board* board;
+    GameWindowManager* window_manager;
+    EventPollingManager* event_manager;
 
-    void Initialize();
-    void HandleStates();
-    void HandleMainMenuButtons();
+    sf::RenderWindow* game_window;
+    SplashScreenManager* splash_screen_manager;
+    MainMenuManager* main_menu_manager;
+    GameplayManager* gameplay_manager;
 
+    GameState current_state;
+    
+    void initialize();
+    void update();
+    void render();
 
 public:
     GameLoop();
     ~GameLoop();
+    
     void run();
+    
 };
-
-#endif // GAMELOOP_H
