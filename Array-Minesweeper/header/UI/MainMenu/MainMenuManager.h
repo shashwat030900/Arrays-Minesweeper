@@ -1,53 +1,50 @@
-#ifndef MAINMENUMANAGER_H
-#define MAINMENUMANAGER_H
-
+#pragma once
 #include <SFML/Graphics.hpp>
 #include "../../header/UI/UI Elements/Button/Buttons.h"
 #include "../../header/Event/EventPollingManager.h"
 
-using namespace UIElements;
-
 namespace UI {
+
+    using namespace UIElements;
+
     class MainMenuManager {
     private:
-        sf::RenderWindow* gameWindow;
-        sf::Texture backgroundTexture;
-        sf::Sprite backgroundSprite;
+        sf::RenderWindow* game_window;
+        sf::Texture background_texture;
+        sf::Sprite background_sprite;
 
-        Button* playButton;
-        Button* quitButton;
+        Button* play_button;
+        Button* quit_button;
 
         // Constants for button dimensions and positions
-        const std::string backgroundTexturePath = "assets/textures/minesweeper_bg.png";
-        const std::string playButtonTexturePath = "assets/textures/play_button.png";
-        const std::string quitButtonTexturePath = "assets/textures/quit_button.png";
+        const std::string background_texture_path = "assets/textures/minesweeper_bg.png";
+        const std::string play_button_texture_path = "assets/textures/play_button.png";
+        const std::string quit_button_texture_path = "assets/textures/quit_button.png";
 
-        const float buttonWidth = 300.f;
-        const float buttonHeight = 100.f;
-        const float playButtonYPosition = 600.f;
-        const float quitButtonYPosition = 750.f;
-        const float backgroundAlpha = 85.f;
+        const float button_width = 300.f;
+        const float button_height = 100.f;
+        const float play_button_y_position = 600.f;
+        const float quit_button_y_position = 750.f;
+        const float background_alpha = 85.f;
+        
+        void initialize();
+        void initializeBackground();
+        void initializeButtons();
 
-        void handleButtons();
-        void InitializeBackground();
-        void InitializeButtons();
-        void RegisterButtonCallbacks();
-        sf::Vector2f GetButtonPosition(float offsetX, float offsetY);
+        void playButtonCallback(ButtonType mouse_button_type);
+        void quitButtonCallback(ButtonType mouse_button_type);
+        void registerButtonCallbacks();
+
+        sf::Vector2f getButtonPosition(float offsetX, float offsetY);
 
     public:
         MainMenuManager(sf::RenderWindow* window);
         ~MainMenuManager();
 
-        void Initialize();
-        void Update(Event::EventPollingManager& eventManager);
-        void Render();
-        void Show();
+        void update(Event::EventPollingManager eventManager);
+        void render();
+        void show();
 
-        void UpdateButtonStates(Event::EventPollingManager& eventManager);
-        ButtonState GetPlayButtonState();
-        ButtonState GetQuitButtonState();
-        void ResetButtonStates();
+        void checkForButtonClicks(Event::EventPollingManager& eventManager);
     };
 }
-
-#endif // MAINMENUMANAGER_H

@@ -12,7 +12,7 @@ namespace Gameplay
     {
         InitializeBackgroundImage();
         board = new Board(this);
-        Time::TimeManager::Initialize();
+        // Time::TimeManager::initialize();
         remainingTime = maxLevelDuration;
         gameResult = GameResult::NONE;
     }
@@ -30,7 +30,7 @@ namespace Gameplay
 
     void GameplayManager::Update(Event::EventPollingManager& eventManager, sf::RenderWindow& window)
     {
-        Time::TimeManager::Update();
+        // Time::TimeManager::update();
         HandleGameplay(eventManager, window);
         gameplayUI.Update(GetMinesCount(), static_cast<int>(remainingTime), eventManager, window);
         ProcessGameResult();
@@ -58,7 +58,7 @@ namespace Gameplay
             gameResult = GameResult::NONE;
             gameplayUI.ResetButtons();
             board->Reset();
-            Time::TimeManager::Initialize();
+            Time::TimeManager::initialize();
             remainingTime = maxLevelDuration;
         }
     }
@@ -95,7 +95,7 @@ namespace Gameplay
 
     void GameplayManager::UpdateRemainingTime()
     {
-        remainingTime -= Time::TimeManager::GetDeltaTime();
+        remainingTime -= Time::TimeManager::getDeltaTime();
         ProcessTimeOver();   
     }
 

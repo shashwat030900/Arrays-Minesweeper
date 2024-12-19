@@ -21,6 +21,9 @@ void GameLoop::initialize()
     // Initialize Sounds:
     Sound::SoundManager::Initialize();
     Sound::SoundManager::PlayBackgroundMusic();
+
+    // Initialize Time:
+    Time::TimeManager::initialize();
 }
 
 GameLoop::~GameLoop()
@@ -34,19 +37,20 @@ GameLoop::~GameLoop()
 
 void GameLoop::update()
 {
+    Time::TimeManager::update();
     event_manager->update();
     window_manager->update();
 
     switch (current_state)
     {
     case GameState::SPLASH_SCREEN:
-        splash_screen_manager->Update();
+        splash_screen_manager->update();
         break;
     case GameState::MAIN_MENU:
-        main_menu_manager->Update(event_manager);
+        main_menu_manager->update(*event_manager);
         break;
     case GameState::GAMEPLAY:
-        gameplay_manager->Update(event_manager, game_window);
+        gameplay_manager->Update(*event_manager, *game_window);
         break;
     case GameState::EXIT:
         game_window->close();
@@ -63,13 +67,13 @@ void GameLoop::render()
     switch (current_state)
     {
     case GameState::SPLASH_SCREEN:
-        splash_screen_manager->Render();
+        splash_screen_manager->render();
         break;
     case GameState::MAIN_MENU:
-        main_menu_manager->Render();
+        main_menu_manager->render();
         break;
     case GameState::GAMEPLAY:
-        gameplay_manager->Render(game_window);
+        gameplay_manager->Render(*game_window);
         break;
     }
     
@@ -85,3 +89,5 @@ void GameLoop::run()
         render();
     }
 }
+
+void GameLoop::setGameState(GameState state_to_set) { current_state = state_to_set; }

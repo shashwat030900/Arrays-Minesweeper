@@ -26,7 +26,7 @@ namespace UI {
 
     void GameplayUI::RegisterButtonCallback()
     {
-        restartButton->RegisterCallbackFunction([this](UIElements::ButtonType buttonType) {
+        restartButton->registerCallbackFunction([this](UIElements::ButtonType buttonType) {
             RestartButtonCallback(buttonType);
             });
     }
@@ -35,7 +35,7 @@ namespace UI {
     {
         if (buttonType == UIElements::ButtonType::LEFT_MOUSE_BUTTON) {
             Sound::SoundManager::PlaySound(Sound::SoundType::BUTTON_CLICK);
-            restartButton->SetButtonsState(ButtonState::PRESSED);
+            // restartButton->SetButtonsState(ButtonState::PRESSED);
         }
     }
 
@@ -64,22 +64,22 @@ namespace UI {
     void GameplayUI::Update(int remaining_mines, int remaining_time, Event::EventPollingManager& eventManager, sf::RenderWindow& window) {
         mineText.setString(std::to_string(remaining_mines));
         timeText.setString(std::to_string(remaining_time));
-        restartButton->UpdateState(eventManager, window);
+        restartButton->handleButtonInteractions(eventManager, window);
     }
 
     void GameplayUI::Render(sf::RenderWindow& window) {
         window.draw(mineText);
         window.draw(timeText);
-        restartButton->Render(window);
+        restartButton->render(window);
     }
 
     ButtonState GameplayUI::GetRestartButtonState() {
-       return restartButton->GetButtonState();
+       // return restartButton->GetButtonState();
     }
 
     void GameplayUI::ResetButtons()
     {
-        restartButton->ResetButtonState();
+        // restartButton->ResetButtonState();
     }
 }
 

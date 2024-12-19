@@ -1,31 +1,29 @@
-#ifndef SPLASHSCREENMANAGER_H
-#define SPLASHSCREENMANAGER_H
-
+#pragma once
 #include <SFML/Graphics.hpp>
 
 namespace UI {
     class SplashScreenManager {
     private:
-        sf::RenderWindow* gameWindow;
-        sf::Texture logoTexture;
-        sf::Sprite logoSprite;
+        sf::RenderWindow* game_window;
+        sf::Texture logo_texture;
+        sf::Sprite logo_sprite;
 
-        const float logoWidth = 600.f;
-        const float logoHeight = 134.f;
-        const float logoAnimationDuration = 2.0f;
-        const std::string logoTexturePath = "assets/textures/outscal_logo.png";
+        const float logo_width = 600.f;
+        const float logo_height = 134.f;
+        const float logo_animation_duration = 2.0f;
+        const std::string logo_texture_path = "assets/textures/outscal_logo.png";
 
-        sf::Vector2f GetLogoPosition();
+        float elapsed_time = 0.0f;
+        
+        void initialize();
+        sf::Vector2f getLogoPosition();
+        void drawLogo();
 
     public:
         SplashScreenManager(sf::RenderWindow* window);
         ~SplashScreenManager();
 
-        void Initialize();
-        void Update();
-        void Render();
-        void Show();
+        void update();
+        void render();
     };
 }
-
-#endif

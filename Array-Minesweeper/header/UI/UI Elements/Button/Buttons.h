@@ -6,12 +6,14 @@
 
 namespace UIElements {
 
-    enum class ButtonType {
+    enum class ButtonType
+    {
         LEFT_MOUSE_BUTTON,
         RIGHT_MOUSE_BUTTON
     };
 
-    enum class ButtonState {
+    enum class ButtonState
+    {
         PRESSED,
         HELD,
         RELEASED
@@ -19,25 +21,22 @@ namespace UIElements {
 
     class Button {
     private:
-        sf::Texture buttonTexture;
+        sf::Texture button_texture;
         sf::Sprite buttonSprite;
-        ButtonState buttonState;
 
         using CallbackFunction = std::function<void(ButtonType)>;
         CallbackFunction callback_function = nullptr;
 
-        bool IsMouseOnSprite(Event::EventPollingManager& eventManager, const sf::RenderWindow& window);
+        void initialize(const std::string& texture_path, const sf::Vector2f& position, float width, float height);
+        bool isMouseOnSprite(Event::EventPollingManager& event_manager, const sf::RenderWindow& window);
 
     public:
-        Button(const std::string& texturePath, const sf::Vector2f& position, float width, float height);
-        void UpdateState(Event::EventPollingManager& eventManager, const sf::RenderWindow& window);
-        void Render(sf::RenderWindow& window) const;
-        void SetTextureRect(const sf::IntRect& rect);
-        void RegisterCallbackFunction(CallbackFunction button_callback);
-        void Initialize(const std::string& texturePath, const sf::Vector2f& position, float width, float height);
-        
-        void ResetButtonState();
-        void SetButtonsState(ButtonState buttonState);
-        ButtonState GetButtonState();
+        Button(const std::string& texture_path, const sf::Vector2f& position, float width, float height);
+
+        void handleButtonInteractions(Event::EventPollingManager& event_manager, const sf::RenderWindow& window);
+        void render(sf::RenderWindow& window) const;
+
+        void setTextureRect(const sf::IntRect& rect);
+        void registerCallbackFunction(CallbackFunction button_callback);
     };
 }

@@ -3,63 +3,40 @@
 
 namespace UIElements {
 
-    Button::Button(const std::string& texturePath, const sf::Vector2f& position, float width, float height) {
-        Initialize(texturePath, position, width, height);
+    Button::Button(const std::string& texture_path, const sf::Vector2f& position, float width, float height)
+    {
+        initialize(texture_path, position, width, height);
     }
 
-    void Button::Initialize(const std::string& texturePath, const sf::Vector2f& position, float width, float height) {
-        if (!buttonTexture.loadFromFile(texturePath)) {
-            std::cerr << "Failed to load button texture: " << texturePath << std::endl;
+    void Button::initialize(const std::string& texture_path, const sf::Vector2f& position, float width, float height)
+    {
+        if (!button_texture.loadFromFile(texture_path)) {
+            std::cerr << "Failed to load button texture: " << texture_path << std::endl;
             return;
         }
-        buttonSprite.setTexture(buttonTexture);
+
+        buttonSprite.setTexture(button_texture);
         buttonSprite.setPosition(position);
-        buttonSprite.setScale(width / buttonTexture.getSize().x, height / buttonTexture.getSize().y);
+        buttonSprite.setScale(width / button_texture.getSize().x, height / button_texture.getSize().y);
     }
 
-    void Button::UpdateState(Event::EventPollingManager& eventManager, const sf::RenderWindow& window) {
+    void Button::handleButtonInteractions(Event::EventPollingManager& event_manager, const sf::RenderWindow& window) {
 
-        if (eventManager.pressedLeftMouseButton() && IsMouseOnSprite(eventManager, window)) 
-        {
-            if (callback_function) callback_function(ButtonType::LEFT_MOUSE_BUTTON);
-        }
-        else if (eventManager.pressedRightMouseButton() && IsMouseOnSprite(eventManager, window)) {
-            if (callback_function) callback_function(ButtonType::RIGHT_MOUSE_BUTTON);
-        }
+        if (event_manager.pressedLeftMouseButton() && isMouseOnSprite(event_manager, window))
+            callback_function(ButtonType::LEFT_MOUSE_BUTTON);
+        else if (event_manager.pressedRightMouseButton() && isMouseOnSprite(event_manager, window))
+            callback_function(ButtonType::RIGHT_MOUSE_BUTTON);
     }
 
-    bool Button::IsMouseOnSprite(Event::EventPollingManager& eventManager, const sf::RenderWindow& window)
+    bool Button::isMouseOnSprite(Event::EventPollingManager& event_manager, const sf::RenderWindow& window)
     {
-        sf::Vector2i mouse_position = eventManager.getMousePosition(window);
+        sf::Vector2i mouse_position = event_manager.getMousePosition();
         return buttonSprite.getGlobalBounds().contains(static_cast<float>(mouse_position.x), static_cast<float>(mouse_position.y));
     }
 
-    void Button::Render(sf::RenderWindow& window) const {
-        window.draw(buttonSprite);
-    }
+    void Button::render(sf::RenderWindow& window) const { window.draw(buttonSprite); }
 
-    void Button::ResetButtonState()
-    {
-        SetButtonsState(ButtonState::RELEASED);
-    }
+    void Button::setTextureRect(const sf::IntRect& rect) { buttonSprite.setTextureRect(rect); }
 
-    void Button::SetButtonsState(ButtonState buttonState)
-    {
-        this->buttonState = buttonState;
-    }
-
-    ButtonState Button::GetButtonState()
-    {
-        return this->buttonState;
-    }
-
-    void Button::SetTextureRect(const sf::IntRect& rect) {
-        buttonSprite.setTextureRect(rect);
-    }
-
-    void Button::RegisterCallbackFunction(CallbackFunction button_callback) {
-        callback_function = button_callback;
-    }
+    void Button::registerCallbackFunction(CallbackFunction button_callback) { callback_function = button_callback; }
 }
-
-

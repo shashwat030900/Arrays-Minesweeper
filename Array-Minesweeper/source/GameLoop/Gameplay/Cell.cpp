@@ -32,31 +32,31 @@ namespace Gameplay
         switch (currentCellState)
         {
         case CellState::HIDDEN:
-            cellButton->SetTextureRect(sf::IntRect(10 * tileSize, 0, tileSize, tileSize));
+            cellButton->setTextureRect(sf::IntRect(10 * tileSize, 0, tileSize, tileSize));
             break;
         case CellState::OPEN:
-            cellButton->SetTextureRect(sf::IntRect(index * tileSize, 0, tileSize, tileSize));
+            cellButton->setTextureRect(sf::IntRect(index * tileSize, 0, tileSize, tileSize));
             break;
         case CellState::FLAGGED:
-            cellButton->SetTextureRect(sf::IntRect(11 * tileSize, 0, tileSize, tileSize));
+            cellButton->setTextureRect(sf::IntRect(11 * tileSize, 0, tileSize, tileSize));
             break;
         }
     }
 
     void Cell::Update(Event::EventPollingManager& eventManager, sf::RenderWindow& window)
     {
-        if (cellButton) cellButton->UpdateState(eventManager, window);
+        if (cellButton) cellButton->handleButtonInteractions(eventManager, window);
     }
 
     void Cell::Render(sf::RenderWindow& window)
     {
         SetCellTexture();
-        if (cellButton) cellButton->Render(window);
+        if (cellButton) cellButton->render(window);
     }
 
     void Cell::RegisterCellButtonCallback()
     {
-        cellButton->RegisterCallbackFunction([this](ButtonType buttonType) {
+        cellButton->registerCallbackFunction([this](ButtonType buttonType) {
             CellButtonCallback(buttonType);
             });
     }

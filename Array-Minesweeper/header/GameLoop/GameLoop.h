@@ -27,7 +27,7 @@ private:
     MainMenuManager* main_menu_manager;
     GameplayManager* gameplay_manager;
 
-    GameState current_state;
+    static GameState current_state;
     
     void initialize();
     void update();
@@ -38,5 +38,5 @@ public:
     ~GameLoop();
     
     void run();
-    
+    static void setGameState(GameState state_to_set);
 };
