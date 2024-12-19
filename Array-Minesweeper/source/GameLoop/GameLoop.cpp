@@ -8,7 +8,7 @@ void GameLoop::initialize()
 {
     // Create Managers:
     window_manager = new GameWindowManager();
-    game_window = window_manager->GetGameWindow();
+    game_window = window_manager->getGameWindow();
     event_manager = new EventPollingManager(game_window);
 
     splash_screen_manager = new SplashScreenManager(game_window);
@@ -35,7 +35,7 @@ GameLoop::~GameLoop()
 void GameLoop::update()
 {
     event_manager->update();
-    window_manager->Update();
+    window_manager->update();
 
     switch (current_state)
     {
@@ -58,7 +58,7 @@ void GameLoop::update()
 void GameLoop::render()
 {
     game_window->clear();
-    window_manager->Render();
+    window_manager->render();
 
     switch (current_state)
     {
@@ -78,7 +78,7 @@ void GameLoop::render()
 
 void GameLoop::run()
 {
-    while (window_manager->IsGameWindowOpen())
+    while (window_manager->isGameWindowOpen())
     {
         event_manager->processEvents();
         update();

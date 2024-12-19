@@ -20,17 +20,18 @@ namespace Event
         MouseButtonState left_mouse_button_state;
         MouseButtonState right_mouse_button_state;
 
-        bool isGameWindowOpen();
-        bool gameWindowWasClosed();
+        void initializeVariables(sf::RenderWindow* window);
+        void updateMouseButtonState(MouseButtonState& button_state, sf::Mouse::Button button_type);
+
         bool hasQuitGame();
         bool isKeyboardEvent();
-        void updateMouseButtonState(MouseButtonState& button_state, sf::Mouse::Button button_type);
+        bool isGameWindowOpen();
+        bool gameWindowWasClosed();
 
     public:
         EventPollingManager(sf::RenderWindow* window);
         ~EventPollingManager();
 
-        void initializeVariables(sf::RenderWindow* window);
         void processEvents();
         void update();
 
