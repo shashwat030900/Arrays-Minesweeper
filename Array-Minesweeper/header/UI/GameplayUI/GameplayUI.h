@@ -1,13 +1,20 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include <SFML/Window.hpp>
 #include "../../header/UI/UI Elements/Button/Buttons.h"
 #include "../../header/Event/EventPollingManager.h"
 
-using namespace UIElements;
+namespace Gameplay
+{
+    class GameplayManager;
+}
 
-namespace UI {
 
+namespace UI
+{
+    using namespace Gameplay;
+    using namespace UIElements;
+    using namespace Event;
+    
     class GameplayUI {
     private:
         sf::Font bubbleBobbleFont;
@@ -38,23 +45,23 @@ namespace UI {
         const float buttonHeight = 80.f;
         const sf::Color textColor = sf::Color::Red;
 
+        GameplayManager* gameplay_manager;
+        
         // Private methods for initialization
-        void InitializeTexts();
-        void InitializeButton();
-        void LoadFonts();
+        void initialize(GameplayManager* gameplay_manager);
+        void initializeTexts();
+        void initializeButton();
+        void loadFonts();
 
-        void RegisterButtonCallback();
-        void RestartButtonCallback(ButtonType buttonType);
+        void registerButtonCallback();
+        void RestartButtonCallback(ButtonType mouse_button_type);
 
     public:
-        GameplayUI();
+        GameplayUI(GameplayManager* gameplay_manager);
         ~GameplayUI() = default;
 
-        void Initialize();
-        void Update(int remaining_mines, int remaining_time, Event::EventPollingManager& eventManager, sf::RenderWindow& window);
-        void Render(sf::RenderWindow& window);
-        ButtonState GetRestartButtonState();
-        void ResetButtons();
+        void update(int remaining_mines, int remaining_time, EventPollingManager* eventManager, sf::RenderWindow* window);
+        void render(sf::RenderWindow& window);
     };
 }
 

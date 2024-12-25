@@ -20,7 +20,7 @@ namespace Gameplay
     {
         InitializeBoardImage();
         CreateBoard();
-        Reset();
+        reset();
     }
 
     void Board::InitializeBoardImage()
@@ -63,7 +63,7 @@ namespace Gameplay
         }
     }
 
-    void Board::Update(Event::EventPollingManager& eventManager, sf::RenderWindow& window)
+    void Board::update(Event::EventPollingManager& eventManager, sf::RenderWindow& window)
     {
         if (boardState == BoardState::COMPLETED)
             return;
@@ -77,7 +77,7 @@ namespace Gameplay
         }
     }
 
-    void Board::Render(sf::RenderWindow& window)
+    void Board::render(sf::RenderWindow& window)
     {
         window.draw(boardSprite);
         for (int row = 0; row < numberOfRows; ++row)
@@ -183,7 +183,7 @@ namespace Gameplay
     }
 
     // Check if all non-mine cells are open
-    bool Board::AreAllCellsOpen() {
+    bool Board::areAllCellsOpen() {
         int total_cell_count = numberOfRows * numberOfColumns;
         int open_cell_count = 0;
 
@@ -205,7 +205,7 @@ namespace Gameplay
             cell_position.x < numberOfColumns && cell_position.y < numberOfRows);
     }
 
-    // Process the cell type to determine if it’s empty, contains a mine, or has surrounding mines
+    // Process the cell type to determine if itâ€™s empty, contains a mine, or has surrounding mines
     void Board::ProcessCellType(sf::Vector2i cell_position) {
 
         switch (board[cell_position.x][cell_position.y]->GetCellType()) {
@@ -225,7 +225,7 @@ namespace Gameplay
     }
 
     void Board::ProcessMineCell(sf::Vector2i cell_position) {
-        gameplayManager->SetGameResult(GameResult::LOST);
+        gameplayManager->setGameResult(GameResult::LOST);
         boardState = BoardState::COMPLETED;
         RevealAllMines();
     }
@@ -263,7 +263,7 @@ namespace Gameplay
         boardState = BoardState::FIRST_CELL;
     }
 
-    void Board::FlagAllMines()
+    void Board::flagAllMines()
     {
         for (int row = 0; row < numberOfRows; ++row)
         {
@@ -324,22 +324,22 @@ namespace Gameplay
     }
 
     // Wrapper for resetting the board
-    void Board::Reset() {
+    void Board::reset() {
         ResetBoard();
     }
 
     // Get the current state of the board
-    BoardState Board::GetBoardState() const {
+    BoardState Board::getBoardState() const {
         return boardState;
     }
 
     // Set the current state of the board
-    void Board::SetBoardState(BoardState state) {
+    void Board::setBoardState(BoardState state) {
         boardState = state;
     }
 
     // Get the number of mines that have not been flagged
-    int Board::GetMinesCount() const {
+    int Board::getMinesCount() const {
         return minesCount - flaggedCells;
     }
 

@@ -72,22 +72,22 @@ namespace Gameplay
 
         // Game flow methods
         void Initialize();
-        void Update(Event::EventPollingManager& eventManager, sf::RenderWindow& window);
-        void Render(sf::RenderWindow& window);
+        void update(Event::EventPollingManager& eventManager, sf::RenderWindow& window);
+        void render(sf::RenderWindow& window);
         void OnCellButtonClicked(sf::Vector2i cell_position, ButtonType buttonType);
         bool IsValidCellPosition(sf::Vector2i cell_position);
-        void Reset();
+        void reset();
 
         // Getters
-        BoardState GetBoardState() const;
-        void SetBoardState(BoardState state);
-        int GetMinesCount() const;
+        BoardState getBoardState() const;
+        void setBoardState(BoardState state);
+        int getMinesCount() const;
         float GetCellWidthInBoard() const;
         float GetCellHeightInBoard() const;
 
 
-        bool AreAllCellsOpen();
-        void FlagAllMines();
+        bool areAllCellsOpen();
+        void flagAllMines();
         void ShowBoard();
     };
 }

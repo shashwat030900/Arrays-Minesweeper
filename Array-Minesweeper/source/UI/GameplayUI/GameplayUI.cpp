@@ -1,45 +1,40 @@
-#include "../../header/UI/GameplayUI/GameplayUI.h"
 #include <iostream>
+#include "../../header/UI/GameplayUI/GameplayUI.h"
+#include "../../../header/GameLoop/Gameplay/GameplayManager.h"
 
 namespace UI {
 
-    GameplayUI::GameplayUI()
+    GameplayUI::GameplayUI(GameplayManager* gameplay_manager) { initialize(gameplay_manager); }
+
+    void GameplayUI::initialize(GameplayManager* gameplay_manager)
     {
-        Initialize();
+        this->gameplay_manager = gameplay_manager;
+        loadFonts();
+        initializeTexts();
+        initializeButton();
+        registerButtonCallback();
     }
 
-    void GameplayUI::Initialize() {
-        LoadFonts();
-        InitializeTexts();
-        InitializeButton();
-        RegisterButtonCallback();
-    }
-
-    void GameplayUI::LoadFonts() {
-        if (!bubbleBobbleFont.loadFromFile("assets/fonts/bubbleBobble.ttf")) {
+    void GameplayUI::loadFonts()
+    {
+        if (!bubbleBobbleFont.loadFromFile("assets/fonts/bubbleBobble.ttf"))
             std::cerr << "Error loading bubbleBobble font!" << std::endl;
-        }
-        if (!dsDigibFont.loadFromFile("assets/fonts/DS_DIGIB.ttf")) {
+        
+        if (!dsDigibFont.loadFromFile("assets/fonts/DS_DIGIB.ttf"))
             std::cerr << "Error loading DS_DIGIB font!" << std::endl;
-        }
     }
 
-    void GameplayUI::RegisterButtonCallback()
+    void GameplayUI::registerButtonCallback()
     {
-        restartButton->registerCallbackFunction([this](UIElements::ButtonType buttonType) {
-            RestartButtonCallback(buttonType);
-            });
+        restartButton->registerCallbackFunction([this](UIElements::ButtonType buttonType)
+            {
+                RestartButtonCallback(buttonType);
+            }
+        );
     }
 
-    void GameplayUI::RestartButtonCallback(ButtonType buttonType)
+    void GameplayUI::initializeTexts()
     {
-        if (buttonType == UIElements::ButtonType::LEFT_MOUSE_BUTTON) {
-            Sound::SoundManager::PlaySound(Sound::SoundType::BUTTON_CLICK);
-            // restartButton->SetButtonsState(ButtonState::PRESSED);
-        }
-    }
-
-    void GameplayUI::InitializeTexts() {
         // Mine Text
         mineText.setFont(dsDigibFont);
         mineText.setCharacterSize(fontSize);
@@ -56,30 +51,32 @@ namespace UI {
         timeText.setString("000");
     }
 
-    void GameplayUI::InitializeButton() {
+    void GameplayUI::initializeButton()
+    {
         restartButton = new Button(restartButtonTexturePath, sf::Vector2f(restartButtonLeftOffset, restartButtonTopOffset), buttonWidth, buttonHeight);
-
     }
 
-    void GameplayUI::Update(int remaining_mines, int remaining_time, Event::EventPollingManager& eventManager, sf::RenderWindow& window) {
+    void GameplayUI::RestartButtonCallback(ButtonType mouse_button_type)
+    {
+        if (mouse_button_type == ButtonType::LEFT_MOUSE_BUTTON)
+        {
+            Sound::SoundManager::PlaySound(Sound::SoundType::BUTTON_CLICK);
+            gameplay_manager->restartGame();
+        }
+    }
+
+    void GameplayUI::update(int remaining_mines, int remaining_time, EventPollingManager* eventManager, sf::RenderWindow* window)
+    {
         mineText.setString(std::to_string(remaining_mines));
         timeText.setString(std::to_string(remaining_time));
-        restartButton->handleButtonInteractions(eventManager, window);
+        restartButton->handleButtonInteractions(*eventManager, *window);
     }
 
-    void GameplayUI::Render(sf::RenderWindow& window) {
+    void GameplayUI::render(sf::RenderWindow& window)
+    {
         window.draw(mineText);
         window.draw(timeText);
         restartButton->render(window);
-    }
-
-    ButtonState GameplayUI::GetRestartButtonState() {
-       // return restartButton->GetButtonState();
-    }
-
-    void GameplayUI::ResetButtons()
-    {
-        // restartButton->ResetButtonState();
     }
 }
 

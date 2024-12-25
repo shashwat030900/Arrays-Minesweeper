@@ -1,6 +1,8 @@
 #include "../../header/GameLoop/GameLoop.h"
-#include "../../header/GameLoop/Gameplay/GameplayManager.h"
+#include "../../header/Time/TimeManager.h"
 #include <iostream>
+
+GameState GameLoop::current_state = GameState::SPLASH_SCREEN;
 
 GameLoop::GameLoop() { initialize(); }
 
@@ -14,10 +16,7 @@ void GameLoop::initialize()
     splash_screen_manager = new SplashScreenManager(game_window);
     main_menu_manager = new MainMenuManager(game_window);
     gameplay_manager = new GameplayManager();
-
-    // Initialize Game State:
-    current_state = GameState::SPLASH_SCREEN;
-
+    
     // Initialize Sounds:
     Sound::SoundManager::Initialize();
     Sound::SoundManager::PlayBackgroundMusic();
@@ -50,7 +49,7 @@ void GameLoop::update()
         main_menu_manager->update(*event_manager);
         break;
     case GameState::GAMEPLAY:
-        gameplay_manager->Update(*event_manager, *game_window);
+        gameplay_manager->update(event_manager, game_window);
         break;
     case GameState::EXIT:
         game_window->close();
@@ -73,7 +72,7 @@ void GameLoop::render()
         main_menu_manager->render();
         break;
     case GameState::GAMEPLAY:
-        gameplay_manager->Render(*game_window);
+        gameplay_manager->render(*game_window);
         break;
     }
     

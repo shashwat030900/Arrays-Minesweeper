@@ -3,14 +3,15 @@
 #include "../../header/Event/EventPollingManager.h"
 #include "../../header/UI/SplashScreenManager/SplashScreenManager.h"
 #include "../../header/UI/MainMenu/MainMenuManager.h"
-#include "../../header/GameLoop/Gameplay/Board.h"
+#include "Gameplay/GameplayManager.h"
 
 using namespace GameWindow;
 using namespace Event;
 using namespace Gameplay;
 using namespace UI;
 
-enum class GameState {
+enum class GameState
+{
     SPLASH_SCREEN,
     MAIN_MENU,
     GAMEPLAY,
