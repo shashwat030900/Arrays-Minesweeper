@@ -54,7 +54,7 @@ namespace UI
         void loadFonts();
 
         void registerButtonCallback();
-        void RestartButtonCallback(ButtonType mouse_button_type);
+        void RestartButtonCallback(MouseButtonType mouse_button_type);
 
     public:
         GameplayUI(GameplayManager* gameplay_manager);

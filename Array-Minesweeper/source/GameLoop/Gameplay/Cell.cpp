@@ -43,12 +43,12 @@ namespace Gameplay
         }
     }
 
-    void Cell::Update(Event::EventPollingManager& eventManager, sf::RenderWindow& window)
+    void Cell::update(Event::EventPollingManager& eventManager, sf::RenderWindow& window)
     {
         if (cellButton) cellButton->handleButtonInteractions(eventManager, window);
     }
 
-    void Cell::Render(sf::RenderWindow& window)
+    void Cell::render(sf::RenderWindow& window)
     {
         SetCellTexture();
         if (cellButton) cellButton->render(window);
@@ -56,27 +56,21 @@ namespace Gameplay
 
     void Cell::RegisterCellButtonCallback()
     {
-        cellButton->registerCallbackFunction([this](ButtonType buttonType) {
+        cellButton->registerCallbackFunction([this](MouseButtonType buttonType) {
             CellButtonCallback(buttonType);
             });
     }
 
-    void Cell::CellButtonCallback(ButtonType button_type)
-    {
-        board->OnCellButtonClicked(GetCellPosition(), button_type);
-    }
+    void Cell::CellButtonCallback(MouseButtonType button_type) { board->onCellButtonClicked(GetCellPosition(), button_type); }
 
-    void Cell::Reset()
+    void Cell::reset()
     {
         currentCellState = CellState::HIDDEN;
         cellType = CellType::EMPTY;
         mines_around = 0;
     }
 
-    bool Cell::CanOpenCell() const
-    {
-        return currentCellState != CellState::FLAGGED && currentCellState != CellState::OPEN;
-    }
+    bool Cell::canOpenCell() const { return currentCellState != CellState::FLAGGED && currentCellState != CellState::OPEN; }
 
     void Cell::ToggleFlag()
     {
@@ -90,12 +84,12 @@ namespace Gameplay
         }
     }
 
-    void Cell::Open()
+    void Cell::open()
     {
         SetCellState(CellState::OPEN);
     }
 
-    CellState Cell::GetCellState() const
+    CellState Cell::getCellState() const
     {
         return currentCellState;
     }
@@ -105,12 +99,12 @@ namespace Gameplay
         currentCellState = state;
     }
 
-    CellType Cell::GetCellType() const
+    CellType Cell::getCellType() const
     {
         return cellType;
     }
 
-    void Cell::SetCellType(CellType type)
+    void Cell::setCellType(CellType type)
     {
         cellType = type;
     }

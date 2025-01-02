@@ -6,7 +6,7 @@
 
 namespace UIElements {
 
-    enum class ButtonType
+    enum class MouseButtonType
     {
         LEFT_MOUSE_BUTTON,
         RIGHT_MOUSE_BUTTON
@@ -24,7 +24,7 @@ namespace UIElements {
         sf::Texture button_texture;
         sf::Sprite buttonSprite;
 
-        using CallbackFunction = std::function<void(ButtonType)>;
+        using CallbackFunction = std::function<void(MouseButtonType)>;
         CallbackFunction callback_function = nullptr;
 
         void initialize(const std::string& texture_path, const sf::Vector2f& position, float width, float height);

@@ -54,18 +54,18 @@ namespace UI {
         quit_button->registerCallbackFunction(std::bind(&MainMenuManager::playButtonCallback, this, std::placeholders::_1));
     }
 
-    void MainMenuManager::playButtonCallback(ButtonType mouse_button_type)
+    void MainMenuManager::playButtonCallback(MouseButtonType mouse_button_type)
     {
-        if (mouse_button_type == ButtonType::LEFT_MOUSE_BUTTON)
+        if (mouse_button_type == MouseButtonType::LEFT_MOUSE_BUTTON)
         {
             Sound::SoundManager::PlaySound(Sound::SoundType::BUTTON_CLICK);
             GameLoop::setGameState(GameState::GAMEPLAY);
         }
     }
 
-    void MainMenuManager::quitButtonCallback(ButtonType mouse_button_type)
+    void MainMenuManager::quitButtonCallback(MouseButtonType mouse_button_type)
     {
-        if (mouse_button_type == ButtonType::LEFT_MOUSE_BUTTON)
+        if (mouse_button_type == MouseButtonType::LEFT_MOUSE_BUTTON)
         {
             Sound::SoundManager::PlaySound(Sound::SoundType::BUTTON_CLICK);
             GameLoop::setGameState(GameState::EXIT);

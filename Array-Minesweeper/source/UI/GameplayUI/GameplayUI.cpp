@@ -26,7 +26,7 @@ namespace UI {
 
     void GameplayUI::registerButtonCallback()
     {
-        restartButton->registerCallbackFunction([this](UIElements::ButtonType buttonType)
+        restartButton->registerCallbackFunction([this](UIElements::MouseButtonType buttonType)
             {
                 RestartButtonCallback(buttonType);
             }
@@ -56,9 +56,9 @@ namespace UI {
         restartButton = new Button(restartButtonTexturePath, sf::Vector2f(restartButtonLeftOffset, restartButtonTopOffset), buttonWidth, buttonHeight);
     }
 
-    void GameplayUI::RestartButtonCallback(ButtonType mouse_button_type)
+    void GameplayUI::RestartButtonCallback(MouseButtonType mouse_button_type)
     {
-        if (mouse_button_type == ButtonType::LEFT_MOUSE_BUTTON)
+        if (mouse_button_type == MouseButtonType::LEFT_MOUSE_BUTTON)
         {
             Sound::SoundManager::PlaySound(Sound::SoundType::BUTTON_CLICK);
             gameplay_manager->restartGame();

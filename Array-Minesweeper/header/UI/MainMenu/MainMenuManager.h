@@ -31,8 +31,8 @@ namespace UI {
         void initializeBackground();
         void initializeButtons();
 
-        void playButtonCallback(ButtonType mouse_button_type);
-        void quitButtonCallback(ButtonType mouse_button_type);
+        void playButtonCallback(MouseButtonType mouse_button_type);
+        void quitButtonCallback(MouseButtonType mouse_button_type);
         void registerButtonCallbacks();
 
         sf::Vector2f getButtonPosition(float offsetX, float offsetY);

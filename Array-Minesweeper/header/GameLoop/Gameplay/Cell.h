@@ -62,17 +62,17 @@ namespace Gameplay
 
         // Initialization and rendering functions
         void Initialize(float width, float height, sf::Vector2i position);
-        void Update(Event::EventPollingManager& eventManager, sf::RenderWindow& window);
-        void Render(sf::RenderWindow& window);
+        void update(Event::EventPollingManager& eventManager, sf::RenderWindow& window);
+        void render(sf::RenderWindow& window);
         void RegisterCellButtonCallback();
-        void CellButtonCallback(ButtonType button_type);
+        void CellButtonCallback(MouseButtonType button_type);
 
         // Cell state and type management
-        CellState GetCellState() const;
+        CellState getCellState() const;
         void SetCellState(CellState state);
 
-        CellType GetCellType() const;
-        void SetCellType(CellType type);
+        CellType getCellType() const;
+        void setCellType(CellType type);
 
         void SetCellPosition(sf::Vector2i grid_position);
         sf::Vector2i GetCellPosition();
@@ -83,9 +83,9 @@ namespace Gameplay
         float GetCellLeftOffset() const;
         float GetCellTopOffset() const;
 
-        void Reset();
-        bool CanOpenCell() const;
+        void reset();
+        bool canOpenCell() const;
         void ToggleFlag();
-        void Open();
+        void open();
     };
 }
