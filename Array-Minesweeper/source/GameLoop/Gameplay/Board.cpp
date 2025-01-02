@@ -139,7 +139,7 @@ namespace Gameplay
             int x = x_dist(randomEngine);
             int y = y_dist(randomEngine);
 
-            if (isInvalidMinePosition(first_cell_position, first_cell_position.x, first_cell_position.y))
+            if (isInvalidMinePosition(first_cell_position, x, y))
                 continue;
 
             board[x][y]->setCellType(CellType::MINE);
