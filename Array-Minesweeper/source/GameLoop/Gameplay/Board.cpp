@@ -118,7 +118,7 @@ namespace Gameplay
 
     void Board::flagCell(sf::Vector2i cell_position)
     {
-        board[cell_position.x][cell_position.y]->ToggleFlag();
+        board[cell_position.x][cell_position.y]->toggleFlag();
         flaggedCells += (board[cell_position.x][cell_position.y]->getCellState() == CellState::FLAGGED) ? 1 : -1;
     }
 
@@ -239,7 +239,7 @@ namespace Gameplay
                 if (board[row][col]->getCellType() == CellType::MINE)
                 {
                     // Open the mine cell
-                    board[row][col]->SetCellState(CellState::OPEN);
+                    board[row][col]->setCellState(CellState::OPEN);
                 }
             }
         }
