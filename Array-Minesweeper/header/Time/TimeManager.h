@@ -6,17 +6,17 @@ namespace Time
     class TimeManager
     {
     private:
-        static std::chrono::time_point<std::chrono::steady_clock> previousTime;
-        static float deltaTime;
+        static std::chrono::time_point<std::chrono::steady_clock> previous_time;
+        static float delta_time;
 
-        static void UpdateDeltaTime();
-        static float CalculateDeltaTime();
-        static void UpdatePreviousTime();
+        static void updateDeltaTime();
+        static float calculateDeltaTime();
+        static void updatePreviousTime();
 
     public:
-        static void Initialize();
-        static void Update();
+        static void initialize();
+        static void update();
 
-        static float GetDeltaTime();
+        static float getDeltaTime();
     };
 }

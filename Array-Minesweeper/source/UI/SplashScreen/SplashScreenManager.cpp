@@ -1,43 +1,49 @@
-#include "../../header/UI/SplashScreenManager/SplashScreenManager.h"
+#include "../../header/UI/SplashScreen/SplashScreenManager.h"
 #include <iostream>
 
-namespace UI {
-    SplashScreenManager::SplashScreenManager(sf::RenderWindow* window) {
-        gameWindow = window;
-        Initialize();
+#include "../../../header/GameLoop/GameLoop.h"
+#include "../../../header/Time/TimeManager.h"
+
+namespace UI
+{
+    SplashScreenManager::SplashScreenManager(sf::RenderWindow* window)
+    {
+        game_window = window;
+        initialize();
     }
 
-    SplashScreenManager::~SplashScreenManager() {
-    }
+    SplashScreenManager::~SplashScreenManager() {}
 
-    void SplashScreenManager::Initialize() {
-        if (!logoTexture.loadFromFile(logoTexturePath)) {
+    void SplashScreenManager::initialize()
+    {
+        if (!logo_texture.loadFromFile(logo_texture_path))
             std::cerr << "Failed to load logo texture" << std::endl;
+
+        logo_sprite.setTexture(logo_texture);
+        logo_sprite.setPosition(getLogoPosition());
+    }
+
+    void SplashScreenManager::update() {}
+
+    void SplashScreenManager::render() { drawLogo(); }
+
+    sf::Vector2f SplashScreenManager::getLogoPosition()
+    {
+        float x_position = (game_window->getSize().x - logo_width) / 2.0f;
+        float y_position = (game_window->getSize().y - logo_height) / 2.0f;
+        return { x_position, y_position };
+    }
+
+    void SplashScreenManager::drawLogo()
+    {
+        elapsed_time = elapsed_time + Time::TimeManager::getDeltaTime();
+
+        if (elapsed_time < logo_animation_duration)
+            game_window->draw(logo_sprite);
+        else
+        {
+            elapsed_time = 0.0f;
+            GameLoop::setGameState(GameState::GAMEPLAY);
         }
-        logoSprite.setTexture(logoTexture);
-        logoSprite.setPosition(GetLogoPosition());
     }
-
-    void SplashScreenManager::Update() {
-    }
-
-    void SplashScreenManager::Render() {
-        Show();
-    }
-
-    sf::Vector2f SplashScreenManager::GetLogoPosition() {
-        float x_position = (gameWindow->getSize().x - logoWidth) / 2.0f;
-        float y_position = (gameWindow->getSize().y - logoHeight) / 2.0f;
-        return sf::Vector2f(x_position, y_position);
-    }
-
-    void SplashScreenManager::Show() {
-        sf::Clock clock;
-        while (clock.getElapsedTime().asSeconds() < logoAnimationDuration) {
-            gameWindow->clear();
-            gameWindow->draw(logoSprite);
-            gameWindow->display();
-        }
-    }
-
 }

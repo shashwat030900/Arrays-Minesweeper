@@ -2,54 +2,36 @@
 
 namespace GameWindow
 {
-	GameWindowManager::GameWindowManager()
+	GameWindowManager::GameWindowManager() { initialize(); }
+
+	GameWindowManager::~GameWindowManager() { onDestroy(); }
+
+	void GameWindowManager::initialize()
 	{
-		Initialize();
+		game_window = createGameWindow();
+		setFrameRate(frame_rate);
 	}
 
-	GameWindowManager::~GameWindowManager()
+	sf::RenderWindow* GameWindowManager::createGameWindow()
 	{
-		OnDestroy();
+		configureVideoMode();
+		return new sf::RenderWindow(video_mode, game_window_title, sf::Style::Fullscreen);
 	}
 
-	void GameWindowManager::Initialize()
+	void GameWindowManager::configureVideoMode()
 	{
-		gameWindow = CreateGameWindow();
-		SetFrameRate(frameRate);
+		video_mode = *(new sf::VideoMode(game_window_width, game_window_height, sf::VideoMode::getDesktopMode().bitsPerPixel));
 	}
 
-	sf::RenderWindow* GameWindowManager::CreateGameWindow()
-	{
-		ConfigureVideoMode();
-		return new sf::RenderWindow(videoMode, gameWindowTitle, sf::Style::Fullscreen);
-	}
+	void GameWindowManager::onDestroy() { delete(game_window); }
 
-	void GameWindowManager::ConfigureVideoMode()
-	{
-		videoMode = *(new sf::VideoMode(gameWindowWidth, gameWindowHeight, sf::VideoMode::getDesktopMode().bitsPerPixel));
-	}
+	void GameWindowManager::setFrameRate(int frame_rate_to_set) { game_window->setFramerateLimit(frame_rate_to_set); }
 
-	void GameWindowManager::OnDestroy()
-	{
-		delete(gameWindow);
-	}
+	void GameWindowManager::update() { }
 
-	void GameWindowManager::SetFrameRate(int frame_rate_to_set)
-	{
-		gameWindow->setFramerateLimit(frame_rate_to_set);
-	}
+	void GameWindowManager::render() { }
 
-	void GameWindowManager::Update() { }
+	bool GameWindowManager::isGameWindowOpen() { return game_window->isOpen(); }
 
-	void GameWindowManager::Render() { }
-
-	bool GameWindowManager::IsGameWindowOpen()
-	{
-		return gameWindow->isOpen();
-	}
-
-	sf::RenderWindow* GameWindowManager::GetGameWindow()
-	{
-		return gameWindow;
-	}
+	sf::RenderWindow* GameWindowManager::getGameWindow() { return game_window; }
 }

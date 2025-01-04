@@ -1,44 +1,40 @@
 #include "../../header/Event/EventPollingManager.h"
 #include "../../header/GameWindow/GameWindowManager.h"
-#include <iostream>
 
 namespace Event
 {
     using namespace GameWindow;
 
-    EventPollingManager::EventPollingManager(sf::RenderWindow* window)
-    {
-        Initialize(window);
-    }
+    EventPollingManager::EventPollingManager(sf::RenderWindow* window) { initializeVariables(window); }
 
     EventPollingManager::~EventPollingManager() = default;
 
-    void EventPollingManager::Initialize(sf::RenderWindow* window)
+    void EventPollingManager::initializeVariables(sf::RenderWindow* window)
     {
-        gameWindow = window;
-        leftMouseButtonState = MouseButtonState::RELEASED;
-        rightMouseButtonState = MouseButtonState::RELEASED;
+        game_window = window;
+        left_mouse_button_state = MouseButtonState::RELEASED;
+        right_mouse_button_state = MouseButtonState::RELEASED;
     }
 
-    void EventPollingManager::Update()
+    void EventPollingManager::processEvents()
     {
-        UpdateMouseButtonState(leftMouseButtonState, sf::Mouse::Left);
-        UpdateMouseButtonState(rightMouseButtonState, sf::Mouse::Right);
-    }
-
-    void EventPollingManager::ProcessEvents()
-    {
-        if (IsGameWindowOpen())
+        if (isGameWindowOpen())
         {
-            while (gameWindow->pollEvent(gameEvent))
+            while (game_window->pollEvent(game_event))
             {
-                if (GameWindowWasClosed() || HasQuitGame())
-                    gameWindow->close();
+                if (gameWindowWasClosed() || hasQuitGame())
+                    game_window->close();
             }
         }
     }
 
-    void EventPollingManager::UpdateMouseButtonState(MouseButtonState& button_state, sf::Mouse::Button button_type)
+    void EventPollingManager::update()
+    {
+        updateMouseButtonState(left_mouse_button_state, sf::Mouse::Left);
+        updateMouseButtonState(right_mouse_button_state, sf::Mouse::Right);
+    }
+
+    void EventPollingManager::updateMouseButtonState(MouseButtonState& button_state, sf::Mouse::Button button_type)
     {
         if (sf::Mouse::isButtonPressed(button_type))
         {
@@ -53,48 +49,22 @@ namespace Event
             }
         }
         else
-        {
             button_state = MouseButtonState::RELEASED;
-        }
     }
 
-    bool EventPollingManager::IsGameWindowOpen()
-    {
-        return gameWindow != nullptr;
-    }
+    bool EventPollingManager::isGameWindowOpen() { return game_window != nullptr; }
 
-    bool EventPollingManager::GameWindowWasClosed()
-    {
-        return gameEvent.type == sf::Event::Closed;
-    }
+    bool EventPollingManager::gameWindowWasClosed() { return game_event.type == sf::Event::Closed; }
 
-    bool EventPollingManager::HasQuitGame()
-    {
-        return (IsKeyboardEvent() && PressedEscapeKey());
-    }
+    bool EventPollingManager::hasQuitGame() { return (isKeyboardEvent() && pressedEscapeKey()); }
 
-    bool EventPollingManager::IsKeyboardEvent()
-    {
-        return gameEvent.type == sf::Event::KeyPressed;
-    }
+    bool EventPollingManager::isKeyboardEvent() { return game_event.type == sf::Event::KeyPressed; }
 
-    bool EventPollingManager::PressedEscapeKey()
-    {
-        return gameEvent.key.code == sf::Keyboard::Escape;
-    }
+    bool EventPollingManager::pressedEscapeKey() { return game_event.key.code == sf::Keyboard::Escape; }
 
-    bool EventPollingManager::PressedLeftMouseButton()
-    {
-        return leftMouseButtonState == MouseButtonState::PRESSED;
-    }
+    bool EventPollingManager::pressedLeftMouseButton() { return left_mouse_button_state == MouseButtonState::PRESSED; }
 
-    bool EventPollingManager::PressedRightMouseButton()
-    {
-        return rightMouseButtonState == MouseButtonState::PRESSED;
-    }
+    bool EventPollingManager::pressedRightMouseButton() { return right_mouse_button_state == MouseButtonState::PRESSED; }
 
-    sf::Vector2i EventPollingManager::GetMousePosition(const sf::RenderWindow& window)
-    {
-        return sf::Mouse::getPosition(window);
-    }
+    sf::Vector2i EventPollingManager::getMousePosition() { return sf::Mouse::getPosition(*game_window); }
 }
