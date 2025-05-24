@@ -1,13 +1,14 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include "Cell.h"
 
 namespace Gameplay
 {
     class Board
     {
     private:
-
+        Cell* cell;
         const float boardWidth = 866.f;
         const float boardHeight = 1080.f;
         const float boardPosition = 530.f;
@@ -18,6 +19,7 @@ namespace Gameplay
 
         void initializeBoardImage();
         void initialize();
+        void createBoard();
 
     public:
 

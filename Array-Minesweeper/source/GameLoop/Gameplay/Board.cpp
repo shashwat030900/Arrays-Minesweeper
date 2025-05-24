@@ -13,6 +13,7 @@ using namespace Gameplay;
     void Board::initialize()
     {
         initializeBoardImage();
+        createBoard();
     }
     void Board::initializeBoardImage() {
         if (!boardTexture.loadFromFile(boardTexturePath)) {
@@ -29,4 +30,9 @@ using namespace Gameplay;
     void Board::render(sf::RenderWindow& window)
     {
         window.draw(boardSprite);
+        cell->render(window);   
+    }
+
+    void Board::createBoard() {
+        cell = new Cell(83, 83, sf::Vector2i(0, 0));
     }
