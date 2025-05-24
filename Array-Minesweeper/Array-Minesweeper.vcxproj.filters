@@ -47,14 +47,18 @@
     <ClInclude Include="header\GameLoop\GameLoop.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="header\UI\SplashScreenManager\SplashScreenManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="header\Time\TimeManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="header\Sound\SoundManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="header\UI\SplashScreen\SplashScreenManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include=".gitignore" />
+    <None Include="CppProperties.json" />
   </ItemGroup>
 </Project>

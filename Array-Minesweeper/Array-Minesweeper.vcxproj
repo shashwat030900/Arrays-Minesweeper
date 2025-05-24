@@ -149,6 +149,10 @@
     <ClInclude Include="header\Time\TimeManager.h" />
     <ClInclude Include="header\Sound\SoundManager.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include=".gitignore" />
+    <None Include="CppProperties.json" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
