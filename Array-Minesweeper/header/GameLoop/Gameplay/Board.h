@@ -21,6 +21,15 @@ namespace Gameplay
         void initialize();
         void createBoard();
 
+        static const int numberOfRows = 9;
+        static const int numberOfColumn = 9;
+        const float horizontalCellPadding = 115.f;
+        const float verticalCellPadding = 329.f;
+        float getCellWidthInBoard() const;
+        float getCellHeightInBoard() const;
+        
+
+
     public:
 
         Board();
