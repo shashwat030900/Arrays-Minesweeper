@@ -20,4 +20,10 @@ namespace UIElements {
     void Button::render(sf::RenderWindow& window) const {
         window.draw(buttonSprite);
     }
+
+    void Button::setTextureRect(const sf::IntRect& rect) {
+
+        buttonSprite.setTextureRect(rect);
+
+    }
 }
