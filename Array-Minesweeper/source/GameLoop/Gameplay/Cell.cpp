@@ -11,7 +11,7 @@ Cell::Cell(float width, float height, sf::Vector2i position)
 void Cell::initialize(float width, float height, sf::Vector2i position)
 {
     this->position = position;
-    sf::Vector2f cellScreenPosition = getCellScreenPosition();
+    sf::Vector2f cellScreenPosition = getCellScreenPosition(width, height);
     cell_button = new Button(cell_texture_path, cellScreenPosition, width * slice_count, height);
 }
 void Cell::render(sf::RenderWindow& window) {
@@ -60,10 +60,10 @@ void Cell::setCellTexture() {
     }
 }
 
-sf::Vector2f Cell::getCellScreenPosition() const
+sf::Vector2f Cell::getCellScreenPosition(float width, float height) const
 {
-    float xScreenPosition = cell_left_offset;
-    float yScreenPosition = cell_top_offset;
+    float xScreenPosition = cell_left_offset + position.x * width;
+    float yScreenPosition = cell_top_offset + position.y * height;
     return sf::Vector2f(xScreenPosition, yScreenPosition);
 }
 

@@ -1,14 +1,16 @@
 #pragma once
-
+#include <random>
 #include <SFML/Graphics.hpp>
 #include "Cell.h"
+#include "../../header/Event/EventPollingManager.h"
+
 
 namespace Gameplay
 {
     class Board
     {
     private:
-        Cell* cell;
+        
         const float boardWidth = 866.f;
         const float boardHeight = 1080.f;
         const float boardPosition = 530.f;
@@ -28,6 +30,7 @@ namespace Gameplay
         float getCellWidthInBoard() const;
         float getCellHeightInBoard() const;
         
+        Cell* cell[numberOfColumn];
 
 
     public:
