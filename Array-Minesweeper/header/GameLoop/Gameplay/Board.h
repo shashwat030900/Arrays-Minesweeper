@@ -41,7 +41,9 @@ namespace Gameplay
         void initializeVariables();
         void populateMines();
 
-
+        int countMinesAround(sf::Vector2i cell_position);
+        void populateCells();
+        bool isValidCellPosition(sf::Vector2i cell_position);
 
     public:
 

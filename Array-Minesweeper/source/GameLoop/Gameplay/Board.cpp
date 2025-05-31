@@ -97,5 +97,45 @@ using namespace Gameplay;
     void Board::populateBoard() {
 
         populateMines();
+        populateCells();
+
+    }
+    int Board::countMinesAround(sf::Vector2i cell_position) {
+
+        int mine_around = 0;
+
+        for (int a = -1; a <= 1; ++a) {
+
+            for (int b = -1; b <= 1; ++b) {
+                if ((a == 0 && b == 0) || !isValidCellPosition(sf::Vector2i(cell_position.x + a, cell_position.y + b)))
+                    continue;
+
+                if (cell[cell_position.x + a][cell_position.y + b]->getCellType() == CellType::MINE)
+                    mine_around++;
+
+            }
+        }
+        return mine_around;
+    }
+
+    bool Board::isValidCellPosition(sf::Vector2i cell_position) {
+
+        return(cell_position.x >= 0 && cell_position.y >= 0 && cell_position.x < numberOfColumn && cell_position.y < numberOfRows);
+
+
+
+    }
+    void Board::populateCells() {
+
+        for (int row = 0; row < numberOfRows; ++row) {
+
+            for(int col = 0; col < numberOfColumn; ++col)
+                if (cell[row][col]->getCellType() != CellType::MINE) {
+
+                    int mmine_around = countMinesAround(sf::Vector2i(row, col));
+                    cell[row][col]->setCellType(static_cast<CellType>(mmine_around));
+                }
+
+        }
 
     }
