@@ -30,7 +30,7 @@ namespace Gameplay
         float getCellWidthInBoard() const;
         float getCellHeightInBoard() const;
         
-        Cell* cell[numberOfColumn];
+        Cell* cell[numberOfRows][numberOfColumn];
 
 
     public:
