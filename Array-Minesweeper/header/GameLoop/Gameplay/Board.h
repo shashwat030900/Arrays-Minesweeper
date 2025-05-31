@@ -32,6 +32,16 @@ namespace Gameplay
         
         Cell* cell[numberOfRows][numberOfColumn];
 
+        std::default_random_engine randomEngine;
+        std::random_device rancdomDevice;
+
+        static const int minesCount = 8;
+
+        void populateBoard();
+        void initializeVariables();
+        void populateMines();
+
+
 
     public:
 

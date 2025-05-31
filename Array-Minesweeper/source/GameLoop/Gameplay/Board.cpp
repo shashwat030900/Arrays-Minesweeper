@@ -13,7 +13,10 @@ using namespace Gameplay;
     void Board::initialize()
     {
         initializeBoardImage();
+        initializeVariables();
         createBoard();
+        populateBoard();
+
     }
     void Board::initializeBoardImage() {
         if (!boardTexture.loadFromFile(boardTexturePath)) {
@@ -45,7 +48,7 @@ using namespace Gameplay;
         float cell_width = getCellWidthInBoard();
         float cell_height = getCellHeightInBoard();
 
-        //create cells for the cell[][] array
+       
         for (int row = 0; row < numberOfRows; ++row)
         {
             for (int col = 0; col < numberOfColumn; ++col)
@@ -65,5 +68,34 @@ using namespace Gameplay;
     float Board::getCellHeightInBoard()const {
 
         return (boardHeight - verticalCellPadding) / numberOfRows;
+
+    }
+    void Board::initializeVariables() {
+
+        randomEngine.seed(rancdomDevice());
+
+    }
+    void Board::populateMines() {
+
+        std::uniform_int_distribution<int>x_dist(0, numberOfColumn - 1);
+        std::uniform_int_distribution<int>y_dist(0, numberOfRows - 1);
+        int mines_placed = 0;
+
+        while (mines_placed < minesCount) {
+
+            int x = x_dist(randomEngine);
+            int y = y_dist(randomEngine);
+
+            if (cell[x][y]->getCellType() != CellType::MINE) {
+
+                cell[x][y]->setCellType(CellType::MINE);
+                ++mines_placed;
+
+            }
+        }
+    }
+    void Board::populateBoard() {
+
+        populateMines();
 
     }
