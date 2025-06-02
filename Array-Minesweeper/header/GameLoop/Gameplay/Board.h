@@ -1,7 +1,6 @@
 #pragma once
 #include <random>
 #include <SFML/Graphics.hpp>
-#include "Cell.h"
 #include "../../header/Event/EventPollingManager.h"
 #include "../../header/GameLoop/Gameplay/Cell.h" 
 
@@ -48,6 +47,9 @@ namespace Gameplay
 
         int flaggedCells;
         void toggleFlag(sf::Vector2i cell_position);
+
+        void processCellType(sf::Vector2i cell_position);
+        void processEmptyCell(sf::Vector2i cell_position);
 
     public:
 

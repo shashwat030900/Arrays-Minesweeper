@@ -109,7 +109,18 @@ bool Cell::canOpenCell() const {
     return current_cell_state == CellState::HIDDEN;
 
 }
+void Cell::toggleFlag() {
 
+    if (current_cell_state == CellState::HIDDEN) {
+
+        setCellState(CellState::FLAGGED);
+    }
+    else if (current_cell_state == CellState::FLAGGED) {
+
+        setCellState(CellState::HIDDEN);
+    }
+
+}
 
 
 

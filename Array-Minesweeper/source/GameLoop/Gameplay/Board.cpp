@@ -160,6 +160,7 @@ using namespace Gameplay;
             toggleFlag(cell_position);
 
         }
+        
     }
 
     void Board::openCell(sf::Vector2i cell_postion) {
@@ -167,8 +168,7 @@ using namespace Gameplay;
             return;
         }
 
-        cell[cell_postion.x][cell_postion.y]->open();
-
+        processCellType(cell_postion);
 
     }
     void Board::toggleFlag(sf::Vector2i cell_position) {
@@ -177,3 +177,78 @@ using namespace Gameplay;
         flaggedCells += (cell[cell_position.x][cell_position.y]->getCellState() == CellState::FLAGGED) ? 1 : 1;
 
     }
+    void Board::processCellType(sf::Vector2i cell_position) {
+
+        switch (cell[cell_position.x][cell_position.y]->getCellType())
+        {
+        case CellType::EMPTY:
+
+            processEmptyCell(cell_position);
+
+            break;
+
+        case CellType::MINE:
+            break;
+
+        default:
+
+            cell[cell_position.x][cell_position.y]->open();
+            break;
+        }
+
+    }
+
+    void Board::processEmptyCell(sf::Vector2i cell_position) {
+        
+        CellState cell_state = cell[cell_position.x][cell_position.y]->getCellState();
+
+
+        switch (cell_state) {
+        case CellState::OPEN:
+            return;
+        default:
+            cell[cell_position.x][cell_position.y]->open();
+        }
+
+        for (int a = -1; a <= 1; ++a) {
+
+            for (int b = -1; b <= 1; ++b) {
+
+                sf::Vector2i next_cell_position = sf::Vector2i(a + cell_position.x, b + cell_position.y);
+                if((a == 0 && b == 0 ) || !isValidCellPosition(next_cell_position)){
+                    
+                    continue;
+                }
+
+                CellState next_cell_state = cell[next_cell_position.x][next_cell_position.y]->getCellState();
+
+                if (next_cell_state == CellState::FLAGGED) {
+
+                    toggleFlag(next_cell_position);
+
+                }
+
+                openCell(next_cell_position);
+            }
+
+
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
