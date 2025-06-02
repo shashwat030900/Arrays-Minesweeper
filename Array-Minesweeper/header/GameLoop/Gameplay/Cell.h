@@ -70,5 +70,7 @@ namespace Gameplay
         void onCellButtonClicked(sf::Vector2i position, UIElements::MouseButtonType button_type);
         void open();
         bool canOpenCell() const;
+
+        void toggleFlag();
     };
 }

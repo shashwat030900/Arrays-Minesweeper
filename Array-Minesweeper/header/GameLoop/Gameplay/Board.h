@@ -46,6 +46,9 @@ namespace Gameplay
         bool isValidCellPosition(sf::Vector2i cell_position);
         void openCell(sf::Vector2i cell_position);
 
+        int flaggedCells;
+        void toggleFlag(sf::Vector2i cell_position);
+
     public:
 
         Board();

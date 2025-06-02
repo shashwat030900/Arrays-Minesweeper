@@ -156,7 +156,8 @@ using namespace Gameplay;
         }
         else if (mouse_button_type == MouseButtonType::RIGHT_MOUSE_BUTTON) {
 
-
+            Sound::SoundManager::PlaySound(Sound::SoundType::FLAG);
+            toggleFlag(cell_position);
 
         }
     }
@@ -168,5 +169,11 @@ using namespace Gameplay;
 
         cell[cell_postion.x][cell_postion.y]->open();
 
+
+    }
+    void Board::toggleFlag(sf::Vector2i cell_position) {
+
+        cell[cell_position.x][cell_position.y]->toggleFlag();
+        flaggedCells += (cell[cell_position.x][cell_position.y]->getCellState() == CellState::FLAGGED) ? 1 : 1;
 
     }
