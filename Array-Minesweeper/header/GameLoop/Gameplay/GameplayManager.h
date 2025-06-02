@@ -40,6 +40,9 @@ namespace Gameplay
         void processTimeOver();
         void handleGameplay(Event::EventPollingManager& eventmanager, sf::RenderWindow& window);
 
+        void gameWon();
+        void gameLost();
+
     public:
         GameplayManager();
         ~GameplayManager() = default;
@@ -47,5 +50,8 @@ namespace Gameplay
         void render(sf::RenderWindow& window);
 
         void setGameResult(GameResult gameResult);
+
+        void checkGameWin();
+        void processGameResult();
     };
 }

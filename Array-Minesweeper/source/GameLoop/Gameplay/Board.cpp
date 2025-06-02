@@ -290,7 +290,23 @@ using namespace Gameplay;
     }
 
 
+    bool Board::areAllCellsOpen() {
 
+        int total_cells = numberOfRows * numberOfColumn;
+        int open_cell = 0;
+        for (int row = 0; row < numberOfRows; ++row) {
+
+            for (int col = 0; col < numberOfRows; ++col) {
+
+                if (cell[row][col]->getCellState() == CellState::OPEN && cell[row][col]->getCellType() != CellType::MINE) {
+                    open_cell++;
+                }
+
+            }
+
+        }
+        return open_cell == (total_cells - minesCount);
+    }
 
 
 

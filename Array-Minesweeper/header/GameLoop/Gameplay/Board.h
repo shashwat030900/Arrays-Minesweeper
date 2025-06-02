@@ -81,5 +81,8 @@ namespace Gameplay
         BoardState getBoardState() const;
         void setBoardState(BoardState state);
 
+        bool areAllCellsOpen();
+        void flagAllMines();
+
     };
 }

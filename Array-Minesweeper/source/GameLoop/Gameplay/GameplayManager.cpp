@@ -40,7 +40,9 @@ namespace Gameplay
 
     void GameplayManager::update(Event::EventPollingManager& eventManager, sf::RenderWindow& window) {
 
-        if(!hasGameEnded()) handleGameplay(eventManager, window);
+        if (!hasGameEnded()) handleGameplay(eventManager, window);
+
+        else if (board->getBoardState() != BoardState::COMPLETED) processGameResult();
 
     }
 
@@ -60,6 +62,7 @@ namespace Gameplay
 
         updateRemainingTime();
         board->update(eventManager, window);
+        checkGameWin();
 
     }
     void GameplayManager::processTimeOver() {
@@ -80,8 +83,59 @@ namespace Gameplay
 
 
     }
-        
+    void GameplayManager::checkGameWin() {
+        if (board->areAllCellsOpen()) {
+            game_result = GameResult::WON;  
+        }
+    }
+    void GameplayManager::processGameResult() {
 
-    
+        switch (game_result)
+        {
+            case GameResult::WON:
+                gameWon();
+                break;
+            case GameResult::LOST:
+                gameLost();
+                break;
+            
+        default:
+            break;
+        }
+
+    }
+
+    void GameplayManager::gameWon() {
+
+        Sound::SoundManager::PlaySound(Sound::SoundType::GAME_WON);
+        board->flagAllMines();
+        board->setBoardState(BoardState::COMPLETED);
+
+    }
+
+    void Board::flagAllMines() {
+
+        for (int row = 0; row < numberOfRows; ++row) {
+            for (int col = 0; col < numberOfColumn; ++col) {
+
+                if (cell[row][col]->getCellType() == CellType::MINE && cell[row][col]->getCellState() != CellState::FLAGGED) {
+
+                    cell[row][col]->setCellState(CellState::FLAGGED);
+                }
+
+            }
+
+        }
+
+    }
+
+
+
+
+
+
+
+
+
 
 }
