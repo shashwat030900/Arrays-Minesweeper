@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include "../../header/GameLoop/Gameplay/Board.h"
 #include <iostream>
+#include "../../header/Sound/SoundManager.h"
 
 using namespace Gameplay;
 
@@ -146,16 +147,26 @@ using namespace Gameplay;
                 cell[row][col]->update(eventManager, window);
 
     }
-    void Board::onCellButtonClicked(sf::Vector2i cell__position, MouseButtonType mouse_button_type) {
+    void Board::onCellButtonClicked(sf::Vector2i cell_position, MouseButtonType mouse_button_type) {
 
         if (mouse_button_type == MouseButtonType::LEFT_MOUSE_BUTTON) {
 
-
-
+            Sound::SoundManager::PlaySound(Sound::SoundType::BUTTON_CLICK);
+            openCell(cell_position);
         }
         else if (mouse_button_type == MouseButtonType::RIGHT_MOUSE_BUTTON) {
 
 
 
         }
+    }
+
+    void Board::openCell(sf::Vector2i cell_postion) {
+        if (!cell[cell_postion.x][cell_postion.y]->canOpenCell()) {
+            return;
+        }
+
+        cell[cell_postion.x][cell_postion.y]->open();
+
+
     }

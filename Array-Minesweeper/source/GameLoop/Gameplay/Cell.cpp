@@ -99,8 +99,16 @@ sf::Vector2i Cell::getCellPosition() {
     return position;
 }
 
+void Cell::open() {
 
+    setCellState(CellState::OPEN);
 
+}
+bool Cell::canOpenCell() const {
+
+    return current_cell_state == CellState::HIDDEN;
+
+}
 
 
 
