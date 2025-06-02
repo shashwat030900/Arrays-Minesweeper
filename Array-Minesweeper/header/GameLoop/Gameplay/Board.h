@@ -22,7 +22,7 @@ namespace Gameplay
     private:
         
         BoardState boardState;
-        GameplayManager* gameplay_manager = nullptr;
+        GameplayManager* gameplay_manager ;
         const float boardWidth = 866.f;
         const float boardHeight = 1080.f;
         const float boardPosition = 530.f;

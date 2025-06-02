@@ -92,10 +92,10 @@ using namespace Gameplay;
             if (isInvalidMinePosition(first_cell_position, x, y)) {
 
                 continue;
-                cell[x][y]->setCellType(CellType::MINE);
-                ++mines_placed;
 
             }
+            cell[x][y]->setCellType(CellType::MINE);
+            ++mines_placed;
         }
     }
     void Board::populateBoard(sf::Vector2i cell_position) {
