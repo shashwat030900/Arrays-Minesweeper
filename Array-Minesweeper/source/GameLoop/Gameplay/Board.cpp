@@ -53,7 +53,7 @@ using namespace Gameplay;
         {
             for (int col = 0; col < numberOfColumn; ++col)
             {
-                cell[row][col] = new Cell(cell_width, cell_height, sf::Vector2i(row, col));
+                cell[row][col] = new Cell(cell_width, cell_height, sf::Vector2i(row, col), this);
             }
         }
     }
@@ -138,4 +138,24 @@ using namespace Gameplay;
 
         }
 
+    }
+    void Board::update (Event::EventPollingManager& eventManager, sf::RenderWindow& window) {
+
+        for (int row = 0; row < numberOfRows; ++row)
+            for (int col = 0; col < numberOfColumn; ++col)
+                cell[row][col]->update(eventManager, window);
+
+    }
+    void Board::onCellButtonClicked(sf::Vector2i cell__position, MouseButtonType mouse_button_type) {
+
+        if (mouse_button_type == MouseButtonType::LEFT_MOUSE_BUTTON) {
+
+
+
+        }
+        else if (mouse_button_type == MouseButtonType::RIGHT_MOUSE_BUTTON) {
+
+
+
+        }
     }

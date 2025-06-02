@@ -3,7 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include "Cell.h"
 #include "../../header/Event/EventPollingManager.h"
-
+#include "../../header/GameLoop/Gameplay/Cell.h" 
 
 namespace Gameplay
 {
@@ -48,7 +48,8 @@ namespace Gameplay
     public:
 
         Board();
-
+        void update(Event::EventPollingManager& eventManager, sf::RenderWindow& window);
         void render(sf::RenderWindow& window);
+        void onCellButtonClicked(sf::Vector2i cell_position, MouseButtonType mouse_button_type);
     };
 }

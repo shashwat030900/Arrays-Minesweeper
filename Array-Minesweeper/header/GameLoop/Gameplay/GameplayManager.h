@@ -23,7 +23,7 @@ namespace Gameplay
     public:
         GameplayManager();
         ~GameplayManager() = default;
-
+        void update(Event::EventPollingManager& eventManager, sf::RenderWindow& window);
         void render(sf::RenderWindow& window);
     };
 }
