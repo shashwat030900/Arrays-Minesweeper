@@ -3,13 +3,17 @@
 #include <SFML/Graphics.hpp>
 #include "../../header/Event/EventPollingManager.h"
 #include "../../header/GameLoop/Gameplay/Cell.h" 
+#include "../../header/Sound/SoundManager.h"
 
 namespace Gameplay
 {
+    class GameplayManager;
+
     class Board
     {
     private:
         
+        GameplayManager* gameplay_manager = nullptr;
         const float boardWidth = 866.f;
         const float boardHeight = 1080.f;
         const float boardPosition = 530.f;
@@ -19,7 +23,7 @@ namespace Gameplay
         sf::Sprite boardSprite;
 
         void initializeBoardImage();
-        void initialize();
+        void initialize(GameplayManager* gameplay_manager);
         void createBoard();
 
         static const int numberOfRows = 9;
@@ -37,7 +41,7 @@ namespace Gameplay
         static const int minesCount = 8;
 
         void populateBoard();
-        void initializeVariables();
+        void initializeVariables(GameplayManager* gameplay_manager);
         void populateMines();
 
         int countMinesAround(sf::Vector2i cell_position);
@@ -51,11 +55,17 @@ namespace Gameplay
         void processCellType(sf::Vector2i cell_position);
         void processEmptyCell(sf::Vector2i cell_position);
 
+        void processMineCell(sf::Vector2i cell_position);
+        
+
+
+
     public:
 
-        Board();
+        Board(GameplayManager* gameplay_maager);
         void update(Event::EventPollingManager& eventManager, sf::RenderWindow& window);
         void render(sf::RenderWindow& window);
         void onCellButtonClicked(sf::Vector2i cell_position, MouseButtonType mouse_button_type);
+        void revealAllMines();
     };
 }

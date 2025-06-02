@@ -2,19 +2,20 @@
 #include "../../header/GameLoop/Gameplay/Board.h"
 #include <iostream>
 #include "../../header/Sound/SoundManager.h"
+#include "../../header/GameLoop/Gameplay/GameplayManager.h"
 
 using namespace Gameplay;
 
 
-    Board::Board()
+    Board::Board(GameplayManager* gameplay_manager)
     {
-        initialize();
+        initialize(gameplay_manager);
     }
 
-    void Board::initialize()
+    void Board::initialize(GameplayManager* gameplay_manager)
     {
         initializeBoardImage();
-        initializeVariables();
+        initializeVariables(gameplay_manager);
         createBoard();
         populateBoard();
 
@@ -71,8 +72,9 @@ using namespace Gameplay;
         return (boardHeight - verticalCellPadding) / numberOfRows;
 
     }
-    void Board::initializeVariables() {
+    void Board::initializeVariables(GameplayManager* gameplay_manager) {
 
+        this->gameplay_manager = gameplay_manager;
         randomEngine.seed(rancdomDevice());
 
     }
@@ -188,6 +190,8 @@ using namespace Gameplay;
             break;
 
         case CellType::MINE:
+
+            processMineCell(cell_position);
             break;
 
         default:
@@ -233,6 +237,31 @@ using namespace Gameplay;
 
 
         }
+    }
+
+    void Board::processMineCell(sf::Vector2i cell_position) {
+
+        gameplay_manager->setGameResult(GameResult::LOST);
+        Sound::SoundManager::PlaySound(Sound::SoundType::EXPLOSION);
+        revealAllMines();
+
+    }
+
+    void Board::revealAllMines() {
+
+        for (int row = 0; row < numberOfRows; ++row) {
+
+            for (int col = 0; col < numberOfColumn; ++col) {
+
+                if (cell[row][col]->getCellType() == CellType::MINE) {
+
+                    cell[row][col]->setCellState(CellState::OPEN);
+                }
+
+            }
+
+        }
+
     }
 
 

@@ -4,6 +4,14 @@
 
 namespace Gameplay
 {
+
+    enum class GameResult
+    {
+        NONE,
+        WON,
+        LOST
+    };
+
     class GameplayManager
     {
     private:
@@ -19,11 +27,15 @@ namespace Gameplay
         void initializeBackgroundImage();
         void initializeVariables();
 
+        GameResult game_result;
+        bool hasGameEnded();
 
     public:
         GameplayManager();
         ~GameplayManager() = default;
         void update(Event::EventPollingManager& eventManager, sf::RenderWindow& window);
         void render(sf::RenderWindow& window);
+
+        void setGameResult(GameResult gameResult);
     };
 }
