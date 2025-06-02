@@ -17,7 +17,7 @@ using namespace Gameplay;
         initializeBoardImage();
         initializeVariables(gameplay_manager);
         createBoard();
-        populateBoard();
+        
 
     }
     void Board::initializeBoardImage() {
@@ -76,9 +76,9 @@ using namespace Gameplay;
 
         this->gameplay_manager = gameplay_manager;
         randomEngine.seed(rancdomDevice());
-
+        boardState = BoardState::FIRST_CELL;
     }
-    void Board::populateMines() {
+    void Board::populateMines(sf::Vector2i first_cell_position) {
 
         std::uniform_int_distribution<int>x_dist(0, numberOfColumn - 1);
         std::uniform_int_distribution<int>y_dist(0, numberOfRows - 1);
@@ -89,17 +89,18 @@ using namespace Gameplay;
             int x = x_dist(randomEngine);
             int y = y_dist(randomEngine);
 
-            if (cell[x][y]->getCellType() != CellType::MINE) {
+            if (isInvalidMinePosition(first_cell_position, x, y)) {
 
+                continue;
                 cell[x][y]->setCellType(CellType::MINE);
                 ++mines_placed;
 
             }
         }
     }
-    void Board::populateBoard() {
+    void Board::populateBoard(sf::Vector2i cell_position) {
 
-        populateMines();
+        populateMines(cell_position);
         populateCells();
 
     }
@@ -165,12 +166,19 @@ using namespace Gameplay;
         
     }
 
-    void Board::openCell(sf::Vector2i cell_postion) {
-        if (!cell[cell_postion.x][cell_postion.y]->canOpenCell()) {
+    void Board::openCell(sf::Vector2i cell_position) {
+        if (!cell[cell_position.x][cell_position.y]->canOpenCell()) 
             return;
-        }
 
-        processCellType(cell_postion);
+            if (boardState == BoardState::FIRST_CELL) {
+
+                populateBoard(cell_position);
+                boardState = BoardState::PLAYING;
+
+
+            }
+
+                processCellType(cell_position);
 
     }
     void Board::toggleFlag(sf::Vector2i cell_position) {
@@ -265,8 +273,21 @@ using namespace Gameplay;
     }
 
 
+    bool Board::isInvalidMinePosition(sf::Vector2i first_cell_position, int x, int y) {
+        return (x == first_cell_position.x && y == first_cell_position.y) ||
+            cell[x][y]->getCellType() == CellType::MINE;
+    }
+    BoardState Board::getBoardState() const {
+
+        return boardState;
 
 
+    }
+    void Board::setBoardState(BoardState state) {
+
+        boardState = state;
+
+    }
 
 
 
