@@ -36,9 +36,13 @@ namespace Gameplay
         Board* board;
         sf::Vector2i position;
 
+    
+
         const int tile_size = 128;
         const int slice_count = 12;
         const std::string cell_texture_path = "assets/textures/cells.jpeg";
+
+       
 
         Button* cell_button;
 
@@ -52,6 +56,7 @@ namespace Gameplay
         void registerCellButtonCallback();
         void cellButtonCallback(MouseButtonType button_type);
 
+        sf::IntRect rect_flagged;
 
     public:
         Cell(float width, float height, sf::Vector2i position, Board* board);
@@ -72,5 +77,6 @@ namespace Gameplay
         bool canOpenCell() const;
 
         void toggleFlag();
+        void reset();
     };
 }

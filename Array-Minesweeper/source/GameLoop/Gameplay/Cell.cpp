@@ -21,6 +21,7 @@ void Cell::initialize(float width, float height, sf::Vector2i position, Board* b
     current_cell_state = CellState::HIDDEN;
 
     registerCellButtonCallback();
+    
 }
 void Cell::render(sf::RenderWindow& window) {
     setCellTexture();
@@ -121,6 +122,11 @@ void Cell::toggleFlag() {
     }
 
 }
+void Cell::reset() {
 
+    current_cell_state = CellState::HIDDEN;
+    cell_type = CellType::EMPTY;
+
+}
 
 
