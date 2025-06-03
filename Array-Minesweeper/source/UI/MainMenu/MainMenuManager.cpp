@@ -43,7 +43,7 @@ namespace UI {
 	void MainMenuManager::initializeButtons() {
 
 		play_button = new Button(play_button_texture_path, getButtonPosition(0.f, quit_button_y_position), button_width, button_height);
-		quit_button = new Button(quit_button_texture_path, getButtonPosition(0.f, quit_button_y_position), button_width, button_height);
+		quit_button = new Button(quit_button_texture_path, getButtonPosition(0.f, play_button_y_position), button_width, button_height);
 
 		registerButtonCallback();
 	}
