@@ -2,10 +2,12 @@
 #include "../../header/GameLoop/Gameplay/Board.h"
 #include "../../header/Event/EventPollingManager.h"
 #include "../../header/Time/TimeManager.h"
+#include "../../header/UI/GameplayUI.h"
 #include <SFML/Graphics.hpp>
 
 namespace Gameplay
 {
+    using namespace UI;
     using namespace Time; 
 
     enum class GameResult
@@ -42,6 +44,10 @@ namespace Gameplay
 
         void gameWon();
         void gameLost();
+
+        int getMinesCount() const;
+
+        GameplayUI* gameplay_ui;
 
     public:
         GameplayManager();

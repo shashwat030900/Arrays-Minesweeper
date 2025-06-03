@@ -18,6 +18,7 @@ namespace Gameplay
     {
 
         board = new Board(this);
+        gameplay_ui = new GameplayUI(this);
         remaining_time = max_level_duration;
     }
 
@@ -36,6 +37,7 @@ namespace Gameplay
     {
         window.draw(background_sprite);
         board->render(window);
+        gameplay_ui->render(window);
     }
 
     void GameplayManager::update(Event::EventPollingManager& eventManager, sf::RenderWindow& window) {
@@ -44,6 +46,8 @@ namespace Gameplay
 
         else if (board->getBoardState() != BoardState::COMPLETED) processGameResult();
 
+        gameplay_ui->update(getMinesCount(), static_cast<int>(remaining_time), eventManager, window);
+  
     }
 
     void GameplayManager::setGameResult(GameResult gameResult) {
@@ -113,25 +117,21 @@ namespace Gameplay
 
     }
 
-    void Board::flagAllMines() {
+    
 
-        for (int row = 0; row < numberOfRows; ++row) {
-            for (int col = 0; col < numberOfColumn; ++col) {
+    void GameplayManager::gameLost() {
 
-                if (cell[row][col]->getCellType() == CellType::MINE && cell[row][col]->getCellState() != CellState::FLAGGED) {
-
-                    cell[row][col]->setCellState(CellState::FLAGGED);
-                }
-
-            }
-
-        }
+        Sound::SoundManager::PlaySound(Sound::SoundType::GAME_WON);
+        board->setBoardState(BoardState::COMPLETED);
+        board->revealAllMines();
 
     }
 
+    int GameplayManager::getMinesCount() const {
 
+        return board->getRemainingMinesCount();
 
-
+    }
 
 
 

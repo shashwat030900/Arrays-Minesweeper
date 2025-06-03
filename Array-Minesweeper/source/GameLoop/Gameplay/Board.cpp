@@ -250,8 +250,7 @@ using namespace Gameplay;
     void Board::processMineCell(sf::Vector2i cell_position) {
 
         gameplay_manager->setGameResult(GameResult::LOST);
-        Sound::SoundManager::PlaySound(Sound::SoundType::EXPLOSION);
-        revealAllMines();
+        
 
     }
 
@@ -307,6 +306,27 @@ using namespace Gameplay;
         }
         return open_cell == (total_cells - minesCount);
     }
+    
+    void Board::flagAllMines() {
+
+        for (int row = 0; row < numberOfRows; ++row) {
+            for (int col = 0; col < numberOfColumn; ++col) {
+
+                if (cell[row][col]->getCellType() == CellType::MINE && cell[row][col]->getCellState() != CellState::FLAGGED) {
+
+                    cell[row][col]->setCellState(CellState::FLAGGED);
+                }
+
+            }
+
+        }
+
+    }
+
+    int Board::getRemainingMinesCount() const {
+        return minesCount - flaggedCells;  
+    }
+
 
 
 
