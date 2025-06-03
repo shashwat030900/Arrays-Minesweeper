@@ -8,6 +8,11 @@ using namespace GameWindow;
 using namespace Event;
 using namespace UI;
 
+
+namespace UI {
+
+    class MainMenuManager;
+}
 enum class GameState
 {
     SPLASH_SCREEN,
@@ -18,6 +23,7 @@ enum class GameState
 
 class GameLoop {
 private:
+    MainMenuManager* main_menu_manager;
     GameWindowManager* window_manager;
     EventPollingManager* event_manager;
     Gameplay::GameplayManager* gameplay_manager;
